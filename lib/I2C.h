@@ -1,0 +1,12 @@
+//
+// Created by nikesh on 5/29/23.
+//
+
+#ifndef DELTARHO_CONTROLLER_I2C_H
+#define DELTARHO_CONTROLLER_I2C_H
+
+#define PCA9685_ADDRESS 0
+
+
+
+#endif //DELTARHO_CONTROLLER_I2C_H
