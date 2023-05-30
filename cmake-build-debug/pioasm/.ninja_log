@@ -1,11 +1,22 @@
 # ninja log v5
-2	988	1685326586346208965	CMakeFiles/pioasm.dir/hex_output.cpp.o	73eac724116a5064
-1	1056	1685326586414212520	CMakeFiles/pioasm.dir/pio_disassembler.cpp.o	41fcf20ec704e5d0
-2	1155	1685326586514217747	CMakeFiles/pioasm.dir/ada_output.cpp.o	cc795b175c80842f
-0	1371	1685326586730229040	CMakeFiles/pioasm.dir/gen/lexer.cpp.o	9f8d1ae2ab07dce0
 2	1385	1685326586746229876	CMakeFiles/pioasm.dir/c_sdk_output.cpp.o	37e38b899f783530
-0	1463	1685326586822233849	CMakeFiles/pioasm.dir/main.cpp.o	5212b564f446b50b
 2	1719	1685326587078247223	CMakeFiles/pioasm.dir/python_output.cpp.o	d96e8ca31116c7c8
+2	1155	1685326586514217747	CMakeFiles/pioasm.dir/ada_output.cpp.o	cc795b175c80842f
+1	1056	1685326586414212520	CMakeFiles/pioasm.dir/pio_disassembler.cpp.o	41fcf20ec704e5d0
 1	2176	1685326587534271004	CMakeFiles/pioasm.dir/gen/parser.cpp.o	c8fe9cf1e96de6d0
+0	1463	1685326586822233849	CMakeFiles/pioasm.dir/main.cpp.o	5212b564f446b50b
 0	2773	1685326588130302068	CMakeFiles/pioasm.dir/pio_assembler.cpp.o	e059068c2e857372
+0	1371	1685326586730229040	CMakeFiles/pioasm.dir/gen/lexer.cpp.o	9f8d1ae2ab07dce0
 2773	2978	1685326588334312680	pioasm	104bd97c7a56de1d
+2	988	1685326586346208965	CMakeFiles/pioasm.dir/hex_output.cpp.o	73eac724116a5064
+6	27	1685413312655850023	build.ninja	f31103350d6d2e2a
+3	827	1685413313487831355	CMakeFiles/pioasm.dir/ada_output.cpp.o	cc795b175c80842f
+2	834	1685413313495831175	CMakeFiles/pioasm.dir/c_sdk_output.cpp.o	37e38b899f783530
+2	852	1685413313511830816	CMakeFiles/pioasm.dir/pio_disassembler.cpp.o	41fcf20ec704e5d0
+3	866	1685413313527830457	CMakeFiles/pioasm.dir/hex_output.cpp.o	73eac724116a5064
+1	1201	1685413313859823007	CMakeFiles/pioasm.dir/main.cpp.o	5212b564f446b50b
+3	1232	1685413313891822290	CMakeFiles/pioasm.dir/python_output.cpp.o	d96e8ca31116c7c8
+1	1355	1685413314015819507	CMakeFiles/pioasm.dir/gen/lexer.cpp.o	9f8d1ae2ab07dce0
+2	1790	1685413314447809812	CMakeFiles/pioasm.dir/gen/parser.cpp.o	c8fe9cf1e96de6d0
+2	2174	1685413314831801193	CMakeFiles/pioasm.dir/pio_assembler.cpp.o	e059068c2e857372
+2174	2314	1685413314971798052	pioasm	104bd97c7a56de1d

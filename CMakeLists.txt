@@ -16,7 +16,7 @@ include(pico_sdk_import.cmake)
 project(DeltaRho_Controller C CXX ASM)
 pico_sdk_init()
 
-add_executable(DeltaRho_Controller src/main.c lib/I2C.c lib/I2C.h lib/Motor_Controller.cpp lib/Motor_Controller.h)
+add_executable(DeltaRho_Controller src/main.c lib/I2C.c lib/I2C.h lib/DC_Motor.cpp lib/DC_Motor.h lib/WIFI.c lib/WIFI.h lib/Robot.cpp lib/Robot.h)
 
 pico_enable_stdio_usb(DeltaRho_Controller 1)
 pico_enable_stdio_uart(DeltaRho_Controller 1)
