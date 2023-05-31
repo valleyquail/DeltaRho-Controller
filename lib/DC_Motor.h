@@ -15,16 +15,16 @@ using namespace std;
 class DC_Motor {
 private:
   float Kp;
-
-public:
+  int motorNum;
   string motorName;
   int pwmPin;
   int lineOneIn;
   int lineTwoIn;
 
+public:
   DC_Motor();
-  void init(string name, int pwm, int lineOne, int lineTwo, float Kp);
-  void setMotorMovement(int effort)
+  void init(int motorNum, int pwm, int lineOne, int lineTwo, float Kp);
+  void setMotorMovement(int effort);
 };
 
 #endif // DELTARHO_CONTROLLER_DC_MOTOR_H

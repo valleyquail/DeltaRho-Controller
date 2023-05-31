@@ -7,6 +7,8 @@
 #include "DC_Motor.h"
 
 class Robot {
+  friend DC_Motor;
+  
 private:
   DC_Motor backRight;
   DC_Motor backLeft;
@@ -15,6 +17,8 @@ private:
 
 public:
   Robot(void);
+
+  void controlRobot(float xComponent, float yComponent, int speed);
 };
 
 #endif // DELTARHO_CONTROLLER_ROBOT_H
