@@ -35,11 +35,11 @@ void DC_Motor::setMotorMovement(int effort) {
   if (effort < 0) {
     setLevel(lineOneIn, true);
     setLevel(lineTwoIn, false);
-    setPWM(pwmPin, -effort);
+    setPWM(pwmPin, -effort * PCA_PWM_RESOLUTION / 100);
   } else {
     setLevel(lineOneIn, false);
     setLevel(lineTwoIn, true);
-    setPWM(pwmPin, effort);
+    setPWM(pwmPin, effort * PCA_PWM_RESOLUTION / 100);
   }
 }
 

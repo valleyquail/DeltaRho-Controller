@@ -5,6 +5,9 @@
 #ifndef DELTARHO_CONTROLLER_ROBOT_H
 #define DELTARHO_CONTROLLER_ROBOT_H
 #include "DC_Motor.h"
+#include <math.h>
+
+constexpr float speedScalingFactor = 1;
 
 class Robot {
   friend DC_Motor;
@@ -15,11 +18,16 @@ private:
   DC_Motor front;
   DC_Motor extra;
 
+  // In cm
+  const float wheelRadius = 5;
+  const float chassisRadius = 10;
+
 public:
   Robot(void);
   void init(void);
 
-  void controlRobot(float xComponent, float yComponent, int speed);
+  void controlRobot(float xComponent, float yComponent, float rotation,
+                    int speed);
 };
 
 #endif // DELTARHO_CONTROLLER_ROBOT_H
