@@ -19,9 +19,9 @@ void Robot::init() {
 }
 
 void Robot::controlRobot(float xComponent, float yComponent, int speed) {
-  backRight.setMotorMovement(2000);
-  backLeft.setMotorMovement(2000);
-  front.setMotorMovement(2000);
+  backRight.setMotorMovement(0);
+  backLeft.setMotorMovement(0);
+  front.setMotorMovement(0);
   printf("Should be setting the speed\n");
   sleep_ms(10);
 }

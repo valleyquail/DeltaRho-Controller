@@ -16,13 +16,14 @@ private:
   int motorNum;
   // used for debugging if desired
   string motorName;
-  int pwmPin;
-  int lineOneIn;
-  int lineTwoIn;
+  uint8_t pwmPin;
+  uint8_t lineOneIn;
+  uint8_t lineTwoIn;
 
 public:
   DC_Motor();
-  void init(int motorNum, int pwm, int lineOne, int lineTwo, float Kp);
+  void init(int motorNum, uint8_t pwm, uint8_t lineOne, uint8_t lineTwo,
+            float Kp);
 
   void setMotorMovement(int effort);
 

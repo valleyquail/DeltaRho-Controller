@@ -10,12 +10,14 @@
  * Initializes the pico i2c connections using the default i2c
  */
 void __init__i2c__() {
-  // setup the I2C communication
-  i2c_init(i2c_default, 400 * 1000);
+  // set up the I2C communication
+  i2c_init(i2c_default, 100 * 1000);
   gpio_set_function(SDA, GPIO_FUNC_I2C);
   gpio_set_function(SCL, GPIO_FUNC_I2C);
   gpio_pull_up(SDA);
   gpio_pull_up(SCL);
+  // Resets the PCA so that it gets initialized
+  reg_write(i2c_default, PCA9685_ADDRESS, MODE1, 0x00, 1);
 }
 
 /**
@@ -34,7 +36,7 @@ void __init__PCA() {
   reg_write(i2c_default, PCA9685_ADDRESS, MODE1, &newState, 1);
   // Set the prescale values
   uint8_t prescaleVal =
-      roundf(PCA_CLOCK_FREQ / (PCA_PWM_RESOLUTION * MIN_OUTPUT_FREQ)) - 1;
+      roundf(PCA_CLOCK_FREQ / ((PCA_PWM_RESOLUTION + 1) * MIN_OUTPUT_FREQ)) - 1;
   // updates the prescale value
   reg_write(i2c_default, PCA9685_ADDRESS, PRESCALE_REGISTER, &prescaleVal, 1);
 

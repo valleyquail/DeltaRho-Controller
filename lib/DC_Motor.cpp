@@ -8,9 +8,10 @@ extern "C" {
 
 DC_Motor::DC_Motor() {}
 
-void DC_Motor::init(int motorNum, int pwm, int lineOne, int lineTwo, float kp) {
+void DC_Motor::init(int motorNum, uint8_t pwm, uint8_t lineOne, uint8_t lineTwo,
+                    float kp) {
   this->motorNum = motorNum;
-  motorName = "Motor " + motorNum;
+  motorName = "Motor " + to_string(motorNum);
   pwmPin = pwm;
   lineOneIn = lineOne;
   lineTwoIn = lineTwo;
@@ -28,8 +29,6 @@ void DC_Motor::setMotorMovement(int effort) {
   printf("Setting the speeds for %s\n", motorName.c_str());
   // Set the driver to short stop the motor
   if (effort == 0) {
-    setLevel(lineOneIn, true);
-    setLevel(lineTwoIn, true);
     setPWM(pwmPin, PCA_LOW);
     return;
   }
