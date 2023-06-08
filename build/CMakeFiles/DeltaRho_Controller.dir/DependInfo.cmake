@@ -131,6 +131,7 @@ set(CMAKE_ASM_TARGET_INCLUDE_PATH
   "/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_cyw43_driver/include"
   "/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_async_context/include"
   "pico-sdk/src/rp2_common/pico_cyw43_driver"
+  "/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/include"
   )
 
 # The set of dependency files which are needed:
@@ -172,6 +173,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_exception/exception.c.obj.d"
   "/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_flash/flash.c.obj.d"
   "/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj.d"
+  "/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj.d"
   "/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj.d"
   "/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj.d"
   "/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj.d"
@@ -209,8 +211,12 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj.d"
   "/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj.d"
   "/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj.d"
-  "/home/nikesh/CLionProjects/DeltaRho_Controller/src/main.c" "CMakeFiles/DeltaRho_Controller.dir/src/main.c.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/src/main.c.obj.d"
+  "/home/nikesh/CLionProjects/DeltaRho_Controller/lib/I2C.c" "CMakeFiles/DeltaRho_Controller.dir/lib/I2C.c.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/lib/I2C.c.obj.d"
+  "/home/nikesh/CLionProjects/DeltaRho_Controller/lib/WIFI.c" "CMakeFiles/DeltaRho_Controller.dir/lib/WIFI.c.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/lib/WIFI.c.obj.d"
   "/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_standard_link/new_delete.cpp.obj.d"
+  "/home/nikesh/CLionProjects/DeltaRho_Controller/lib/DC_Motor.cpp" "CMakeFiles/DeltaRho_Controller.dir/lib/DC_Motor.cpp.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/lib/DC_Motor.cpp.obj.d"
+  "/home/nikesh/CLionProjects/DeltaRho_Controller/lib/Robot.cpp" "CMakeFiles/DeltaRho_Controller.dir/lib/Robot.cpp.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/lib/Robot.cpp.obj.d"
+  "/home/nikesh/CLionProjects/DeltaRho_Controller/src/main.cpp" "CMakeFiles/DeltaRho_Controller.dir/src/main.cpp.obj" "gcc" "CMakeFiles/DeltaRho_Controller.dir/src/main.cpp.obj.d"
   )
 
 # Targets to which this target links.

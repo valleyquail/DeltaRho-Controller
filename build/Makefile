@@ -1103,6 +1103,30 @@ home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s
 .PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.s
 
+home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.obj: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
+.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.obj
+
+# target to build an object file
+home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
+.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj
+
+home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.i: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.i
+.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.i
+
+# target to preprocess a source file
+home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.i
+.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.i
+
+home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.s: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.s
+.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.s
+
+# target to generate assembly for a file
+home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.s
+.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.s
+
 home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_irq/irq.obj: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_irq/irq.c.obj
 .PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_irq/irq.obj
 
@@ -2095,29 +2119,125 @@ home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s
 .PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.s
 
-src/main.obj: src/main.c.obj
+lib/DC_Motor.obj: lib/DC_Motor.cpp.obj
+.PHONY : lib/DC_Motor.obj
+
+# target to build an object file
+lib/DC_Motor.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/DC_Motor.cpp.obj
+.PHONY : lib/DC_Motor.cpp.obj
+
+lib/DC_Motor.i: lib/DC_Motor.cpp.i
+.PHONY : lib/DC_Motor.i
+
+# target to preprocess a source file
+lib/DC_Motor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/DC_Motor.cpp.i
+.PHONY : lib/DC_Motor.cpp.i
+
+lib/DC_Motor.s: lib/DC_Motor.cpp.s
+.PHONY : lib/DC_Motor.s
+
+# target to generate assembly for a file
+lib/DC_Motor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/DC_Motor.cpp.s
+.PHONY : lib/DC_Motor.cpp.s
+
+lib/I2C.obj: lib/I2C.c.obj
+.PHONY : lib/I2C.obj
+
+# target to build an object file
+lib/I2C.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/I2C.c.obj
+.PHONY : lib/I2C.c.obj
+
+lib/I2C.i: lib/I2C.c.i
+.PHONY : lib/I2C.i
+
+# target to preprocess a source file
+lib/I2C.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/I2C.c.i
+.PHONY : lib/I2C.c.i
+
+lib/I2C.s: lib/I2C.c.s
+.PHONY : lib/I2C.s
+
+# target to generate assembly for a file
+lib/I2C.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/I2C.c.s
+.PHONY : lib/I2C.c.s
+
+lib/Robot.obj: lib/Robot.cpp.obj
+.PHONY : lib/Robot.obj
+
+# target to build an object file
+lib/Robot.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/Robot.cpp.obj
+.PHONY : lib/Robot.cpp.obj
+
+lib/Robot.i: lib/Robot.cpp.i
+.PHONY : lib/Robot.i
+
+# target to preprocess a source file
+lib/Robot.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/Robot.cpp.i
+.PHONY : lib/Robot.cpp.i
+
+lib/Robot.s: lib/Robot.cpp.s
+.PHONY : lib/Robot.s
+
+# target to generate assembly for a file
+lib/Robot.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/Robot.cpp.s
+.PHONY : lib/Robot.cpp.s
+
+lib/WIFI.obj: lib/WIFI.c.obj
+.PHONY : lib/WIFI.obj
+
+# target to build an object file
+lib/WIFI.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/WIFI.c.obj
+.PHONY : lib/WIFI.c.obj
+
+lib/WIFI.i: lib/WIFI.c.i
+.PHONY : lib/WIFI.i
+
+# target to preprocess a source file
+lib/WIFI.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/WIFI.c.i
+.PHONY : lib/WIFI.c.i
+
+lib/WIFI.s: lib/WIFI.c.s
+.PHONY : lib/WIFI.s
+
+# target to generate assembly for a file
+lib/WIFI.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/WIFI.c.s
+.PHONY : lib/WIFI.c.s
+
+src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
 # target to build an object file
-src/main.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/src/main.c.obj
-.PHONY : src/main.c.obj
+src/main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/src/main.cpp.obj
+.PHONY : src/main.cpp.obj
 
-src/main.i: src/main.c.i
+src/main.i: src/main.cpp.i
 .PHONY : src/main.i
 
 # target to preprocess a source file
-src/main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/src/main.c.i
-.PHONY : src/main.c.i
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
 
-src/main.s: src/main.c.s
+src/main.s: src/main.cpp.s
 .PHONY : src/main.s
 
 # target to generate assembly for a file
-src/main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/src/main.c.s
-.PHONY : src/main.c.s
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -2246,6 +2366,9 @@ help:
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.obj"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.i"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.s"
+	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.obj"
+	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.i"
+	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.s"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_irq/irq.obj"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_irq/irq.i"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_irq/irq.s"
@@ -2370,6 +2493,18 @@ help:
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.obj"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.i"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.s"
+	@echo "... lib/DC_Motor.obj"
+	@echo "... lib/DC_Motor.i"
+	@echo "... lib/DC_Motor.s"
+	@echo "... lib/I2C.obj"
+	@echo "... lib/I2C.i"
+	@echo "... lib/I2C.s"
+	@echo "... lib/Robot.obj"
+	@echo "... lib/Robot.i"
+	@echo "... lib/Robot.s"
+	@echo "... lib/WIFI.obj"
+	@echo "... lib/WIFI.i"
+	@echo "... lib/WIFI.s"
 	@echo "... src/main.obj"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

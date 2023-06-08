@@ -8,7 +8,7 @@
 
 class Robot {
   friend DC_Motor;
-  
+
 private:
   DC_Motor backRight;
   DC_Motor backLeft;
@@ -17,6 +17,7 @@ private:
 
 public:
   Robot(void);
+  void init(void);
 
   void controlRobot(float xComponent, float yComponent, int speed);
 };
