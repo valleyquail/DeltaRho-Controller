@@ -20,7 +20,7 @@ void Robot::init() {
   __init__PCA();
 }
 // Kinematics taken from here:
-// https://www.internationaljournalssrg.org/IJEEE/2019/Volume6-Issue12/IJEEE-V6I12P101.pdf
+// https://www.researchgate.net/publication/228786543_Three_omni-directional_wheels_control_on_a_mobile_robot
 
 /**
  *Assumes a heading of 0 is in front front wheel of the robot and increases
@@ -47,5 +47,5 @@ void Robot::controlRobot(float xComponent, float yComponent, float rotation,
   backRight.setMotorMovement(backRightSpeed);
   backLeft.setMotorMovement(backLeftSpeed);
   front.setMotorMovement(frontSpeed);
-  printf("Should be setting the speed\n");
+  //  printf("Should be setting the speed\n");
 }

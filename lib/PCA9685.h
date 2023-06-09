@@ -22,7 +22,7 @@ static inline void setPWM(int channel, int effort) {
   reg_write(i2c_default, PCA9685_ADDRESS, LED0_ON_H + offset, 0, 1);
   reg_write(i2c_default, PCA9685_ADDRESS, LED0_OFF_L + offset, &offLow, 1);
   reg_write(i2c_default, PCA9685_ADDRESS, LED0_OFF_H + offset, &offHigh, 1);
-  printf("OffLow = %i and OffHigh = %i\n", offLow, offHigh);
+  //  printf("OffLow = %i and OffHigh = %i\n", offLow, offHigh);
 }
 
 /**
