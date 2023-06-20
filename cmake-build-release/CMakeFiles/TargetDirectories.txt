@@ -2,6 +2,8 @@
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/CMakeFiles/ELF2UF2Build.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/CMakeFiles/edit_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/CMakeFiles/rebuild_cache.dir
+/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/FREERTOS_KERNEL/CMakeFiles/edit_cache.dir
+/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/FREERTOS_KERNEL/CMakeFiles/rebuild_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/CMakeFiles/edit_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/CMakeFiles/rebuild_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/tools/CMakeFiles/edit_cache.dir
@@ -123,6 +125,9 @@
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/pico_stdio_uart/CMakeFiles/rebuild_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/cmsis/CMakeFiles/edit_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/cmsis/CMakeFiles/rebuild_cache.dir
+/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/tinyusb/CMakeFiles/PioasmBuild.dir
+/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/tinyusb/CMakeFiles/tinyusb_pico_pio_usb_usb_tx_pio_h.dir
+/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/tinyusb/CMakeFiles/tinyusb_pico_pio_usb_usb_rx_pio_h.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/tinyusb/CMakeFiles/edit_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/tinyusb/CMakeFiles/rebuild_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/pico_stdio_usb/CMakeFiles/edit_cache.dir
@@ -133,7 +138,6 @@
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/pico_async_context/CMakeFiles/rebuild_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/pico_btstack/CMakeFiles/edit_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/pico_btstack/CMakeFiles/rebuild_cache.dir
-/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/cyw43_driver_picow_cyw43_bus_pio_spi_pio_h.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/edit_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/rebuild_cache.dir

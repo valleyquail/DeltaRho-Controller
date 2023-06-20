@@ -191,8 +191,34 @@ PioasmBuild: cmake_check_build_system
 
 # fast build rule for target.
 PioasmBuild/fast:
-	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/build.make pico-sdk/src/rp2_common/pico_cyw43_driver/CMakeFiles/PioasmBuild.dir/build
+	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/tinyusb/CMakeFiles/PioasmBuild.dir/build.make pico-sdk/src/rp2_common/tinyusb/CMakeFiles/PioasmBuild.dir/build
 .PHONY : PioasmBuild/fast
+
+#=============================================================================
+# Target rules for targets named tinyusb_pico_pio_usb_usb_tx_pio_h
+
+# Build rule for target.
+tinyusb_pico_pio_usb_usb_tx_pio_h: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tinyusb_pico_pio_usb_usb_tx_pio_h
+.PHONY : tinyusb_pico_pio_usb_usb_tx_pio_h
+
+# fast build rule for target.
+tinyusb_pico_pio_usb_usb_tx_pio_h/fast:
+	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/tinyusb/CMakeFiles/tinyusb_pico_pio_usb_usb_tx_pio_h.dir/build.make pico-sdk/src/rp2_common/tinyusb/CMakeFiles/tinyusb_pico_pio_usb_usb_tx_pio_h.dir/build
+.PHONY : tinyusb_pico_pio_usb_usb_tx_pio_h/fast
+
+#=============================================================================
+# Target rules for targets named tinyusb_pico_pio_usb_usb_rx_pio_h
+
+# Build rule for target.
+tinyusb_pico_pio_usb_usb_rx_pio_h: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tinyusb_pico_pio_usb_usb_rx_pio_h
+.PHONY : tinyusb_pico_pio_usb_usb_rx_pio_h
+
+# fast build rule for target.
+tinyusb_pico_pio_usb_usb_rx_pio_h/fast:
+	$(MAKE) $(MAKESILENT) -f pico-sdk/src/rp2_common/tinyusb/CMakeFiles/tinyusb_pico_pio_usb_usb_rx_pio_h.dir/build.make pico-sdk/src/rp2_common/tinyusb/CMakeFiles/tinyusb_pico_pio_usb_usb_rx_pio_h.dir/build
+.PHONY : tinyusb_pico_pio_usb_usb_rx_pio_h/fast
 
 #=============================================================================
 # Target rules for targets named cyw43_driver_picow_cyw43_bus_pio_spi_pio_h
@@ -302,438 +328,6 @@ home/nikesh/Documents/pico/pico-sdk/lib/cyw43-driver/src/cyw43_stats.s: home/nik
 home/nikesh/Documents/pico/pico-sdk/lib/cyw43-driver/src/cyw43_stats.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/cyw43-driver/src/cyw43_stats.c.s
 .PHONY : home/nikesh/Documents/pico/pico-sdk/lib/cyw43-driver/src/cyw43_stats.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.s
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.obj: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.i: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.c.i
-
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.s: home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.c.s
 
 home/nikesh/Documents/pico/pico-sdk/src/common/pico_sync/critical_section.obj: home/nikesh/Documents/pico/pico-sdk/src/common/pico_sync/critical_section.c.obj
 .PHONY : home/nikesh/Documents/pico/pico-sdk/src/common/pico_sync/critical_section.obj
@@ -1695,30 +1289,6 @@ home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shi
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
 .PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.S.obj
 
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.obj: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.i: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.i
-
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.s: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.s
-
 home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.obj: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.S.obj
 .PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.obj
 
@@ -1999,78 +1569,6 @@ home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s
 .PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.c.s
 
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.obj: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.i: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.i
-
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.s: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.c.s
-
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.obj: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.i: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.i
-
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.s: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.s
-
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.obj: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.obj
-
-# target to build an object file
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj
-
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.i: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.i
-
-# target to preprocess a source file
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.i
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.i
-
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.s: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.s
-
-# target to generate assembly for a file
-home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s
-.PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.s
-
 home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.obj: home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj
 .PHONY : home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.obj
 
@@ -2191,30 +1689,6 @@ lib/Robot.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/Robot.cpp.s
 .PHONY : lib/Robot.cpp.s
 
-lib/WIFI.obj: lib/WIFI.c.obj
-.PHONY : lib/WIFI.obj
-
-# target to build an object file
-lib/WIFI.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/WIFI.c.obj
-.PHONY : lib/WIFI.c.obj
-
-lib/WIFI.i: lib/WIFI.c.i
-.PHONY : lib/WIFI.i
-
-# target to preprocess a source file
-lib/WIFI.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/WIFI.c.i
-.PHONY : lib/WIFI.c.i
-
-lib/WIFI.s: lib/WIFI.c.s
-.PHONY : lib/WIFI.s
-
-# target to generate assembly for a file
-lib/WIFI.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/DeltaRho_Controller.dir/build.make CMakeFiles/DeltaRho_Controller.dir/lib/WIFI.c.s
-.PHONY : lib/WIFI.c.s
-
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -2252,6 +1726,8 @@ help:
 	@echo "... bs2_default_bin"
 	@echo "... bs2_default_padded_checksummed_asm"
 	@echo "... cyw43_driver_picow_cyw43_bus_pio_spi_pio_h"
+	@echo "... tinyusb_pico_pio_usb_usb_rx_pio_h"
+	@echo "... tinyusb_pico_pio_usb_usb_tx_pio_h"
 	@echo "... DeltaRho_Controller"
 	@echo "... bs2_default"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/cyw43-driver/src/cyw43_ctrl.obj"
@@ -2266,60 +1742,6 @@ help:
 	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/cyw43-driver/src/cyw43_stats.obj"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/cyw43-driver/src/cyw43_stats.i"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/cyw43-driver/src/cyw43_stats.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/cdc/cdc_device.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_device.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/hid/hid_device.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/midi/midi_device.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/msc/msc_device.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ecm_rndis_device.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/vendor/vendor_device.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd_control.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/tusb.s"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/common/pico_sync/critical_section.obj"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/common/pico_sync/critical_section.i"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/common/pico_sync/critical_section.s"
@@ -2440,9 +1862,6 @@ help:
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_double/double_math.i"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_double/double_math.s"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_double/double_v1_rom_shim.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.s"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_float/float_aeabi.obj"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.obj"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_float/float_init_rom.i"
@@ -2478,15 +1897,6 @@ help:
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.obj"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.i"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_uart/stdio_uart.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/reset_interface.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.s"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.obj"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.i"
-	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.s"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.obj"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.i"
 	@echo "... home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.s"
@@ -2502,9 +1912,6 @@ help:
 	@echo "... lib/Robot.obj"
 	@echo "... lib/Robot.i"
 	@echo "... lib/Robot.s"
-	@echo "... lib/WIFI.obj"
-	@echo "... lib/WIFI.i"
-	@echo "... lib/WIFI.s"
 	@echo "... src/main.obj"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
+
 set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
@@ -11,20 +12,40 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
+# MQTT Agent library Public Include directories.
+#set(MQTT_AGENT_INCLUDE_PUBLIC_DIRS
+#        "${FREERTOS_PATH}/coreMQTT-Agent/source/include")
+#
+## MQTT Agent library source files.
+#set(MQTT_AGENT_SOURCES
+#        "${FREERTOS_PATH}/coreMQTT-Agent/source/core_mqtt_agent.c"
+#        "${FREERTOS_PATH}/coreMQTT-Agent/source/core_mqtt_agent_command_functions.c")
+
+
 include(pico_sdk_import.cmake)
+include(FreeRTOS_Kernel_import.cmake)
 
 project(DeltaRho_Controller C CXX ASM)
 pico_sdk_init()
 
-add_executable(DeltaRho_Controller src/main.cpp lib/I2C.c lib/I2C.h lib/DC_Motor.cpp lib/DC_Motor.h lib/Robot.cpp lib/Robot.h lib/PCA9685.h)
+
+add_executable(DeltaRho_Controller
+        src/main.cpp
+        lib/I2C.c lib/I2C.h
+        lib/DC_Motor.cpp lib/DC_Motor.h
+        lib/Robot.cpp lib/Robot.h
+        lib/PCA9685.h
+        )
 
 pico_enable_stdio_usb(DeltaRho_Controller 1)
 pico_enable_stdio_uart(DeltaRho_Controller 1)
 
 pico_add_extra_outputs(DeltaRho_Controller)
-target_link_libraries(DeltaRho_Controller
+target_link_libraries(
+        DeltaRho_Controller
         pico_stdlib
         pico_cyw43_arch_none
         hardware_i2c
-        pico_multicore
-        )
+        FreeRTOS-Kernel
+        FreeRTOS-Kernel-Heap4
+)

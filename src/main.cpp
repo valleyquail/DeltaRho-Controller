@@ -5,22 +5,21 @@
  */
 
 #include "../lib/Robot.h"
+#include "FreeRTOS.h"
 #include "pico/cyw43_arch.h"
-#include "pico/multicore.h"
 #include "pico/stdlib.h"
 
 int main() {
   stdio_init_all();
 
-  sleep_ms(1000);
   if (cyw43_arch_init()) {
     printf("Wi-Fi init failed");
     return -1;
   }
-  Robot robot = Robot();
+  Robot robot = Robot(1);
   robot.init();
 
-  robot.controlRobot(0, 0, 0);
+  robot.controlRobot(0, 0, 0, 0);
   sleep_ms(1000);
   while (true) {
 

@@ -3,13 +3,12 @@
 //
 
 #include "Robot.h"
-#include <functional>
 
 extern "C" {
 #include "I2C.h"
 }
 
-Robot::Robot() {}
+Robot::Robot(uint8_t robotNum) : robotNum(robotNum) {}
 
 void Robot::init() {
   backRight.init(0, 0, 1, 2, 1);

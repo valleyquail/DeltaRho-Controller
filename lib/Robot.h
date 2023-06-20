@@ -23,11 +23,11 @@ private:
   const float chassisRadius = 10;
 
 public:
-  Robot(void);
-  void init(void);
-
+  Robot(uint8_t robotNum);
+  void init();
   void controlRobot(float xComponent, float yComponent, float rotation,
                     int speed);
+  const uint8_t robotNum;
 };
 
 #endif // DELTARHO_CONTROLLER_ROBOT_H
