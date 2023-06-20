@@ -5,7 +5,7 @@
 #ifndef DELTARHO_CONTROLLER_PCA9685_H
 #define DELTARHO_CONTROLLER_PCA9685_H
 
-#include "I2C.h"
+#include "I2C_Control.h"
 #include "pico/stdio.h"
 #include "pico/stdlib.h"
 

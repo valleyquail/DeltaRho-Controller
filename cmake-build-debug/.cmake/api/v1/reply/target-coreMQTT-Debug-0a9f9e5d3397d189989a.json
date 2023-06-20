@@ -1,0 +1,95 @@
+{
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"include",
+			"target_sources"
+		],
+		"files" : 
+		[
+			"FreeRTOS_coreMQTT-Agent.cmake",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 23,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 22,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 28,
+				"parent" : 2
+			}
+		]
+	},
+	"id" : "coreMQTT::@6890427a1f51a3e7e1df",
+	"name" : "coreMQTT",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 4,
+			"path" : "/home/nikesh/Documents/pico/FreeRTOS/coreMQTT-Agent/source/core_mqtt_agent.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "/home/nikesh/Documents/pico/FreeRTOS/coreMQTT-Agent/source/core_mqtt_agent_command_functions.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "/home/nikesh/Documents/pico/FreeRTOS/coreMQTT-Agent/source/dependency/coreMQTT/source/core_mqtt.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "/home/nikesh/Documents/pico/FreeRTOS/coreMQTT-Agent/source/dependency/coreMQTT/source/core_mqtt_state.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "/home/nikesh/Documents/pico/FreeRTOS/coreMQTT-Agent/source/dependency/coreMQTT/source/core_mqtt_serializer.c",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "INTERFACE_LIBRARY"
+}

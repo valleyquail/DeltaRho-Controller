@@ -5,7 +5,7 @@
 #include "Robot.h"
 
 extern "C" {
-#include "I2C.h"
+#include "I2C_Control.h"
 }
 
 Robot::Robot(uint8_t robotNum) : robotNum(robotNum) {}

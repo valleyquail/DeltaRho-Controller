@@ -5,7 +5,7 @@
 # or the CMakeLists.txt in this directory may be included or added via add_subdirectory
 # respectively.
 
-if (DEFINED ENV{FREERTOS_KERNEL_PATH} AND (NOT FREERTOS_KERNEL_PATH))
+if (DEFINED ENV{FREERTOS_KERNEL_PATH})
     set(FREERTOS_KERNEL_PATH $ENV{FREERTOS_KERNEL_PATH})
     message("Using FREERTOS_KERNEL_PATH from environment ('${FREERTOS_KERNEL_PATH}')")
 endif ()
