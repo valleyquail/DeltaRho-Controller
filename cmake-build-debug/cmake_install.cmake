@@ -39,7 +39,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/FREERTOS_KERNEL/cmake_install.cmake")
   include("/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/pico-sdk/cmake_install.cmake")
 
 endif()

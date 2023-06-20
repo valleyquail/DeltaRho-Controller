@@ -2,8 +2,6 @@
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/CMakeFiles/ELF2UF2Build.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/CMakeFiles/edit_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/FREERTOS_KERNEL/CMakeFiles/edit_cache.dir
-/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/FREERTOS_KERNEL/CMakeFiles/rebuild_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/pico-sdk/CMakeFiles/edit_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/pico-sdk/CMakeFiles/rebuild_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/pico-sdk/tools/CMakeFiles/edit_cache.dir

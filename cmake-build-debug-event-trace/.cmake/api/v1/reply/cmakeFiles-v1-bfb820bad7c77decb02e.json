@@ -36,11 +36,8 @@
 			"path" : "/home/nikesh/Documents/pico/pico-sdk/cmake/pico_pre_load_toolchain.cmake"
 		},
 		{
-			"path" : "FreeRTOS_Kernel_import.cmake"
-		},
-		{
 			"isGenerated" : true,
-			"path" : "cmake-build-debug/CMakeFiles/3.25.2/CMakeSystem.cmake"
+			"path" : "cmake-build-debug-event-trace/CMakeFiles/3.25.2/CMakeSystem.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -61,15 +58,15 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "cmake-build-debug/CMakeFiles/3.25.2/CMakeCCompiler.cmake"
+			"path" : "cmake-build-debug-event-trace/CMakeFiles/3.25.2/CMakeCCompiler.cmake"
 		},
 		{
 			"isGenerated" : true,
-			"path" : "cmake-build-debug/CMakeFiles/3.25.2/CMakeCXXCompiler.cmake"
+			"path" : "cmake-build-debug-event-trace/CMakeFiles/3.25.2/CMakeCXXCompiler.cmake"
 		},
 		{
 			"isGenerated" : true,
-			"path" : "cmake-build-debug/CMakeFiles/3.25.2/CMakeASMCompiler.cmake"
+			"path" : "cmake-build-debug-event-trace/CMakeFiles/3.25.2/CMakeASMCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -184,7 +181,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "cmake-build-debug/elf2uf2/tmp/ELF2UF2Build-mkdirs.cmake"
+			"path" : "cmake-build-debug-event-trace/elf2uf2/tmp/ELF2UF2Build-mkdirs.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -195,129 +192,6 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/ExternalProject/cfgcmd.txt.in"
-		},
-		{
-			"isExternal" : true,
-			"path" : "/home/nikesh/Documents/pico/FreeRTOS/FreeRTOS/Source/portable/ThirdParty/GCC/RP2040/CMakeLists.txt"
-		},
-		{
-			"isExternal" : true,
-			"path" : "/home/nikesh/Documents/pico/FreeRTOS/FreeRTOS/Source/portable/ThirdParty/GCC/RP2040/pico_sdk_import.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "/home/nikesh/Documents/pico/pico-sdk/pico_sdk_init.cmake"
-		},
-		{
-			"isGenerated" : true,
-			"path" : "cmake-build-debug/CMakeFiles/3.25.2/CMakeSystem.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "/home/nikesh/Documents/pico/pico-sdk/cmake/preload/toolchains/pico_arm_gcc.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "/home/nikesh/Documents/pico/pico-sdk/cmake/preload/toolchains/find_compiler.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "/home/nikesh/Documents/pico/pico-sdk/cmake/preload/toolchains/set_flags.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeSystemSpecificInitialize.cmake"
-		},
-		{
-			"isGenerated" : true,
-			"path" : "cmake-build-debug/CMakeFiles/3.25.2/CMakeCCompiler.cmake"
-		},
-		{
-			"isGenerated" : true,
-			"path" : "cmake-build-debug/CMakeFiles/3.25.2/CMakeCXXCompiler.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeSystemSpecificInformation.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeGenericSystem.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeInitializeConfigs.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "/home/nikesh/Documents/pico/pico-sdk/cmake/Platform/PICO.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCInformation.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeLanguageInformation.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU-C.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "/home/nikesh/Documents/pico/pico-sdk/cmake/Platform/PICO.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCommonLanguageInclude.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXInformation.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeLanguageInformation.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU-CXX.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "/home/nikesh/Documents/pico/pico-sdk/cmake/Platform/PICO.cmake"
-		},
-		{
-			"isCMake" : true,
-			"isExternal" : true,
-			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCommonLanguageInclude.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -341,10 +215,6 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/share/cmake-3.25/Modules/Compiler/GNU.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "/home/nikesh/Documents/pico/FreeRTOS/FreeRTOS/Source/portable/ThirdParty/GCC/RP2040/library.cmake"
 		},
 		{
 			"isExternal" : true,
@@ -681,7 +551,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "cmake-build-debug/pico-sdk/src/rp2_common/tinyusb/pioasm/tmp/PioasmBuild-mkdirs.cmake"
+			"path" : "cmake-build-debug-event-trace/pico-sdk/src/rp2_common/tinyusb/pioasm/tmp/PioasmBuild-mkdirs.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -806,7 +676,7 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug",
+		"build" : "/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug-event-trace",
 		"source" : "/home/nikesh/CLionProjects/DeltaRho_Controller"
 	},
 	"version" : 
