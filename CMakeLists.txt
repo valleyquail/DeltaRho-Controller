@@ -1,3 +1,9 @@
+#set these as the cmake environment variables
+#Roughly assumes a similar project structure
+#FREERTOS_COREMQTT_MODULE=/home/<user>/CLionProjects/DeltaRho_Controller/libraries/coreMQTT-Agent;
+#FREERTOS_KERNEL_PATH=/home/<user>/CLionProjects/DeltaRho_Controller/libraries/FreeRTOS/Source;
+#PICO_SDK_PATH=/home/<user>/Documents/pico/pico-sdk
+
 cmake_minimum_required(VERSION 3.13)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -15,9 +21,6 @@ set(CMAKE_CXX_STANDARD 17)
 
 
 include(pico_sdk_import.cmake)
-
-set(FREERTOS_CONFIG_FILE_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/FreeRTOSConfig.h" CACHE STRING "Local Config")
-include_directories("${FREERTOS_CONFIG_FILE_DIRECTORY}") # FreeRTOS config files
 
 include(FreeRTOS_Kernel_import.cmake)
 include(FreeRTOS_coreMQTT-Agent.cmake)
@@ -38,6 +41,7 @@ pico_enable_stdio_usb(DeltaRho_Controller 1)
 pico_enable_stdio_uart(DeltaRho_Controller 1)
 
 pico_add_extra_outputs(DeltaRho_Controller)
+
 target_link_libraries(
         DeltaRho_Controller
         pico_stdlib

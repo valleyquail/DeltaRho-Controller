@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "FREERTOS_KERNEL",
+		"source" : "libraries/FreeRTOS/Source/portable/ThirdParty/GCC/RP2040"
+	}
+}

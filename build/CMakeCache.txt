@@ -248,6 +248,12 @@ DeltaRho_Controller_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 DeltaRho_Controller_SOURCE_DIR:STATIC=/home/nikesh/CLionProjects/DeltaRho_Controller
 
+//Local Config
+FREERTOS_CONFIG_FILE_DIRECTORY:STRING=/home/nikesh/CLionProjects/DeltaRho_Controller/FreeRTOSConfig.h
+
+//Path to the FreeRTOS Kernel
+FREERTOS_KERNEL_PATH:PATH=/home/nikesh/CLionProjects/DeltaRho_Controller/libraries
+
 //PICO target board (e.g. pico)
 PICO_BOARD:STRING=pico_w
 
@@ -434,7 +440,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=80
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

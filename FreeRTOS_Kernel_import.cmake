@@ -5,7 +5,7 @@
 # or the CMakeLists.txt in this directory may be included or added via add_subdirectory
 # respectively.
 
-if (DEFINED ENV{FREERTOS_KERNEL_PATH})
+if (DEFINED ENV{FREERTOS_KERNEL_PATH} AND (NOT FREERTOS_KERNEL_PATH))
     set(FREERTOS_KERNEL_PATH $ENV{FREERTOS_KERNEL_PATH})
     message("Using FREERTOS_KERNEL_PATH from environment ('${FREERTOS_KERNEL_PATH}')")
 endif ()
@@ -24,8 +24,8 @@ if (NOT FREERTOS_KERNEL_PATH)
     if (_ACTUAL_PATH STREQUAL _POSSIBLE_PATH)
         get_filename_component(FREERTOS_KERNEL_PATH ${CMAKE_CURRENT_LIST_DIR}/${FREERTOS_KERNEL_RP2040_BACK_PATH} REALPATH)
         message("Setting FREERTOS_KERNEL_PATH to ${FREERTOS_KERNEL_PATH} based on location of FreeRTOS-Kernel-import.cmake")
-    elseif (PICO_SDK_PATH AND EXISTS "${PICO_SDK_PATH}/../FreeRTOS/FreeRTOS/Source")
-        set(FREERTOS_KERNEL_PATH ${PICO_SDK_PATH}/../FreeRTOS/FreeRTOS/Source)
+    elseif (PICO_SDK_PATH AND EXISTS "${PICO_SDK_PATH}/../FreeRTOS-Kernel")
+        set(FREERTOS_KERNEL_PATH ${PICO_SDK_PATH}/../FreeRTOS-Kernel)
         message("Defaulting FREERTOS_KERNEL_PATH as sibling of PICO_SDK_PATH: ${FREERTOS_KERNEL_PATH}")
     endif ()
 endif ()
