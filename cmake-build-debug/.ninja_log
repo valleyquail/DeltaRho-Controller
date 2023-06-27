@@ -1,6 +1,5 @@
 # ninja log v5
 269	362	1687279684783198128	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_bootrom/bootrom.c.obj	65a7504d0d95d635
-1164	1635	1687279686055178272	CMakeFiles/DeltaRho_Controller.dir/libraries/FreeRTOS/Source/tasks.c.obj	c3684c2977d30360
 862	1332	1687279685751183018	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/cyw43-driver/src/cyw43_ctrl.c.obj	8abd1720a54a9a35
 480	733	1687279685151192385	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.obj	eef65b840a4bdb45
 33	709	1685326585746177564	/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-configure	a0c0b00c841cb9e2
@@ -20,7 +19,6 @@
 444	552	1687279684967195257	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_unique_id/unique_id.c.obj	506126dc43670569
 30	314	1685326585354157021	pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure	5ff3e4ef023a34f
 31	166	1687279684587201186	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_claim/claim.c.obj	72ce01dfb3fe3d6d
-1078	1388	1687279685807182144	CMakeFiles/DeltaRho_Controller.dir/libraries/FreeRTOS/Source/stream_buffer.c.obj	e04ec637fa715cfc
 28	1302	1687279685723183455	CMakeFiles/DeltaRho_Controller.dir/src/main.cpp.obj	2d3612697715fc1e
 930	1080	1687279685499186952	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_dma/dma.c.obj	cc9798e52cf60db
 637	700	1687279685119192884	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.obj	a554108c782d48f7
@@ -46,13 +44,11 @@
 396	687	1687279685107193072	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio/stdio.c.obj	6350069774cfe1b7
 643	706	1687279685127192760	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/net/ncm_device.c.obj	e69f53ff8e86ad97
 203	266	1687279684687199626	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_vreg/vreg.c.obj	70fa5c6a04f2e64e
-1061	1262	1687279685683184080	CMakeFiles/DeltaRho_Controller.dir/libraries/FreeRTOS/Source/event_groups.c.obj	bc0df2e9fc1070bc
 1002	1163	1687279685583185641	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_async_context/async_context_base.c.obj	48d0fdb95af56f8d
 1018	1265	1687279685683184080	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_i2c/i2c.c.obj	b1af312395b0cd0f
 152	382	1687279684799197878	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/common/pico_util/pheap.c.obj	d3b18f70dfbc49f6
 17	24	1685326585062141718	/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-update	722669ced45ac63c
 30	314	1685326585354157021	/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure	5ff3e4ef023a34f
-1170	1392	1687279685811182081	CMakeFiles/DeltaRho_Controller.dir/libraries/FreeRTOS/Source/timers.c.obj	bcf1039f06b2bd6b
 553	635	1687279685055193883	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/audio/audio_device.c.obj	2f95a19bb597df5
 20	25	1687239202235917901	/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/pico-sdk/src/rp2_common/tinyusb/pioasm/src/PioasmBuild-stamp/PioasmBuild-patch	1acb85606f7a5344
 413	555	1687279684971195195	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.obj	7535a28008d4a31e
@@ -60,7 +56,7 @@
 28	1018	1687279685435187951	CMakeFiles/DeltaRho_Controller.dir/lib/DC_Motor.cpp.obj	177dc97e1bed88c3
 11	17	1685326585054141299	pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-download	6498b45ca61f0701
 25	52	1687239202263917424	pico-sdk/src/rp2_common/tinyusb/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure	87b431f6408c0887
-1	399	1687288843715439841	build.ninja	3fc5624af3a31c8b
+1	399	1687895617166998535	build.ninja	3fc5624af3a31c8b
 910	1270	1687279685691183954	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_pio/pio.c.obj	993ff18d7a979f62
 512	1057	1687279685475187327	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/device/usbd.c.obj	1e9a05e512b96290
 698	862	1687279685283190324	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.obj	a0f221623ea1df45
@@ -69,7 +65,6 @@
 688	772	1687279685191191761	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/video/video_device.c.obj	982f80b738671384
 4	18	0	/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-build	16fd82c6605ee972
 416	649	1687279685067193696	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdio_usb/stdio_usb.c.obj	ce4f912afdc0d8a1
-1081	1184	1687279685599185391	CMakeFiles/DeltaRho_Controller.dir/libraries/FreeRTOS/Source/list.c.obj	96095157a3fa12b
 733	929	1687279685347189325	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_cyw43_arch/cyw43_arch_threadsafe_background.c.obj	25b42b1bcff834d
 347	894	1687279685299190074	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_float/float_math.c.obj	d072dbd5ba66308e
 582	642	1687279685063193759	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/class/dfu/dfu_rt_device.c.obj	51a5dba93db6794d
@@ -80,7 +75,6 @@
 989	1281	1687279685699183830	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_cyw43_driver/cyw43_driver.c.obj	8fb2c3b9f7260677
 201	302	1687279684723199064	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_pll/pll.c.obj	b9e4482574c22c9c
 15	22	1686263394744899020	pico-sdk/src/rp2_common/pico_cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-done	c8913fa44429c979
-1028	1093	1687279685511186765	CMakeFiles/DeltaRho_Controller.dir/libraries/FreeRTOS/Source/croutine.c.obj	89acfa85bc3b4cfa
 31	33	1687279647107780272	pico-sdk/src/rp2_common/boot_stage2/bs2_default.bin	d61793759b56ba30
 9	14	1687239202227918038	pico-sdk/src/rp2_common/tinyusb/pioasm/src/PioasmBuild-stamp/PioasmBuild-download	5f961da901264508
 5	19	0	pico-sdk/src/rp2_common/tinyusb/pioasm/src/PioasmBuild-stamp/PioasmBuild-build	706190fec93d183b
@@ -97,7 +91,6 @@
 30	228	1687279684647200250	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_stdlib/stdlib.c.obj	57cc832334b8e4b2
 33	126	1687279684543201873	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/common/pico_sync/lock_core.c.obj	48c06ffe16195825
 3	9	1687239202219918174	pico-sdk/src/rp2_common/tinyusb/pioasm/src/PioasmBuild-stamp/PioasmBuild-mkdir	5ca90ceded2758c7
-1021	1424	1687279685843181581	CMakeFiles/DeltaRho_Controller.dir/libraries/FreeRTOS/Source/queue.c.obj	a51429bc8e3292fd
 247	466	1687279684887196505	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_runtime/runtime.c.obj	347b9f26f1b9040
 372	496	1687279684891196442	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_standard_link/binary_info.c.obj	2977d5eee647a74c
 20	26	1685326585066141928	/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-update	a2cfa8f8c8617a2b
@@ -117,7 +110,6 @@
 19	22	0	elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-install	ea44187cbeca7500
 31	174	1687279684591201124	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_platform/platform.c.obj	c22b58f1cf7dc798
 9	14	1687239202227918038	/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/pico-sdk/src/rp2_common/tinyusb/pioasm/src/PioasmBuild-stamp/PioasmBuild-download	5f961da901264508
-1004	1226	1687279685647184641	CMakeFiles/DeltaRho_Controller.dir/libraries/FreeRTOS/Source/portable/ThirdParty/GCC/RP2040/port.c.obj	b64f33d2eeaf70b1
 23	32	1687288511956900579	/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/pico-sdk/src/rp2_common/tinyusb/CMakeFiles/PioasmBuild-complete	d201bb351de0f47c
 28	245	1687279684659200063	CMakeFiles/DeltaRho_Controller.dir/lib/I2C_Control.c.obj	73d9d2c18188331b
 756	805	1687279685223191261	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_cyw43_arch/cyw43_arch_freertos.c.obj	f4a4620e2e4dfd81
@@ -150,7 +142,6 @@
 29	91	1687279684507202434	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_irq/irq_handler_chain.S.obj	c04321157343d6e2
 760	1077	1687279685495187014	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/pico_cyw43_driver/cybt_shared_bus/cybt_shared_bus.c.obj	683e2ff7adab92f2
 10	20	1685326585058141508	/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug/elf2uf2/src/ELF2UF2Build-stamp/ELF2UF2Build-download	edad31fa255aae0a
-1094	1255	1687279685675184205	CMakeFiles/DeltaRho_Controller.dir/libraries/FreeRTOS/Source/portable/MemMang/heap_4.c.obj	870bbdbac363e5f5
 30	329	1687279684719199127	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_gpio/gpio.c.obj	8d85a463c9456926
 228	339	1687279684751198627	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/hardware_xosc/xosc.c.obj	e2632f1100b007fd
 700	1170	1687279685591185516	CMakeFiles/DeltaRho_Controller.dir/home/nikesh/Documents/pico/pico-sdk/lib/tinyusb/src/common/tusb_fifo.c.obj	510bbff0fbdd330d

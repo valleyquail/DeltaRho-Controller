@@ -1,4 +1,4 @@
-# Install script for directory: /home/nikesh/CLionProjects/DeltaRho_Controller/libraries/FreeRTOS/Source/portable/ThirdParty/GCC/RP2040
+# Install script for directory: /home/nikesh/CLionProjects/DeltaRho_Controller/include/FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,6 +34,6 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "arm-none-eabi-objdump")
+  set(CMAKE_OBJDUMP "/usr/bin/arm-none-eabi-objdump")
 endif()
 
