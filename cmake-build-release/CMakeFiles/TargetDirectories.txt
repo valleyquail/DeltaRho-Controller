@@ -3,8 +3,6 @@
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/CMakeFiles/ELF2UF2Build.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/CMakeFiles/edit_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/CMakeFiles/rebuild_cache.dir
-/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/FREERTOS_KERNEL/CMakeFiles/edit_cache.dir
-/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/FREERTOS_KERNEL/CMakeFiles/rebuild_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/CMakeFiles/edit_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/CMakeFiles/rebuild_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/tools/CMakeFiles/edit_cache.dir
@@ -172,3 +170,5 @@
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/src/rp2040/hardware_structs/CMakeFiles/rebuild_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/docs/CMakeFiles/edit_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/pico-sdk/docs/CMakeFiles/rebuild_cache.dir
+/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/FREERTOS_KERNEL/CMakeFiles/edit_cache.dir
+/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/FREERTOS_KERNEL/CMakeFiles/rebuild_cache.dir

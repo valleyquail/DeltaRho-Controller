@@ -251,7 +251,7 @@ DeltaRho_Controller_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 DeltaRho_Controller_SOURCE_DIR:STATIC=/home/nikesh/CLionProjects/DeltaRho_Controller
 
-//Path to the FreeRTOS_KERNEL
+// Path to the FreeRTOS_KERNEL 
 FREERTOS_KERNEL_PATH:PATH=/home/nikesh/CLionProjects/DeltaRho_Controller/include/FreeRTOS-Kernel
 
 //Value Computed by CMake
@@ -308,23 +308,14 @@ PICO_SDK_FETCH_FROM_GIT_PATH:FILEPATH=
 //Path to the Raspberry Pi Pico SDK
 PICO_SDK_PATH:PATH=/home/nikesh/Documents/pico/pico-sdk
 
-//Globablly enable stdio semihosting
+//Globally enable stdio semi-hosting
 PICO_STDIO_SEMIHOSTING:BOOL=OFF
 
-//Globablly enable stdio UART
+//Globally enable stdio UART
 PICO_STDIO_UART:BOOL=ON
 
-//Globablly enable stdio USB
+//Globally enable stdio USB
 PICO_STDIO_USB:BOOL=OFF
-
-//Value Computed by CMake
-Project_BINARY_DIR:STATIC=/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug-event-trace
-
-//Value Computed by CMake
-Project_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-Project_SOURCE_DIR:STATIC=/home/nikesh/CLionProjects/DeltaRho_Controller
 
 //The directory containing a CMake configuration file for pico-sdk-tools.
 pico-sdk-tools_DIR:PATH=pico-sdk-tools_DIR-NOTFOUND
@@ -452,7 +443,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=81
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -506,7 +497,7 @@ PICO_BOOT_STAGE2_DIR:INTERNAL=/home/nikesh/Documents/pico/pico-sdk/src/rp2_commo
 PICO_CMAKE_PRELOAD_PLATFORM_DIR:INTERNAL=/home/nikesh/Documents/pico/pico-sdk/cmake/preload/platforms
 PICO_CMAKE_PRELOAD_PLATFORM_FILE:INTERNAL=/home/nikesh/Documents/pico/pico-sdk/cmake/preload/platforms/rp2040.cmake
 PICO_COMPILER_ASM:INTERNAL=/usr/bin/arm-none-eabi-gcc
-PICO_DOXYGEN_EXCLUDE_PATHS:INTERNAL= /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs
+PICO_DOXYGEN_EXCLUDE_PATHS:INTERNAL= /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs
 PICO_DOXYGEN_PATHS:INTERNAL= /home/nikesh/Documents/pico/pico-sdk/src/common /home/nikesh/Documents/pico/pico-sdk/lib/cyw43-driver/src /home/nikesh/Documents/pico/pico-sdk/src/rp2_common /home/nikesh/Documents/pico/pico-sdk/src/rp2040
 PICO_NO_HARDWARE:INTERNAL=0
 PICO_ON_DEVICE:INTERNAL=1

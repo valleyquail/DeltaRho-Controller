@@ -6,8 +6,8 @@
 
 #include "../lib/Robot.h"
 extern "C" {
-#include "FreeRTOS.h"
-#include "core_mqtt.h"
+// #include "FreeRTOS.h"
+// #include "core_mqtt.h"
 #include "pico/cyw43_arch.h"
 #include "pico/stdlib.h"
 }
