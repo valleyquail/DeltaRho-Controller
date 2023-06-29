@@ -37,7 +37,7 @@ target_link_libraries(
         pico_stdlib
         pico_cyw43_arch_none
         hardware_i2c
-        pico_lwip
-        pico_mbedtls
-        pico_lwip_mqtt
+        #        pico_lwip
+        #        pico_mbedtls
+        #        pico_lwip_mqtt
 )

@@ -1,4 +1,4 @@
-/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/ninja/linux/x64/ninja -DPICO_BOARD:STRING=pico_w -G Ninja -S /home/nikesh/CLionProjects/DeltaRho_Controller -B /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug
+/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DPICO_BOARD=pico_w -S /home/nikesh/CLionProjects/DeltaRho_Controller -B /home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug
 PICO_SDK_PATH is /home/nikesh/Documents/pico/pico-sdk
 PICO platform is rp2040.
 Build type is Debug
