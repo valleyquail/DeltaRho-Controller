@@ -36,7 +36,7 @@ rule C_STATIC_LIBRARY_LINKER__coreMQTT_Release
 rule ASM_COMPILER__DeltaRho_Controller_Release
   depfile = $DEP_FILE
   deps = gcc
-  command = /usr/bin/arm-none-eabi-gcc $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  command = /usr/bin/arm-none-eabi-gcc $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out   -c $in
   description = Building ASM object $out
 
 
@@ -64,7 +64,7 @@ rule CXX_COMPILER__DeltaRho_Controller_Release
 # Rule for linking CXX executable.
 
 rule CXX_EXECUTABLE_LINKER__DeltaRho_Controller_Release
-  command = $PRE_LINK && /usr/bin/arm-none-eabi-g++ $FLAGS $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD
+  command = $PRE_LINK && /usr/bin/arm-none-eabi-g++ $FLAGS -Wl,--build-id=none $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD
   description = Linking CXX executable $TARGET_FILE
   restat = $RESTAT
 
@@ -83,7 +83,7 @@ rule CUSTOM_COMMAND
 rule ASM_COMPILER__bs2_default_Release
   depfile = $DEP_FILE
   deps = gcc
-  command = /usr/bin/arm-none-eabi-gcc $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  command = /usr/bin/arm-none-eabi-gcc $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out   -c $in
   description = Building ASM object $out
 
 
@@ -91,7 +91,7 @@ rule ASM_COMPILER__bs2_default_Release
 # Rule for linking ASM executable.
 
 rule ASM_EXECUTABLE_LINKER__bs2_default_Release
-  command = $PRE_LINK && /usr/bin/arm-none-eabi-gcc $FLAGS $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD
+  command = $PRE_LINK && /usr/bin/arm-none-eabi-gcc $FLAGS -Wl,--build-id=none $LINK_FLAGS $in -o $TARGET_FILE $LINK_PATH $LINK_LIBRARIES && $POST_BUILD
   description = Linking ASM executable $TARGET_FILE
   restat = $RESTAT
 

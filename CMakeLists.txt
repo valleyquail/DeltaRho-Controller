@@ -22,10 +22,11 @@ set(CMAKE_CXX_STANDARD 17)
 
 project(DeltaRho_Controller C CXX ASM)
 
+
 #add_compile_definitions(FREERTOS_KERNEL_SMP=1)
 
 include(pico_sdk_import.cmake)
-
+pico_sdk_init()
 #Includes the FreeRTOSConfig.h file
 add_library(freertos_config INTERFACE)
 target_include_directories(freertos_config SYSTEM INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
@@ -34,9 +35,6 @@ target_compile_definitions(freertos_config INTERFACE)
 include(FreeRTOS_Kernel_import.cmake)
 
 include(FreeRTOS_coreMQTT-Agent.cmake)
-
-
-pico_sdk_init()
 
 
 add_executable(DeltaRho_Controller
