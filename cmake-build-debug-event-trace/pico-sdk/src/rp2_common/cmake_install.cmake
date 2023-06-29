@@ -27,9 +27,14 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
+# Install shared libraries without execute permission?
+if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
+  set(CMAKE_INSTALL_SO_NO_EXE "1")
+endif()
+
 # Is this installation the result of a crosscompile?
 if(NOT DEFINED CMAKE_CROSSCOMPILING)
-  set(CMAKE_CROSSCOMPILING "TRUE")
+  set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
 # Set default install directory permissions.
@@ -73,6 +78,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug-event-trace/pico-sdk/src/rp2_common/pico_divider/cmake_install.cmake")
   include("/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug-event-trace/pico-sdk/src/rp2_common/pico_double/cmake_install.cmake")
   include("/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug-event-trace/pico-sdk/src/rp2_common/pico_int64_ops/cmake_install.cmake")
+  include("/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug-event-trace/pico-sdk/src/rp2_common/pico_flash/cmake_install.cmake")
   include("/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug-event-trace/pico-sdk/src/rp2_common/pico_float/cmake_install.cmake")
   include("/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug-event-trace/pico-sdk/src/rp2_common/pico_mem_ops/cmake_install.cmake")
   include("/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug-event-trace/pico-sdk/src/rp2_common/pico_malloc/cmake_install.cmake")

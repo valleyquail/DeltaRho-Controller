@@ -6,7 +6,7 @@
 
 cmake_minimum_required(VERSION 3.13)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
+#
 set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
@@ -20,12 +20,22 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
 
+project(DeltaRho_Controller C CXX ASM)
+
+#add_compile_definitions(FREERTOS_KERNEL_SMP=1)
+
 include(pico_sdk_import.cmake)
 
+#Includes the FreeRTOSConfig.h file
+add_library(freertos_config INTERFACE)
+target_include_directories(freertos_config SYSTEM INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_compile_definitions(freertos_config INTERFACE)
+
 include(FreeRTOS_Kernel_import.cmake)
+
 include(FreeRTOS_coreMQTT-Agent.cmake)
 
-project(DeltaRho_Controller C CXX ASM)
+
 pico_sdk_init()
 
 
@@ -50,4 +60,5 @@ target_link_libraries(
         FreeRTOS-Kernel
         FreeRTOS-Kernel-Heap4
         coreMQTT
+        freertos_config
 )

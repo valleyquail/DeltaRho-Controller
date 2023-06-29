@@ -17,9 +17,6 @@
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/usr/bin/arm-none-eabi-addr2line
 
-//ASM compiler
-CMAKE_ASM_COMPILER:STRING=/usr/bin/arm-none-eabi-gcc
-
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
 CMAKE_ASM_COMPILER_AR:FILEPATH=/usr/bin/arm-none-eabi-gcc-ar
@@ -29,10 +26,10 @@ CMAKE_ASM_COMPILER_AR:FILEPATH=/usr/bin/arm-none-eabi-gcc-ar
 CMAKE_ASM_COMPILER_RANLIB:FILEPATH=/usr/bin/arm-none-eabi-gcc-ranlib
 
 //Flags used by the ASM compiler during all build types.
-CMAKE_ASM_FLAGS:STRING=-mcpu=cortex-m0plus -mthumb
+CMAKE_ASM_FLAGS:STRING=
 
 //Flags used by the ASM compiler during DEBUG builds.
-CMAKE_ASM_FLAGS_DEBUG:STRING=-Og -g
+CMAKE_ASM_FLAGS_DEBUG:STRING=-g
 
 //Flags used by the ASM compiler during MINSIZEREL builds.
 CMAKE_ASM_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
@@ -50,9 +47,6 @@ CMAKE_BUILD_TYPE:STRING=Debug
 //Enable colored diagnostics throughout.
 CMAKE_COLOR_DIAGNOSTICS:BOOL=ON
 
-//CXX compiler
-CMAKE_CXX_COMPILER:STRING=/usr/bin/arm-none-eabi-g++
-
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
 CMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/arm-none-eabi-gcc-ar
@@ -62,10 +56,10 @@ CMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/arm-none-eabi-gcc-ar
 CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/usr/bin/arm-none-eabi-gcc-ranlib
 
 //Flags used by the CXX compiler during all build types.
-CMAKE_CXX_FLAGS:STRING=-mcpu=cortex-m0plus -mthumb
+CMAKE_CXX_FLAGS:STRING=
 
 //Flags used by the CXX compiler during DEBUG builds.
-CMAKE_CXX_FLAGS_DEBUG:STRING=-Og -g
+CMAKE_CXX_FLAGS_DEBUG:STRING=-g
 
 //Flags used by the CXX compiler during MINSIZEREL builds.
 CMAKE_CXX_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
@@ -76,9 +70,6 @@ CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 //Flags used by the CXX compiler during RELWITHDEBINFO builds.
 CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
-//C compiler
-CMAKE_C_COMPILER:STRING=/usr/bin/arm-none-eabi-gcc
-
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
 CMAKE_C_COMPILER_AR:FILEPATH=/usr/bin/arm-none-eabi-gcc-ar
@@ -88,10 +79,10 @@ CMAKE_C_COMPILER_AR:FILEPATH=/usr/bin/arm-none-eabi-gcc-ar
 CMAKE_C_COMPILER_RANLIB:FILEPATH=/usr/bin/arm-none-eabi-gcc-ranlib
 
 //Flags used by the C compiler during all build types.
-CMAKE_C_FLAGS:STRING=-mcpu=cortex-m0plus -mthumb
+CMAKE_C_FLAGS:STRING=
 
 //Flags used by the C compiler during DEBUG builds.
-CMAKE_C_FLAGS_DEBUG:STRING=-Og -g
+CMAKE_C_FLAGS_DEBUG:STRING=-g
 
 //Flags used by the C compiler during MINSIZEREL builds.
 CMAKE_C_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
@@ -158,10 +149,6 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 //Path to a program.
 CMAKE_NM:FILEPATH=/usr/bin/arm-none-eabi-nm
 
-CMAKE_OBJCOPY:FILEPATH=/usr/bin/arm-none-eabi-objcopy
-
-CMAKE_OBJDUMP:FILEPATH=/usr/bin/arm-none-eabi-objdump
-
 //Value Computed by CMake
 CMAKE_PROJECT_DESCRIPTION:STATIC=
 
@@ -227,9 +214,6 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 //Path to a program.
 CMAKE_STRIP:FILEPATH=/usr/bin/arm-none-eabi-strip
 
-//The CMake toolchain file
-CMAKE_TOOLCHAIN_FILE:FILEPATH=/home/nikesh/Documents/pico/pico-sdk/cmake/preload/toolchains/pico_arm_gcc.cmake
-
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
 // during the make.  This is useful for debugging only. With Visual
@@ -251,7 +235,7 @@ DeltaRho_Controller_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 DeltaRho_Controller_SOURCE_DIR:STATIC=/home/nikesh/CLionProjects/DeltaRho_Controller
 
-//Path to the FreeRTOS_KERNEL
+// Path to the FreeRTOS_KERNEL 
 FREERTOS_KERNEL_PATH:PATH=/home/nikesh/CLionProjects/DeltaRho_Controller/include/FreeRTOS-Kernel
 
 //Value Computed by CMake
@@ -263,7 +247,7 @@ FreeRTOS-Kernel_IS_TOP_LEVEL:STATIC=OFF
 //Value Computed by CMake
 FreeRTOS-Kernel_SOURCE_DIR:STATIC=/home/nikesh/CLionProjects/DeltaRho_Controller/include/FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040
 
-//No help, variable specified on the command line.
+//PICO target board (e.g. pico)
 PICO_BOARD:STRING=pico_w
 
 //PICO board header directories
@@ -272,29 +256,14 @@ PICO_BOARD_HEADER_DIRS:STRING=
 //Build HTML Doxygen docs
 PICO_BUILD_DOCS:BOOL=OFF
 
-//Path to a program.
-PICO_COMPILER_CC:FILEPATH=/usr/bin/arm-none-eabi-gcc
-
-//Path to a program.
-PICO_COMPILER_CXX:FILEPATH=/usr/bin/arm-none-eabi-g++
-
 //Default binaries to Copy code to RAM when booting from flash
 PICO_COPY_TO_RAM:BOOL=OFF
 
 //boot stage 2 short name
 PICO_DEFAULT_BOOT_STAGE2:STRING=compile_time_choice
 
-//Build debug builds with -O0
-PICO_DEOPTIMIZED_DEBUG:BOOL=OFF
-
 //Default binaries to not not use flash
 PICO_NO_FLASH:BOOL=OFF
-
-//Path to a program.
-PICO_OBJCOPY:FILEPATH=/usr/bin/arm-none-eabi-objcopy
-
-//Path to a program.
-PICO_OBJDUMP:FILEPATH=/usr/bin/arm-none-eabi-objdump
 
 //PICO Build platform (e.g. rp2040, host)
 PICO_PLATFORM:STRING=rp2040
@@ -308,14 +277,23 @@ PICO_SDK_FETCH_FROM_GIT_PATH:FILEPATH=
 //Path to the Raspberry Pi Pico SDK
 PICO_SDK_PATH:PATH=/home/nikesh/Documents/pico/pico-sdk
 
-//Globablly enable stdio semihosting
+//Globally enable stdio semi-hosting
 PICO_STDIO_SEMIHOSTING:BOOL=OFF
 
-//Globablly enable stdio UART
+//Globally enable stdio UART
 PICO_STDIO_UART:BOOL=ON
 
-//Globablly enable stdio USB
+//Globally enable stdio USB
 PICO_STDIO_USB:BOOL=OFF
+
+//Value Computed by CMake
+Project_BINARY_DIR:STATIC=/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-debug-event-trace
+
+//Value Computed by CMake
+Project_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+Project_SOURCE_DIR:STATIC=/home/nikesh/CLionProjects/DeltaRho_Controller
 
 //The directory containing a CMake configuration file for pico-sdk-tools.
 pico-sdk-tools_DIR:PATH=pico-sdk-tools_DIR-NOTFOUND
@@ -336,8 +314,6 @@ pico_sdk_SOURCE_DIR:STATIC=/home/nikesh/Documents/pico/pico-sdk
 
 //ADVANCED property for variable: CMAKE_ADDR2LINE
 CMAKE_ADDR2LINE-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_ASM_COMPILER
-CMAKE_ASM_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_ASM_COMPILER_AR
 CMAKE_ASM_COMPILER_AR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_ASM_COMPILER_RANLIB
@@ -367,8 +343,6 @@ CMAKE_COMMAND:INTERNAL=/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch
 CMAKE_CPACK_COMMAND:INTERNAL=/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/bin/cpack
 //Path to ctest program executable.
 CMAKE_CTEST_COMMAND:INTERNAL=/home/nikesh/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/bin/ctest
-//ADVANCED property for variable: CMAKE_CXX_COMPILER
-CMAKE_CXX_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_COMPILER_AR
 CMAKE_CXX_COMPILER_AR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_COMPILER_RANLIB
@@ -383,8 +357,6 @@ CMAKE_CXX_FLAGS_MINSIZEREL-ADVANCED:INTERNAL=1
 CMAKE_CXX_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_FLAGS_RELWITHDEBINFO
 CMAKE_CXX_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_C_COMPILER
-CMAKE_C_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_COMPILER_AR
 CMAKE_C_COMPILER_AR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_C_COMPILER_RANLIB
@@ -428,6 +400,8 @@ CMAKE_GENERATOR_TOOLSET:INTERNAL=
 //Source directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/home/nikesh/CLionProjects/DeltaRho_Controller
+//Install .so files without execute permission.
+CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
 CMAKE_LINKER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS
@@ -443,11 +417,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=81
-//ADVANCED property for variable: CMAKE_OBJCOPY
-CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: CMAKE_OBJDUMP
-CMAKE_OBJDUMP-ADVANCED:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=82
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_RANLIB
@@ -482,6 +452,7 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_STRIP
 CMAKE_STRIP-ADVANCED:INTERNAL=1
+CMAKE_TOOLCHAIN_FILE:INTERNAL=/home/nikesh/Documents/pico/pico-sdk/cmake/preload/toolchains/pico_arm_gcc.cmake
 //uname command
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
@@ -496,8 +467,7 @@ FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/usr/local/bin/python3.11][cfound
 PICO_BOOT_STAGE2_DIR:INTERNAL=/home/nikesh/Documents/pico/pico-sdk/src/rp2_common/boot_stage2
 PICO_CMAKE_PRELOAD_PLATFORM_DIR:INTERNAL=/home/nikesh/Documents/pico/pico-sdk/cmake/preload/platforms
 PICO_CMAKE_PRELOAD_PLATFORM_FILE:INTERNAL=/home/nikesh/Documents/pico/pico-sdk/cmake/preload/platforms/rp2040.cmake
-PICO_COMPILER_ASM:INTERNAL=/usr/bin/arm-none-eabi-gcc
-PICO_DOXYGEN_EXCLUDE_PATHS:INTERNAL= /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs
+PICO_DOXYGEN_EXCLUDE_PATHS:INTERNAL= /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs
 PICO_DOXYGEN_PATHS:INTERNAL= /home/nikesh/Documents/pico/pico-sdk/src/common /home/nikesh/Documents/pico/pico-sdk/lib/cyw43-driver/src /home/nikesh/Documents/pico/pico-sdk/src/rp2_common /home/nikesh/Documents/pico/pico-sdk/src/rp2040
 PICO_NO_HARDWARE:INTERNAL=0
 PICO_ON_DEVICE:INTERNAL=1
@@ -505,6 +475,8 @@ PICO_PLATFORM_CMAKE_FILE:INTERNAL=/home/nikesh/Documents/pico/pico-sdk/src/rp204
 //Enable build of SDK tests
 PICO_SDK_TESTS_ENABLED:INTERNAL=
 PICO_TOOLCHAIN_PATH:INTERNAL=
+//linker supports push/pop state
+_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
 //Compiler reason failure
 _Python3_Compiler_REASON_FAILURE:INTERNAL=
 //Development reason failure
@@ -512,7 +484,7 @@ _Python3_Development_REASON_FAILURE:INTERNAL=
 //Path to a program.
 _Python3_EXECUTABLE:INTERNAL=/usr/local/bin/python3.11
 //Python3 Properties
-_Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;11;3;32;;;/usr/local/lib/python3.11;/usr/local/lib/python3.11;/usr/local/lib/python3.11/site-packages;/usr/local/lib/python3.11/site-packages
+_Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;11;3;32;;cpython-311-x86_64-linux-gnu;/usr/local/lib/python3.11;/usr/local/lib/python3.11;/usr/local/lib/python3.11/site-packages;/usr/local/lib/python3.11/site-packages
 _Python3_INTERPRETER_SIGNATURE:INTERNAL=fbfda9d001391c3addbef115245e87bf
 //Interpreter reason failure
 _Python3_Interpreter_REASON_FAILURE:INTERNAL=

@@ -77,7 +77,7 @@ endif()
 
 
 
-set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES "/usr/lib/arm-none-eabi/include/c++/10.3.1;/usr/lib/arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v6-m/nofp;/usr/lib/arm-none-eabi/include/c++/10.3.1/backward;/usr/lib/gcc/arm-none-eabi/10.3.1/include;/usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed;/usr/lib/arm-none-eabi/include")
+set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES "/usr/lib/arm-none-eabi/include/c++/10.3.1;/usr/lib/arm-none-eabi/include/c++/10.3.1/arm-none-eabi;/usr/lib/arm-none-eabi/include/c++/10.3.1/backward;/usr/lib/gcc/arm-none-eabi/10.3.1/include;/usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed;/usr/lib/arm-none-eabi/include")
 set(CMAKE_CXX_IMPLICIT_LINK_LIBRARIES "")
 set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "")
 set(CMAKE_CXX_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES "")
