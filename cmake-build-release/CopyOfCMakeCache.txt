@@ -171,6 +171,21 @@ CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 //Value Computed by CMake
 CMAKE_PROJECT_NAME:STATIC=DeltaRho_Controller
 
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION:STATIC=3.1.0
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_MAJOR:STATIC=3
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_MINOR:STATIC=1
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_PATCH:STATIC=0
+
+//Value Computed by CMake
+CMAKE_PROJECT_VERSION_TWEAK:STATIC=
+
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/arm-none-eabi-ranlib
 
@@ -254,6 +269,18 @@ DeltaRho_Controller_SOURCE_DIR:STATIC=/home/nikesh/CLionProjects/DeltaRho_Contro
 // Path to the FreeRTOS_KERNEL 
 FREERTOS_KERNEL_PATH:PATH=/home/nikesh/CLionProjects/DeltaRho_Controller/include/FreeRTOS-Kernel
 
+//FreeRTOS buffer allocation model number. 1 .. 2.
+FREERTOS_PLUS_TCP_BUFFER_ALLOCATION:STRING=2
+
+//Build the test for FreeRTOS Plus TCP
+FREERTOS_PLUS_TCP_BUILD_TEST:BOOL=OFF
+
+//FreeRTOS Plus TCP Compiler Selection
+FREERTOS_PLUS_TCP_COMPILER:STRING=
+
+//FreeRTOS Plus TCP Network Interface selection
+FREERTOS_PLUS_TCP_NETWORK_IF:STRING=
+
 //Value Computed by CMake
 FreeRTOS-Kernel_BINARY_DIR:STATIC=/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/FREERTOS_KERNEL
 
@@ -263,7 +290,16 @@ FreeRTOS-Kernel_IS_TOP_LEVEL:STATIC=OFF
 //Value Computed by CMake
 FreeRTOS-Kernel_SOURCE_DIR:STATIC=/home/nikesh/CLionProjects/DeltaRho_Controller/include/FreeRTOS-Kernel/portable/ThirdParty/GCC/RP2040
 
-//No help, variable specified on the command line.
+//Value Computed by CMake
+FreeRTOS-Plus-TCP_BINARY_DIR:STATIC=/home/nikesh/CLionProjects/DeltaRho_Controller/cmake-build-release/include/FreeRTOS-Plus-TCP
+
+//Value Computed by CMake
+FreeRTOS-Plus-TCP_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+FreeRTOS-Plus-TCP_SOURCE_DIR:STATIC=/home/nikesh/CLionProjects/DeltaRho_Controller/include/FreeRTOS-Plus-TCP
+
+//PICO target board (e.g. pico)
 PICO_BOARD:STRING=pico_w
 
 //PICO board header directories
@@ -443,7 +479,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=82
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -497,7 +533,7 @@ PICO_BOOT_STAGE2_DIR:INTERNAL=/home/nikesh/Documents/pico/pico-sdk/src/rp2_commo
 PICO_CMAKE_PRELOAD_PLATFORM_DIR:INTERNAL=/home/nikesh/Documents/pico/pico-sdk/cmake/preload/platforms
 PICO_CMAKE_PRELOAD_PLATFORM_FILE:INTERNAL=/home/nikesh/Documents/pico/pico-sdk/cmake/preload/platforms/rp2040.cmake
 PICO_COMPILER_ASM:INTERNAL=/usr/bin/arm-none-eabi-gcc
-PICO_DOXYGEN_EXCLUDE_PATHS:INTERNAL= /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs
+PICO_DOXYGEN_EXCLUDE_PATHS:INTERNAL= /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs /home/nikesh/Documents/pico/pico-sdk/src/rp2_common/cmsis /home/nikesh/Documents/pico/pico-sdk/src/rp2040/hardware_regs
 PICO_DOXYGEN_PATHS:INTERNAL= /home/nikesh/Documents/pico/pico-sdk/src/common /home/nikesh/Documents/pico/pico-sdk/lib/cyw43-driver/src /home/nikesh/Documents/pico/pico-sdk/src/rp2_common /home/nikesh/Documents/pico/pico-sdk/src/rp2040
 PICO_NO_HARDWARE:INTERNAL=0
 PICO_ON_DEVICE:INTERNAL=1

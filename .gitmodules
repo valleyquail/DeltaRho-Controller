@@ -4,3 +4,9 @@
 [submodule "include/coreMQTT-Agent"]
 	path = include/coreMQTT-Agent
 	url = https://github.com/FreeRTOS/coreMQTT-Agent
+[submodule "include/paho_mqtt/paho.mqtt.embedded-c"]
+	path = include/paho_mqtt/paho.mqtt.embedded-c
+	url = https://github.com/eclipse/paho.mqtt.embedded-c
+[submodule "include/FreeRTOS-Plus-TCP"]
+	path = include/FreeRTOS-Plus-TCP
+	url = https://github.com/FreeRTOS/FreeRTOS-Plus-TCP.git
