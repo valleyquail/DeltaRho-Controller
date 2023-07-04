@@ -54,5 +54,4 @@ target_link_libraries(
         pico_lwip_mqtt
         pico_stdlib
         hardware_i2c
-
 )
