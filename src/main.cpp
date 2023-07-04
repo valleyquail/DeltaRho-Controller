@@ -4,12 +4,13 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#include "../lib/Robot.h"
+// #include "../lib/Robot.h"
 extern "C" {
-#include "FreeRTOS.h"
+// #include "FreeRTOS.h"
 #include "pico/cyw43_arch.h"
 #include "pico/stdlib.h"
 }
+
 int main() {
   stdio_init_all();
 
@@ -17,10 +18,10 @@ int main() {
     printf("Wi-Fi init failed");
     return -1;
   }
-  Robot robot = Robot(1);
-  robot.init();
+  //  Robot robot = Robot(1);
+  //  robot.init();
 
-  robot.controlRobot(0, 0, 0, 0);
+  //  robot.controlRobot(0, 0, 0, 0);
   sleep_ms(1000);
   while (true) {
 

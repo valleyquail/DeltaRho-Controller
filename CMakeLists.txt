@@ -5,8 +5,7 @@
 #PICO_SDK_PATH=/home/<user>/Documents/pico/pico-sdk
 
 cmake_minimum_required(VERSION 3.13)
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-#
+
 set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
@@ -20,17 +19,14 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
 
+include(pico_sdk_import.cmake)
 project(DeltaRho_Controller C CXX ASM)
 
-
-#add_compile_definitions(FREERTOS_KERNEL_SMP=1)
-
-include(pico_sdk_import.cmake)
 pico_sdk_init()
 
 #Includes the FreeRTOSConfig.h file
 add_library(freertos_config INTERFACE)
-target_include_directories(freertos_config SYSTEM INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(freertos_config SYSTEM INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 target_compile_definitions(freertos_config INTERFACE)
 
 include(FreeRTOS_Kernel_import.cmake)
@@ -44,21 +40,19 @@ target_include_directories(DeltaRho_Controller SYSTEM PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 
-#pico_enable_stdio_usb(DeltaRho_Controller 1)
-#pico_enable_stdio_uart(DeltaRho_Controller 1)
+pico_enable_stdio_usb(DeltaRho_Controller 1)
+pico_enable_stdio_uart(DeltaRho_Controller 1)
 
 pico_add_extra_outputs(DeltaRho_Controller)
 
 target_link_libraries(
         DeltaRho_Controller
-        async_context_freertos
         freertos_config
         FreeRTOS-Kernel
         FreeRTOS-Kernel-Heap4
         pico_cyw43_arch_lwip_sys_freertos
-        pico_lwip_freertos
-        pico_lwip_api
         pico_lwip_mqtt
         pico_stdlib
         hardware_i2c
+
 )
