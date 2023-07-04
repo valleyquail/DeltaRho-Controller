@@ -33,11 +33,13 @@ include(FreeRTOS_Kernel_import.cmake)
 
 
 add_executable(DeltaRho_Controller
-        src/main.cpp)
-
-target_include_directories(DeltaRho_Controller SYSTEM PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/lib
-        ${CMAKE_CURRENT_SOURCE_DIR}/src)
+        src/main.cpp
+        src/mqtt_connection.cpp src/mqtt_connection.h
+        lib/DCMotor.cpp lib/DC_Motor.h
+        lib/I2C_Control.c lib/I2C_Control.h
+        lib/PCA9685.h
+        lib/Robot.cpp lib/Robot.h
+        lib/wifi_config.h src/multicore_management.h src/instruction_parser.h)
 
 
 pico_enable_stdio_usb(DeltaRho_Controller 1)

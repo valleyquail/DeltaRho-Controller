@@ -169,3 +169,5 @@
 /home/nikesh/CLionProjects/DeltaRho_Controller/build/pico-sdk/src/rp2040/hardware_structs/CMakeFiles/rebuild_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/build/pico-sdk/docs/CMakeFiles/edit_cache.dir
 /home/nikesh/CLionProjects/DeltaRho_Controller/build/pico-sdk/docs/CMakeFiles/rebuild_cache.dir
+/home/nikesh/CLionProjects/DeltaRho_Controller/build/FREERTOS_KERNEL/CMakeFiles/edit_cache.dir
+/home/nikesh/CLionProjects/DeltaRho_Controller/build/FREERTOS_KERNEL/CMakeFiles/rebuild_cache.dir

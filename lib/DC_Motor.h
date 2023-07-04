@@ -8,7 +8,7 @@
 #include <string>
 
 using namespace std;
-class DC_Motor {
+class DCMotor {
 private:
   float Kp;
   // The motor number is used for determining the proper register to write to
@@ -21,7 +21,7 @@ private:
   uint8_t lineTwoIn;
 
 public:
-  DC_Motor();
+  DCMotor();
   void init(int motorNum, uint8_t pwm, uint8_t lineOne, uint8_t lineTwo,
             float Kp);
 

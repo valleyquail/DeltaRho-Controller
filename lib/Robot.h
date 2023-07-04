@@ -10,13 +10,13 @@
 constexpr float speedScalingFactor = 1;
 
 class Robot {
-  friend DC_Motor;
+  friend DCMotor;
 
 private:
-  DC_Motor backRight;
-  DC_Motor backLeft;
-  DC_Motor front;
-  DC_Motor extra;
+  DCMotor backRight;
+  DCMotor backLeft;
+  DCMotor front;
+  DCMotor extra;
 
   // In cm
   const float wheelRadius = 5;
