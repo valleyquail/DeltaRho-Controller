@@ -27,6 +27,7 @@ project(DeltaRho_Controller C CXX ASM)
 
 include(pico_sdk_import.cmake)
 pico_sdk_init()
+
 #Includes the FreeRTOSConfig.h file
 add_library(freertos_config INTERFACE)
 target_include_directories(freertos_config SYSTEM INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
@@ -34,29 +35,30 @@ target_compile_definitions(freertos_config INTERFACE)
 
 include(FreeRTOS_Kernel_import.cmake)
 
-include(FreeRTOS_coreMQTT-Agent.cmake)
-
 
 add_executable(DeltaRho_Controller
-        src/main.cpp
-        lib/I2C_Control.c lib/I2C_Control.h
-        lib/DC_Motor.cpp lib/DC_Motor.h
-        lib/Robot.cpp lib/Robot.h
-        lib/PCA9685.h
-        )
+        src/main.cpp)
 
-pico_enable_stdio_usb(DeltaRho_Controller 1)
-pico_enable_stdio_uart(DeltaRho_Controller 1)
+target_include_directories(DeltaRho_Controller SYSTEM PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/lib
+        ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+
+#pico_enable_stdio_usb(DeltaRho_Controller 1)
+#pico_enable_stdio_uart(DeltaRho_Controller 1)
 
 pico_add_extra_outputs(DeltaRho_Controller)
 
 target_link_libraries(
         DeltaRho_Controller
-        pico_stdlib
-        pico_cyw43_arch_none
-        hardware_i2c
+        async_context_freertos
+        freertos_config
         FreeRTOS-Kernel
         FreeRTOS-Kernel-Heap4
-        coreMQTT
-        freertos_config
+        pico_cyw43_arch_lwip_sys_freertos
+        pico_lwip_freertos
+        pico_lwip_api
+        pico_lwip_mqtt
+        pico_stdlib
+        hardware_i2c
 )

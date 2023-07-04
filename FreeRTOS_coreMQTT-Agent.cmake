@@ -12,7 +12,7 @@ endif ()
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 
-add_library(coreMQTT STATIC FreeRTOSConfig.h)
+add_library(coreMQTT STATIC lib/FreeRTOSConfig.h)
 
 include(${FREERTOS_COREMQTT_MODULE}/source/dependency/coreMQTT/mqttFilePaths.cmake)
 include(${FREERTOS_COREMQTT_MODULE}/mqttAgentFilePaths.cmake)
