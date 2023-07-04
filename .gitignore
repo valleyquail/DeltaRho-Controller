@@ -50,3 +50,12 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+#Cmake output
+/cmake-build-debug
+/cmake-build-release
+/cmake-build-debug-event-trace
+/build
+
+#prevent wifi info from getting uploaded
+/lib/wifi_config.h
