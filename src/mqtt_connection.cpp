@@ -3,11 +3,16 @@
 //
 
 #include "mqtt_connection.h"
-static mqtt_client_t *client = NULL;
+#define ip_address_define                                                      \
+  = IPADDR4_INIT_BYTES(ip_address[0], ip_address[1], ip_address[86],           \
+                       ip_address[3])
+static ip4_addr_t ip_addr ip_address_define;
+
+static mqtt_client_t *mqtt_client = NULL;
 
 static const struct mqtt_connect_client_info_t clientInfo = {
-    "test",
-    "nik",  /* user */
+    "usertwo",
+    "usertwo",
     "temp", /* pass */
     100,    /* keep alive */
     NULL,   /* will_topic */
@@ -19,6 +24,7 @@ static const struct mqtt_connect_client_info_t clientInfo = {
     NULL
 #endif
 };
+
 mqtt_request_cb_t pub_mqtt_request_cb_t;
 char PUB_PAYLOAD[] = "this is a message from pico_w ctrl 0       ";
 char PUB_PAYLOAD_SCR[] = "this is a message from pico_w ctrl 0       ";
@@ -27,21 +33,24 @@ u16_t payload_size;
 
 static void connect(mqtt_client_t *client);
 
-bool initMQTT() {
-  client = mqtt_client_new();
-  if (client == NULL) {
-    printf("Could not initialize the mqtt client");
-    return 1;
+void initMQTT() {
+  mqtt_client = mqtt_client_new();
+  if (mqtt_client == NULL) {
+    printf("Could not initialize the mqtt client\n");
+    return;
   }
-  connect(client);
-  return true;
+  printf("Going to connect to the client\n");
+  connect(mqtt_client);
+  printf("Made the client\n");
+  return;
 }
 
-/* The idea is to demultiplex topic and create some reference to be used in
-   data callbacks Example here uses a global variable, better would be to use
-   a member in arg If RAM and CPU budget allows it, the easiest implementation
-   might be to just take a copy of the topic string and use it in
-   mqtt_incoming_data_cb
+/* The idea is to demultiplex topic and create some reference to be used
+/ in
+   data callbacks Example here uses a global variable, better would be to
+   use a member in arg If RAM and CPU budget allows it, the easiest
+   implementation might be to just take a copy of the topic string and use
+   it in mqtt_incoming_data_cb
 */
 static int inpub_id;
 
@@ -85,7 +94,8 @@ static void mqtt_incoming_data_cb(void *arg, const u8_t *data, u16_t len,
       printf("mqtt_incoming_data_cb: Ignoring payload...\n");
     }
   } else {
-    /* Handle fragmented payload, store in buffer, write to file or whatever
+    /* Handle fragmented payload, store in buffer, write to file or
+    whatever
      */
   }
 }
@@ -105,7 +115,8 @@ static void mqtt_connection_cb(mqtt_client_t *client, void *arg,
 
     /* Setup callback for incoming publish requests */
     mqtt_set_inpub_callback(client, mqtt_incoming_publish_cb,
-                            mqtt_incoming_data_cb, arg);
+                            mqtt_incoming_data_cb,
+                            LWIP_CONST_CAST(void *, &clientInfo));
 
     /* Subscribe to a topic named "subtopic" with QoS level 1, call
      * mqtt_sub_request_cb with result */
@@ -116,13 +127,12 @@ static void mqtt_connection_cb(mqtt_client_t *client, void *arg,
     }
   } else {
     printf("mqtt_connection_cb: Disconnected, reason: %d\n", status);
-
     /* Its more nice to be connected, so try to reconnect */
     connect(client);
   }
 }
 
-/* Called when publish is complete either with sucess or failure */
+/* Called when publish is complete either with success or failure */
 static void mqtt_pub_request_cb(void *arg, err_t result) {
   if (result != ERR_OK) {
     printf("Publish result: %d\n", result);
@@ -130,11 +140,11 @@ static void mqtt_pub_request_cb(void *arg, err_t result) {
 }
 
 void publish(mqtt_client_t *client, void *arg) {
-  const char *pub_payload = "PubSubHubLubJub";
+  const char *pub_payload = "testpublish";
   err_t err;
-  u8_t qos = 2;    /* 0 1 or 2, see MQTT specification */
+  u8_t qos = 0;    /* 0 1 or 2, see MQTT specification */
   u8_t retain = 0; /* No don't retain such crappy payload... */
-  err = mqtt_publish(client, "pub_topic", pub_payload, strlen(pub_payload), qos,
+  err = mqtt_publish(client, "test", pub_payload, strlen(pub_payload), qos,
                      retain, mqtt_pub_request_cb, arg);
   if (err != ERR_OK) {
     printf("Publish err: %d\n", err);
@@ -143,10 +153,21 @@ void publish(mqtt_client_t *client, void *arg) {
 
 void connect(mqtt_client_t *client) {
   err_t err;
-  /* Initiate client and connect to server, if this fails immediately an error
+  //  ip4_addr_t ip_addr;
+  //  if (!ip4addr_aton(ip_address, &ip_addr)) {
+  //    printf("IP address could not be converted");
+  //    return;
+  //  } else {
+  //    //    printf("IP address translation went fine: %lu\n",
+  //    //     ip_addr.addr);
+  //    char *temp = ip4addr_ntoa(&ip_addr);
+  //    printf("Reversed back to int: %s\n", temp);
+  //  }
+  /* Initiate client and connect to server, if this fails immediately an
+  error
      code is returned otherwise mqtt_connection_cb will be called with
-     connection result after attempting to establish a connection with the
-     server. For now MQTT version 3.1.1 is always used */
+     connection result after attempting to establish a connection with
+     the server. For now MQTT version 3.1.1 is always used */
   mqtt_set_inpub_callback(client, mqtt_incoming_publish_cb,
                           mqtt_incoming_data_cb,
                           LWIP_CONST_CAST(void *, &clientInfo));
@@ -160,30 +181,29 @@ void connect(mqtt_client_t *client) {
   }
 }
 
-bool mqttDebug() {
+void mqttDebug(__unused void *params) {
   printf("mqtt_task starts\n");
-  mqtt_subscribe(client, "pub_time", 2, pub_mqtt_request_cb_t, PUB_EXTRA_ARG);
+  mqtt_subscribe(mqtt_client, "test", 0, pub_mqtt_request_cb_t, PUB_EXTRA_ARG);
 
   while (true) {
     printf("in mqtt\n");
     strcpy(PUB_PAYLOAD_SCR, PUB_PAYLOAD);
-    strcat(PUB_PAYLOAD_SCR, "testing");
-    payload_size = sizeof(PUB_PAYLOAD_SCR) + 7;
+    //    strcat(PUB_PAYLOAD_SCR, "testing");
+    payload_size = sizeof(PUB_PAYLOAD_SCR);
     printf("%s  %d \n", PUB_PAYLOAD_SCR, sizeof(PUB_PAYLOAD_SCR));
-    bool check_mqtt_connected = mqtt_client_is_connected(client);
+    bool check_mqtt_connected = mqtt_client_is_connected(mqtt_client);
     if (check_mqtt_connected == 0) {
-      mqtt_client_free(client);
-      client = mqtt_client_new();
-      connect(client);
+      connect(mqtt_client);
     }
     /*
     mqtt_client_is_connected 1 if connected to server, 0 otherwise
     */
-    printf("saved_mqtt_client 0x%x check_mqtt_connected %d \n", client,
+    printf("saved_mqtt_client 0x%x check_mqtt_connected %d \n", mqtt_client,
            check_mqtt_connected);
 
-    mqtt_publish(client, "update/memo", PUB_PAYLOAD_SCR, payload_size, 2, 0,
-                 pub_mqtt_request_cb_t, PUB_EXTRA_ARG);
-    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    //     mqtt_publish(mqtt_client, "test", PUB_PAYLOAD_SCR, payload_size, 0,
+    //     0,
+    //                  pub_mqtt_request_cb_t, PUB_EXTRA_ARG);
+    //    sleep_ms(500);
   }
 }
