@@ -18,6 +18,8 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
+set(PICO_BOARD pico_w)
+set(NO_SYS 1)
 
 include(pico_sdk_import.cmake)
 project(DeltaRho_Controller C CXX ASM)
@@ -42,7 +44,7 @@ add_executable(DeltaRho_Controller
         lib/wifi_config.h
         src/multicore_management.h src/multicore_management.c)
 
-
+#target_compile_definitions(DeltaRho_Controller PUBLIC NO_SYS=0)
 pico_enable_stdio_usb(DeltaRho_Controller 1)
 pico_enable_stdio_uart(DeltaRho_Controller 1)
 
@@ -53,9 +55,9 @@ target_link_libraries(
         freertos_config
         FreeRTOS-Kernel
         FreeRTOS-Kernel-Heap4
+        hardware_i2c
         pico_cyw43_arch_lwip_sys_freertos
         pico_lwip_mqtt
         pico_multicore
         pico_stdlib
-        hardware_i2c
 )
