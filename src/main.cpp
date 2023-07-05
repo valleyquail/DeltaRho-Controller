@@ -57,12 +57,11 @@ void __main__task(__unused void *pvParams) {
   __init__PCA__();
   Robot robot = Robot(1);
   robot.init();
-  //  robot.controlRobot(50, 0, 0);
-  sleep_ms(3000);
+  sleep_ms(1000);
   printf("Trying to connect to the wifi\n");
   printf("Shouldn't be initialized yet: %i\n",
          cyw43_is_initialized(&cyw43_state));
-  int error = cyw43_arch_init_with_country(CYW43_COUNTRY_USA);
+  int error = cyw43_arch_init();
   printf("Should be initialized : %i\n", cyw43_is_initialized(&cyw43_state));
   if (error) {
     printf("Wi-Fi init failed --> %i\n", error);
@@ -72,11 +71,10 @@ void __main__task(__unused void *pvParams) {
   printf("Initialized the wifi\n");
 
   cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
-  //  robot.controlRobot(50, 0, 0);
-  if (cyw43_arch_wifi_connect_timeout_ms(ssid, password,
+  cyw43_arch_enable_sta_mode();
+  if (cyw43_arch_wifi_connect_timeout_ms(SSID, PASSWORD,
                                          CYW43_AUTH_WPA2_AES_PSK, 10000)) {
     printf("failed to connect\n");
-    robot.controlRobot(0, 0, 0);
     return;
   }
   printf("connected\n");

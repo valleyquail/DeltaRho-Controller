@@ -8,9 +8,9 @@
 #include "lwip/ip4.h"
 #include <pico/stdlib.h>
 
-const int ip_address[] = {192, 168, 86, 32};
-static const char *const ssid = "Pudgie Budgie";
-static const char *password = "<00k1381rd";
+static const int ip_address[] = {192, 168, 86, 32};
+static const char *SSID = "Pudgie Budgie";
+static const char *PASSWORD = "<00k1381rd";
 static const ip_addr_t ip_addr = IPADDR4_INIT_BYTES(
     ip_address[0], ip_address[1], ip_address[2], ip_address[3]);
 
