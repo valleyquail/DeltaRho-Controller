@@ -3,10 +3,6 @@
 //
 
 #include "mqtt_connection.h"
-#define ip_address_define                                                      \
-  = IPADDR4_INIT_BYTES(ip_address[0], ip_address[1], ip_address[86],           \
-                       ip_address[3])
-static ip4_addr_t ip_addr ip_address_define;
 
 static mqtt_client_t *mqtt_client = NULL;
 
@@ -60,7 +56,7 @@ static void mqtt_incoming_publish_cb(void *arg, const char *topic,
          (unsigned int)tot_len);
 
   /* Decode topic string into a user defined reference */
-  if (strcmp(topic, "print_payload") == 0) {
+  if (strcmp(topic, topics[INSTRUCTIONS]) == 0) {
     inpub_id = 0;
   } else if (topic[0] == 'A') {
     /* All topics starting with 'A' might be handled at the same way */
@@ -120,7 +116,7 @@ static void mqtt_connection_cb(mqtt_client_t *client, void *arg,
 
     /* Subscribe to a topic named "subtopic" with QoS level 1, call
      * mqtt_sub_request_cb with result */
-    err = mqtt_subscribe(client, "subtopic", 1, mqtt_sub_request_cb, arg);
+    err = mqtt_subscribe(client, "subtopic", 0, mqtt_sub_request_cb, arg);
 
     if (err != ERR_OK) {
       printf("mqtt_subscribe return: %d\n", err);
@@ -153,21 +149,12 @@ void publish(mqtt_client_t *client, void *arg) {
 
 void connect(mqtt_client_t *client) {
   err_t err;
-  //  ip4_addr_t ip_addr;
-  //  if (!ip4addr_aton(ip_address, &ip_addr)) {
-  //    printf("IP address could not be converted");
-  //    return;
-  //  } else {
-  //    //    printf("IP address translation went fine: %lu\n",
-  //    //     ip_addr.addr);
-  //    char *temp = ip4addr_ntoa(&ip_addr);
-  //    printf("Reversed back to int: %s\n", temp);
-  //  }
-  /* Initiate client and connect to server, if this fails immediately an
-  error
-     code is returned otherwise mqtt_connection_cb will be called with
-     connection result after attempting to establish a connection with
-     the server. For now MQTT version 3.1.1 is always used */
+  /*
+   * Initiate client and connect to server, if this fails immediately an
+   * error code is returned otherwise mqtt_connection_cb will be called with
+   * connection result after attempting to establish a connection with
+   * the server. For now MQTT version 3.1.1 is always used
+   */
   mqtt_set_inpub_callback(client, mqtt_incoming_publish_cb,
                           mqtt_incoming_data_cb,
                           LWIP_CONST_CAST(void *, &clientInfo));
@@ -183,7 +170,8 @@ void connect(mqtt_client_t *client) {
 
 void mqttDebug(__unused void *params) {
   printf("mqtt_task starts\n");
-  mqtt_subscribe(mqtt_client, "test", 0, pub_mqtt_request_cb_t, PUB_EXTRA_ARG);
+  mqtt_subscribe(mqtt_client, "testremote", 0, pub_mqtt_request_cb_t,
+                 PUB_EXTRA_ARG);
 
   while (true) {
     printf("in mqtt\n");
@@ -201,9 +189,11 @@ void mqttDebug(__unused void *params) {
     printf("saved_mqtt_client 0x%x check_mqtt_connected %d \n", mqtt_client,
            check_mqtt_connected);
 
-    //     mqtt_publish(mqtt_client, "test", PUB_PAYLOAD_SCR, payload_size, 0,
-    //     0,
-    //                  pub_mqtt_request_cb_t, PUB_EXTRA_ARG);
-    //    sleep_ms(500);
+    error_t err =
+        mqtt_publish(mqtt_client, "test", PUB_PAYLOAD_SCR, payload_size, 0, 0,
+                     pub_mqtt_request_cb_t, PUB_EXTRA_ARG);
+    if (err != ERR_OK) {
+      printf("mqtt_publish return %d\n", err);
+    }
   }
 }
