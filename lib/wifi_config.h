@@ -9,7 +9,7 @@
 #include "lwip/ip4_addr.h"
 #include <pico/stdlib.h>
 
-static const char ip_address[] = "your ip";
+static const int ip_address[] = {0, 0, 0, 0};
 static const char *SSID = "your network";
 static const char *PASSWORD = "your password";
 

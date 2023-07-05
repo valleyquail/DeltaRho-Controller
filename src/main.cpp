@@ -86,7 +86,7 @@ void __main__task(__unused void *pvParams) {
   cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
 
   //  }
-  mqttDebug();
+  mqttDebug(0);
 }
 
 void vLaunch(void) {

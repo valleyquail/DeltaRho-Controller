@@ -20,7 +20,7 @@ extern "C" {
 #include <string.h>
 };
 
-bool initMQTT();
-bool mqttDebug();
+void initMQTT();
+void mqttDebug(__unused void *params);
 
 #endif // DELTARHO_CONTROLLER_MQTT_CONNECTION_H

@@ -11,6 +11,7 @@
 // This example uses a common include to avoid repetition
 #include "lwipopts_examples_common.h"
 
+#define MEMP_NUM_SYS_TIMEOUT (LWIP_NUM_SYS_TIMEOUT_INTERNAL + 1)
 #if !NO_SYS
 #define TCPIP_THREAD_STACKSIZE 1024
 #define DEFAULT_THREAD_STACKSIZE 1024
@@ -20,10 +21,6 @@
 
 // not necessary, can be done either way
 #define LWIP_TCPIP_CORE_LOCKING_INPUT 1
-
-// ping_thread sets socket receive timeout, so enable this feature
-#define LWIP_SO_RCVTIMEO 1
-
 #endif
 
 #endif // DELTARHO_CONTROLLER_LWIPOPTS_H
