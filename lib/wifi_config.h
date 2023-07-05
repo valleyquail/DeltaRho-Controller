@@ -6,12 +6,11 @@
 #define DELTARHO_CONTROLLER_WIFI_CONFIG_H
 
 #include "lwip/ip4.h"
+#include "lwip/ip4_addr.h"
 #include <pico/stdlib.h>
 
-static const int ip_address[] = {192, 168, 86, 32};
-static const char *SSID = "Pudgie Budgie";
-static const char *PASSWORD = "<00k1381rd";
-static const ip_addr_t ip_addr = IPADDR4_INIT_BYTES(
-    ip_address[0], ip_address[1], ip_address[2], ip_address[3]);
+static const char ip_address[] = "your ip";
+static const char *SSID = "your network";
+static const char *PASSWORD = "your password";
 
 #endif // DELTARHO_CONTROLLER_WIFI_CONFIG_H
