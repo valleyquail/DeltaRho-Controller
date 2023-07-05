@@ -35,11 +35,12 @@ include(FreeRTOS_Kernel_import.cmake)
 add_executable(DeltaRho_Controller
         src/main.cpp
         src/mqtt_connection.cpp src/mqtt_connection.h
-        lib/DCMotor.cpp lib/DC_Motor.h
+        lib/DCMotor.cpp lib/DCMotor.h
         lib/I2C_Control.c lib/I2C_Control.h
         lib/PCA9685.h
         lib/Robot.cpp lib/Robot.h
-        lib/wifi_config.h src/multicore_management.h src/instruction_parser.h)
+        lib/wifi_config.h
+        src/multicore_management.h src/multicore_management.c)
 
 
 pico_enable_stdio_usb(DeltaRho_Controller 1)
@@ -54,6 +55,7 @@ target_link_libraries(
         FreeRTOS-Kernel-Heap4
         pico_cyw43_arch_lwip_sys_freertos
         pico_lwip_mqtt
+        pico_multicore
         pico_stdlib
         hardware_i2c
 )

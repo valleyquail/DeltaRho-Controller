@@ -19,24 +19,31 @@ static const struct mqtt_connect_client_info_t clientInfo = {
     NULL
 #endif
 };
+mqtt_request_cb_t pub_mqtt_request_cb_t;
+char PUB_PAYLOAD[] = "this is a message from pico_w ctrl 0       ";
+char PUB_PAYLOAD_SCR[] = "this is a message from pico_w ctrl 0       ";
+char PUB_EXTRA_ARG[] = "test";
+u16_t payload_size;
+
 async_context_freertos_t *asyncContext;
 
 static void connect(mqtt_client_t *client);
 
-bool initMqtt() {
+bool initMQTT() {
+  async_context_freertos_init_with_defaults(asyncContext);
+  lwip_freertos_init(reinterpret_cast<async_context_t *>(asyncContext));
   client = mqtt_client_new();
   if (client == NULL) {
     printf("Could not initialize the mqtt client");
     return 1;
   }
-  async_context_freertos_init_with_defaults(asyncContext);
-  lwip_freertos_init(reinterpret_cast<async_context_t *>(asyncContext));
   connect(client);
   return true;
 }
-/* The idea is to demultiplex topic and create some reference to be used in data
-   callbacks Example here uses a global variable, better would be to use a
-   member in arg If RAM and CPU budget allows it, the easiest implementation
+
+/* The idea is to demultiplex topic and create some reference to be used in
+   data callbacks Example here uses a global variable, better would be to use
+   a member in arg If RAM and CPU budget allows it, the easiest implementation
    might be to just take a copy of the topic string and use it in
    mqtt_incoming_data_cb
 */
@@ -65,10 +72,11 @@ static void mqtt_incoming_data_cb(void *arg, const u8_t *data, u16_t len,
          (unsigned int)flags);
 
   if (flags & MQTT_DATA_FLAG_LAST) {
-    /* Last fragment of payload received (or whole part if payload fits receive
-       buffer See MQTT_VAR_HEADER_BUFFER_LEN)  */
+    /* Last fragment of payload received (or whole part if payload fits
+       receive buffer See MQTT_VAR_HEADER_BUFFER_LEN)  */
 
-    /* Call function or do action depending on reference, in this case inpub_id
+    /* Call function or do action depending on reference, in this case
+     * inpub_id
      */
     if (inpub_id == 0) {
       /* Don't trust the publisher, check zero termination */
@@ -81,7 +89,8 @@ static void mqtt_incoming_data_cb(void *arg, const u8_t *data, u16_t len,
       printf("mqtt_incoming_data_cb: Ignoring payload...\n");
     }
   } else {
-    /* Handle fragmented payload, store in buffer, write to file or whatever */
+    /* Handle fragmented payload, store in buffer, write to file or whatever
+     */
   }
 }
 
@@ -142,12 +151,41 @@ void connect(mqtt_client_t *client) {
      code is returned otherwise mqtt_connection_cb will be called with
      connection result after attempting to establish a connection with the
      server. For now MQTT version 3.1.1 is always used */
+  mqtt_set_inpub_callback(client, mqtt_incoming_publish_cb,
+                          mqtt_incoming_data_cb,
+                          LWIP_CONST_CAST(void *, &clientInfo));
 
-  err = mqtt_client_connect(client, &ip_addr, MQTT_PORT, mqtt_connection_cb, 0,
-                            &clientInfo);
+  err = mqtt_client_connect(client, &ip_addr, MQTT_PORT, mqtt_connection_cb,
+                            LWIP_CONST_CAST(void *, &clientInfo), &clientInfo);
 
   /* For now just print the result code if something goes wrong */
   if (err != ERR_OK) {
     printf("mqtt_connect return %d\n", err);
+  }
+}
+
+bool mqttDebug() {
+  printf("mqtt_task starts\n");
+  mqtt_subscribe(client, "pub_time", 2, pub_mqtt_request_cb_t, PUB_EXTRA_ARG);
+
+  while (true) {
+    printf("in mqtt\n");
+    strcpy(PUB_PAYLOAD_SCR, PUB_PAYLOAD);
+    strcat(PUB_PAYLOAD_SCR, "testing");
+    payload_size = sizeof(PUB_PAYLOAD_SCR) + 7;
+    printf("%s  %d \n", PUB_PAYLOAD_SCR, sizeof(PUB_PAYLOAD_SCR));
+    bool check_mqtt_connected = mqtt_client_is_connected(client);
+    if (check_mqtt_connected == 0) {
+      mqtt_client_free(client);
+      connect(client);
+    }
+    /*
+    mqtt_client_is_connected 1 if connected to server, 0 otherwise
+    */
+    printf("saved_mqtt_client 0x%x check_mqtt_connected %d \n", client,
+           check_mqtt_connected);
+
+    mqtt_publish(client, "update/memo", PUB_PAYLOAD_SCR, payload_size, 2, 0,
+                 pub_mqtt_request_cb_t, PUB_EXTRA_ARG);
   }
 }

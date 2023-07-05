@@ -15,8 +15,6 @@ void Robot::init() {
   backLeft.init(1, 3, 4, 5, 1);
   front.init(2, 6, 7, 8, 1);
   extra.init(3, 9, 10, 11, 1);
-  __init__i2c__();
-  __init__PCA();
 }
 // Kinematics taken from here:
 // https://www.researchgate.net/publication/228786543_Three_omni-directional_wheels_control_on_a_mobile_robot
@@ -31,17 +29,11 @@ void Robot::init() {
  */
 // TODO need to figure out what the maximum RPM of the motors are so that the
 // directions and speeds can be converted into actual units
-void Robot::controlRobot(float xComponent, float yComponent, float rotation,
-                         int speed) {
+void Robot::controlRobot(int speed, float direction, float rotation) {
 
-  double theta = atan2(yComponent, xComponent);
-  double velocity = sqrt(xComponent * xComponent + yComponent * yComponent) *
-                    speedScalingFactor;
-  if (velocity > 100)
-    velocity = 100;
-  float backRightSpeed = velocity * cos(theta + 2 * M_PI / 3) - rotation;
-  float backLeftSpeed = velocity * cos(theta - 2 * M_PI / 3) - rotation;
-  float frontSpeed = velocity * cos(theta) - rotation;
+  float backRightSpeed = speed * cos(direction + 2 * M_PI / 3) - rotation;
+  float backLeftSpeed = speed * cos(direction - 2 * M_PI / 3) - rotation;
+  float frontSpeed = speed * cos(direction) - rotation;
 
   backRight.setMotorMovement(backRightSpeed);
   backLeft.setMotorMovement(backLeftSpeed);
