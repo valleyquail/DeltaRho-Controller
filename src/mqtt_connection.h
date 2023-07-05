@@ -21,7 +21,7 @@ extern "C" {
 
 enum TOPIC { INSTRUCTIONS, ADC, MISC };
 
-const char *topics[] = {"instruc", "adc", "misc"};
+static const char *topics[] = {"instruc", "adc", "misc"};
 
 /**
  * Initialized the MQTT connection by creating a client struct and the calling
