@@ -2,8 +2,8 @@
 // Created by nikesh on 5/29/23.
 //
 
-#ifndef DELTARHO_CONTROLLER_DC_MOTOR_H
-#define DELTARHO_CONTROLLER_DC_MOTOR_H
+#ifndef DELTARHO_CONTROLLER_DCMOTOR_H
+#define DELTARHO_CONTROLLER_DCMOTOR_H
 
 #include <string>
 
@@ -30,4 +30,4 @@ public:
   void setMotorStop(void);
 };
 
-#endif // DELTARHO_CONTROLLER_DC_MOTOR_H
+#endif // DELTARHO_CONTROLLER_DCMOTOR_H

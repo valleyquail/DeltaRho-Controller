@@ -1,10 +1,12 @@
 //
 // Created by nikesh on 5/29/23.
 //
-#include "DC_Motor.h"
+#include "DCMotor.h"
 extern "C" {
 #include "PCA9685.h"
 }
+
+constexpr float speedScalingFactor = PCA_PWM_RESOLUTION / 100;
 
 DCMotor::DCMotor() {}
 
@@ -25,21 +27,21 @@ void DCMotor::init(int motorNum, uint8_t pwm, uint8_t lineOne, uint8_t lineTwo,
  * @param effort a value to be mapped to the 12bit pwm output of the PCA. CW is
  * a positive value and CCW is a negative value
  */
-void DCMotor::setMotorMovement(int effort) {
+void DCMotor::setMotorMovement(int speed) {
   printf("Setting the speeds for %s\n", motorName.c_str());
   // Set the driver to short stop the motor
-  if (effort == 0) {
+  if (speed == 0) {
     setPWM(pwmPin, PCA_LOW);
     return;
   }
-  if (effort < 0) {
+  if (speed < 0) {
     setLevel(lineOneIn, true);
     setLevel(lineTwoIn, false);
-    setPWM(pwmPin, -effort * PCA_PWM_RESOLUTION / 100);
+    setPWM(pwmPin, -speed * speedScalingFactor);
   } else {
     setLevel(lineOneIn, false);
     setLevel(lineTwoIn, true);
-    setPWM(pwmPin, effort * PCA_PWM_RESOLUTION / 100);
+    setPWM(pwmPin, speed * speedScalingFactor);
   }
 }
 

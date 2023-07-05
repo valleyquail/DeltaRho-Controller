@@ -19,13 +19,7 @@ extern "C" {
 #include <string.h>
 };
 
-typedef struct mqttPacket {
-  float xComponent;
-  float yComponent;
-  float rotation;
-  // add more parameters later depending on what needs to be parsed
-} mqttPacket;
-
 bool initMQTT();
+bool mqttDebug();
 
 #endif // DELTARHO_CONTROLLER_MQTT_CONNECTION_H
