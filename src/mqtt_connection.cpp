@@ -25,13 +25,9 @@ char PUB_PAYLOAD_SCR[] = "this is a message from pico_w ctrl 0       ";
 char PUB_EXTRA_ARG[] = "test";
 u16_t payload_size;
 
-async_context_freertos_t *asyncContext;
-
 static void connect(mqtt_client_t *client);
 
 bool initMQTT() {
-  async_context_freertos_init_with_defaults(asyncContext);
-  lwip_freertos_init(reinterpret_cast<async_context_t *>(asyncContext));
   client = mqtt_client_new();
   if (client == NULL) {
     printf("Could not initialize the mqtt client");
@@ -177,6 +173,7 @@ bool mqttDebug() {
     bool check_mqtt_connected = mqtt_client_is_connected(client);
     if (check_mqtt_connected == 0) {
       mqtt_client_free(client);
+      client = mqtt_client_new();
       connect(client);
     }
     /*
@@ -187,5 +184,6 @@ bool mqttDebug() {
 
     mqtt_publish(client, "update/memo", PUB_PAYLOAD_SCR, payload_size, 2, 0,
                  pub_mqtt_request_cb_t, PUB_EXTRA_ARG);
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
   }
 }

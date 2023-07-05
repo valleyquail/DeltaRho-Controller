@@ -12,6 +12,7 @@ extern "C" {
 #include "FreeRTOS.h"
 #include "lwip/apps/mqtt.h"
 #include "multicore_management.h"
+#include "pico/cyw43_arch.h"
 #include "pico/lwip_freertos.h"
 #include "wifi_config.h"
 #include <lwip/apps/mqtt_priv.h>
