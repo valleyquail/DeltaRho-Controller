@@ -82,11 +82,7 @@ void __main__task(__unused void *pvParams) {
   sleep_ms(1000);
   initMQTT();
 
-  //  while (true) {
   cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
-
-  //  }
-  mqttDebug(0);
 }
 
 void vLaunch(void) {
