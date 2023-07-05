@@ -31,12 +31,12 @@ void Robot::init() {
 // directions and speeds can be converted into actual units
 void Robot::controlRobot(int speed, float direction, float rotation) {
 
-  float backRightSpeed = speed * cos(direction + 2 * M_PI / 3) - rotation;
-  float backLeftSpeed = speed * cos(direction - 2 * M_PI / 3) - rotation;
+  float backRightSpeed = speed * cos(direction + 2 * M_PI / 3.) - rotation;
+  float backLeftSpeed = speed * cos(direction - 2 * M_PI / 3.) - rotation;
   float frontSpeed = speed * cos(direction) - rotation;
 
-  backRight.setMotorMovement(backRightSpeed);
-  backLeft.setMotorMovement(backLeftSpeed);
-  front.setMotorMovement(frontSpeed);
-  //  printf("Should be setting the speed\n");
+  backRight.setMotorMovement(floor(backRightSpeed));
+  backLeft.setMotorMovement(floor(backLeftSpeed));
+  front.setMotorMovement(floor(frontSpeed));
+  printf("Should be setting the speed\n");
 }

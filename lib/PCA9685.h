@@ -93,7 +93,7 @@ inline void __init__PCA__() {
   sleep_us(500); // stops sleep and allows the oscillator to stabilize
   buf[1] = oldState | 0x80; // sets the reset register to be 1
   reg_write(i2c_default, PCA9685_ADDRESS, MODE1, &oldState, 1);
-  printf("Should have updated the PCA9685");
+  printf("Should have updated the PCA9685\n");
 }
 
 #endif // DELTARHO_CONTROLLER_PCA9685_H
