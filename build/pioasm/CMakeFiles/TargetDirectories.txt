@@ -1,3 +1,0 @@
-/home/nikesh/CLionProjects/DeltaRho_Controller/build/pioasm/CMakeFiles/pioasm.dir
-/home/nikesh/CLionProjects/DeltaRho_Controller/build/pioasm/CMakeFiles/edit_cache.dir
-/home/nikesh/CLionProjects/DeltaRho_Controller/build/pioasm/CMakeFiles/rebuild_cache.dir

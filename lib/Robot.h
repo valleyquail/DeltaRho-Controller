@@ -4,19 +4,17 @@
 
 #ifndef DELTARHO_CONTROLLER_ROBOT_H
 #define DELTARHO_CONTROLLER_ROBOT_H
-#include "DC_Motor.h"
+#include "DCMotor.h"
 #include <math.h>
 
-constexpr float speedScalingFactor = 1;
-
 class Robot {
-  friend DC_Motor;
+  friend DCMotor;
 
 private:
-  DC_Motor backRight;
-  DC_Motor backLeft;
-  DC_Motor front;
-  DC_Motor extra;
+  DCMotor backRight;
+  DCMotor backLeft;
+  DCMotor front;
+  DCMotor extra;
 
   // In cm
   const float wheelRadius = 5;
@@ -25,8 +23,16 @@ private:
 public:
   Robot(uint8_t robotNum);
   void init();
-  void controlRobot(float xComponent, float yComponent, float rotation,
-                    int speed);
+  /**
+   *
+   * @param speed integer between 0 and 100 representing the speed of the robot
+   * in a percent
+   * @param direction represents theta, the angle in which to travel relative to
+   * the front wheel of the robot
+   * @param rotation angular rotation speed in rad/sec, or at least will be one
+   * day once speed is characterized
+   */
+  void controlRobot(int speed, float direction, float rotation);
   const uint8_t robotNum;
 };
 
