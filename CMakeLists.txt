@@ -20,7 +20,6 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(PICO_BOARD pico_w)
 
-
 include(pico_sdk_import.cmake)
 project(DeltaRho_Controller C CXX ASM)
 
@@ -44,7 +43,7 @@ add_executable(DeltaRho_Controller
         lib/wifi_config.h
         src/multicore_management.h src/multicore_management.c)
 
-target_compile_definitions(DeltaRho_Controller PUBLIC NO_SYS=0)
+target_compile_definitions(DeltaRho_Controller PUBLIC NO_SYS=0 PRIVATE ${CMAKE_BUILD_TYPE})
 pico_enable_stdio_usb(DeltaRho_Controller 1)
 pico_enable_stdio_uart(DeltaRho_Controller 1)
 

@@ -8,6 +8,8 @@
 /* Kernel includes. */
 #include "FreeRTOS.h" /* Must come first. */
 #include "pico/multicore.h"
+#include "pico/mutex.h"
+#include "pico/sem.h"
 #include "pico/stdlib.h"
 #include "queue.h"  /* RTOS queue related API prototypes. */
 #include "semphr.h" /* Semaphore related API prototypes. */

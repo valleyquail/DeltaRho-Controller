@@ -25,10 +25,9 @@ void vLaunch();
 
 int main() {
   stdio_init_all();
-  sleep_ms(1000);
   for (int i = 0; i < 100; ++i) {
-    printf("Hello %i\n", i);
-    sleep_ms(50);
+    printf("Launching in %i ms\n", 100 * 20 - i);
+    sleep_ms(20);
   }
   const char *rtos_name;
 #if (portSUPPORT_SMP == 1)
