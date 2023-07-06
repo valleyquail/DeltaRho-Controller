@@ -68,7 +68,7 @@ static void mqtt_incoming_data_cb(void *arg, const u8_t *data, u16_t len,
     /* Last fragment of payload received (or whole part if payload fits
        receive buffer See MQTT_VAR_HEADER_BUFFER_LEN)  */
     // Matches the first character of the subscribed topics
-    if (data[0] == (topics_to_subscribe_to[0])[0]) {
+    if (data[0] == topics[INSTRUCTIONS][0]) {
 #if Debug
       printf("mqtt_incoming_data_cb: %s\n", (const char *)data);
     } else {
@@ -102,8 +102,10 @@ static void subscribe_to_default_topics(mqtt_client_t *client, void *arg) {
 
   /* Subscribe to a topic named "subtopic" with QoS level 1, call
    * mqtt_sub_request_cb with result */
-  for (const char *topic : topics_to_subscribe_to) {
-    err = mqtt_subscribe(client, topic, 1, mqtt_sub_request_cb, arg);
+  int size = sizeof(topics_to_subscribe_to) / sizeof(enum TOPIC);
+  for (int i = 0; i < size; i++) {
+    enum TOPIC topic = topics_to_subscribe_to[i];
+    err = mqtt_subscribe(client, topics[topic], 1, mqtt_sub_request_cb, arg);
 
 #if Debug
     if (err != ERR_OK) {
