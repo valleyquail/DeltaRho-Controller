@@ -6,9 +6,7 @@
 #define DELTARHO_CONTROLLER_MQTT_CONNECTION_H
 
 #include <stdbool.h>
-#include <string>
 
-extern "C" {
 #include "FreeRTOS.h"
 #include "lwip/apps/mqtt.h"
 #include "multicore_management.h"
@@ -17,11 +15,18 @@ extern "C" {
 #include "wifi_config.h"
 #include <lwip/apps/mqtt_priv.h>
 #include <string.h>
-};
 
 enum TOPIC { INSTRUCTIONS, ADC, MISC };
-
+/**
+ * Lists all of the topics that the robot should ever interact with and map them
+ * to the TOPIC enum to make it clear
+ */
 static const char *topics[] = {"instruc", "adc", "misc"};
+/**
+ * Use this to keep a list of topics the robot should subscribe to during
+ * initialization
+ */
+static const char *topics_to_subscribe_to[] = {topics[INSTRUCTIONS]};
 
 /**
  * Initialized the MQTT connection by creating a client struct and the calling
