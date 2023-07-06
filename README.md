@@ -6,14 +6,17 @@ shield. The documentation for the shield can be found at:
 ## Building
 
 To set up the repository, the following libraries are needed:
-FreeRTOS
+FreeRTOS SMP Branch
 Pico-SDK
 
 The FreeRTOS library is included through a Git Submodule and can be added to the project using the following commands
 
 ```
  cd include 
- git submodule add https:/github.com/FreeRTOS/FreeRTOS-Kernel.git --init-recursive
+ git submodule add https:/github.com/FreeRTOS/FreeRTOS-Kernel.git --init-recursive 
+ cd FreeRTOS
+ git checkout smp
+ git submodule update --recursive
 ```
 
 The Pico-SDK can be added using the following guide:

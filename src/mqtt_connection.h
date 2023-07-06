@@ -26,7 +26,7 @@ static const char *topics[] = {"instruc", "adc", "misc"};
  * Use this to keep a list of topics the robot should subscribe to during
  * initialization
  */
-static const char *topics_to_subscribe_to[] = {topics[INSTRUCTIONS]};
+static const enum TOPIC topics_to_subscribe_to[] = {INSTRUCTIONS};
 
 /**
  * Initialized the MQTT connection by creating a client struct and the calling

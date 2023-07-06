@@ -5,8 +5,6 @@
  */
 
 #include "Robot.h"
-#include "mqtt_connection.h"
-
 extern "C" {
 #include "FreeRTOS.h"
 #include "I2C_Control.h"
@@ -19,6 +17,8 @@ extern "C" {
 
 #include "wifi_config.h"
 }
+// Global instance of the robot
+Robot robot = Robot(1);
 
 void __main__task(__unused void *pvParams);
 void vLaunch();
@@ -54,14 +54,13 @@ int main() {
 void __main__task(__unused void *pvParams) {
   __init__i2c__();
   __init__PCA__();
-  Robot robot = Robot(1);
   robot.init();
-  sleep_ms(1000);
   printf("Trying to connect to the wifi\n");
-  printf("Shouldn't be initialized yet: %i\n",
-         cyw43_is_initialized(&cyw43_state));
+  //  printf("Shouldn't be initialized yet: %i\n",
+  //         cyw43_is_initialized(&cyw43_state));
   int error = cyw43_arch_init();
-  printf("Should be initialized : %i\n", cyw43_is_initialized(&cyw43_state));
+  //  printf("Should be initialized : %i\n",
+  //  cyw43_is_initialized(&cyw43_state));
   if (error) {
     printf("Wi-Fi init failed --> %i\n", error);
     robot.controlRobot(0, 0, 0);
@@ -77,17 +76,25 @@ void __main__task(__unused void *pvParams) {
     return;
   }
   printf("connected\n");
-
   sleep_ms(1000);
-  initMQTT();
 
   cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
+  // Launches the MQTT connection. Configures 1kb of stack words since Wi-Fi
+  // communication is likely going to be parsing/encoding a lot of data
+  xTaskCreate(prvMQTTTaskEntry, "MQTT Connection", 1024, NULL,
+              mainMQTT_EVENT_TASK_PRIORITY, &vMQTTConnection);
+  // Deletes this task
+  vTaskDelete(NULL);
 }
 
 void vLaunch(void) {
-  TaskHandle_t task;
+  // Ignore making a task handle for the main task since it is just used to
+  // initialize the Wi-Fi connection and then will delete itself after
+  // scheduling the remaining tasks
   xTaskCreate(__main__task, "TestMainThread", configMINIMAL_STACK_SIZE, NULL,
-              tskIDLE_PRIORITY, &task);
+              tskIDLE_PRIORITY, NULL);
   /* Start the tasks and timer running. */
   vTaskStartScheduler();
+  // Ideally we should never reach this point
+  panic_unsupported();
 }
