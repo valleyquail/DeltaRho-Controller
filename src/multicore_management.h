@@ -29,16 +29,16 @@ converted to ticks using the pdMS_TO_TICKS() macro. */
 
 /*-----------------------------------------------------------*/
 
-static TaskHandle_t vMQTTConnectionHandle;
-static TaskHandle_t vControlRobotHandle;
-static TaskHandle_t xADCTaskHandle;
+extern TaskHandle_t vMQTTConnectionHandle;
+extern TaskHandle_t vControlRobotHandle;
+extern TaskHandle_t xADCTaskHandle;
 
 // Queue is initialized in __main__task. The number of packets is defined below
 #define MQTT_QUEUE_SIZE 10
-static QueueHandle_t xMQTTQueue;
+extern QueueHandle_t xMQTTQueue;
 
-mqttPacket *currPacket = NULL;
-mqttPacket *prevPacket = NULL;
+extern struct mqttPacket *currPacket;
+extern struct mqttPacket *prevPacket;
 
 void vControlRobot(void *pvParameters);
 

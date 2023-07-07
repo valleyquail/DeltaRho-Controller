@@ -3,23 +3,37 @@
 //
 
 #include "Robot.h"
-
+#include "../src/multicore_management.h"
 extern "C" {
 #include "I2C_Control.h"
 }
 
-#define BACK_RIGHT_INTERRUPT 0
-#define BACK_LEFT_INTERRUPT 0
-#define FRONT_INTERRUPT 0
-#define EXTRA_INTERRUPT 0
+DCMotor backRight;
+DCMotor backLeft;
+DCMotor front;
+DCMotor extra;
 
 Robot::Robot(uint8_t robotNum) : robotNum(robotNum) {}
 
 void Robot::init() {
-  backRight.init(0, 0, 1, 2, 1, BACK_RIGHT_INTERRUPT);
-  backLeft.init(1, 3, 4, 5, 1, BACK_LEFT_INTERRUPT);
-  front.init(2, 6, 7, 8, 1, FRONT_INTERRUPT);
-  extra.init(3, 9, 10, 11, 1, EXTRA_INTERRUPT);
+
+  backRight.init(0, 0, 1, 2, 1);
+  backLeft.init(1, 3, 4, 5, 1);
+  front.init(2, 6, 7, 8, 1);
+  extra.init(3, 9, 10, 11, 1);
+
+  //  gpio_set_irq_enabled_with_callback(BACK_LEFT_INTERRUPT,
+  //                                     GPIO_IRQ_EDGE_RISE |
+  //                                     GPIO_IRQ_EDGE_FALL, false,
+  //                                     &backLeftISR);
+  //  gpio_set_irq_enabled_with_callback(BACK_RIGHT_INTERRUPT,
+  //                                     GPIO_IRQ_EDGE_RISE |
+  //                                     GPIO_IRQ_EDGE_FALL, false,
+  //                                     &backRightISR);
+  //
+  //  gpio_set_irq_enabled_with_callback(FRONT_INTERRUPT,
+  //                                     GPIO_IRQ_EDGE_RISE |
+  //                                     GPIO_IRQ_EDGE_FALL, false, &frontISR);
 }
 // Kinematics taken from here:
 // https://www.researchgate.net/publication/228786543_Three_omni-directional_wheels_control_on_a_mobile_robot
@@ -37,6 +51,7 @@ void Robot::init() {
  */
 void Robot::controlRobot(float speed, float direction, float rotation) {
   vTaskEnterCritical();
+  uint32_t interrupts = save_and_disable_interrupts();
   // Convert speed into ticks/s
   speed = (speed / wheelRadius) * encoderTicksPerRotation;
   float backRightSpeed = speed * cos(direction + 2 * M_PI / 3.) - rotation;
@@ -49,6 +64,7 @@ void Robot::controlRobot(float speed, float direction, float rotation) {
   backRight.sumError = 0;
   backLeft.sumError = 0;
   front.sumError = 0;
+  restore_interrupts(interrupts);
   vTaskExitCritical();
   //  printf("Should be setting the speed\n");
 }
@@ -64,3 +80,5 @@ void Robot::update() {
   backLeft.updatePID();
   front.updatePID();
 }
+
+float Robot::getCurrDistMovedThisInstruction() { return 0; }

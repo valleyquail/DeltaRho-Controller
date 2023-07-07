@@ -1,13 +1,18 @@
 //
 // Created by nikesh on 5/29/23.
 //
-
+#pragma once
 #ifndef DELTARHO_CONTROLLER_DCMOTOR_H
 #define DELTARHO_CONTROLLER_DCMOTOR_H
 
 #include "hardware/timer.h"
 #include "pico/stdlib.h"
 #include <string>
+
+#define BACK_RIGHT_INTERRUPT 0
+#define BACK_LEFT_INTERRUPT 0
+#define FRONT_INTERRUPT 0
+#define EXTRA_INTERRUPT 0
 
 class DCMotor {
   friend class Robot;
@@ -27,19 +32,18 @@ private:
   uint8_t lineTwoIn;
 
   // True if CW, False if CCW
-  static volatile bool direction;
+  bool direction;
   // Target speed in ticks/s
   volatile int16_t targetSpeed;
-  static uint32_t prevTime;
+  uint32_t prevTime;
   const int8_t maxError = 200;
-  static volatile int currCount;
-  static volatile int prevCount;
+  volatile int currCount;
+  volatile int prevCount;
 
   // Used for integral control
   int32_t sumError;
 
   void updatePID();
-  static void encoderIRQ(uint gpio, uint32_t events);
   /**
    * Calculates the rate of tick change between calls of the function. Used to
    * set the speed of the robot since this value can be directly converted to
@@ -63,10 +67,15 @@ private:
 public:
   DCMotor();
   void init(int motorNum, uint8_t pwm, uint8_t lineOne, uint8_t lineTwo,
-            float kp, uint8_t interruptPin);
+            float kp);
   void setMotorMovement(int effort);
 
   void setMotorStop(void);
+  /**
+   * Handles the encoders based on an XOR'd signal from the encoders and then
+   * using the known direction to set the count
+   */
+  void encoderIRQ();
 };
 
 #endif // DELTARHO_CONTROLLER_DCMOTOR_H

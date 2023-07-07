@@ -13,7 +13,7 @@ DCMotor::DCMotor() {}
 
 // Callback function for the interrupt. This acts as an intermediate since the
 // pico SDK is in C
-// void gpio_callback(uint gpio, uint32_t events) { DCMotor::encoderIRQ(); }
+void gpio_callback(uint gpio, uint32_t events) {}
 
 /**
  * Initializes each of the DC motors on the robot
@@ -25,21 +25,15 @@ DCMotor::DCMotor() {}
  * @param lineTwo one of the two pins on the PCA that determines the direction
  * of the motor
  * @param kp used for PID to set the motor speed
- * @param interruptPin pin associated with the interrupt signal from the
- * encoders
  */
 void DCMotor::init(int motorNum, uint8_t pwm, uint8_t lineOne, uint8_t lineTwo,
-                   float kp, uint8_t interruptPin) {
+                   float kp) {
   this->motorNum = motorNum;
   motorName = "Motor " + std::to_string(motorNum);
   pwmPin = pwm;
   lineOneIn = lineOne;
   lineTwoIn = lineTwo;
   Kp = kp;
-  // Enables interrupts
-  gpio_set_irq_enabled_with_callback(interruptPin,
-                                     GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL,
-                                     false, &DCMotor::encoderIRQ);
 }
 
 /**
@@ -89,4 +83,15 @@ void DCMotor::updatePID() {
   int16_t newPWM =
       (targetSpeed + Kp * error - Ki * sumError) * speedScalingFactor;
   setPWM(pwmPin, newPWM);
+}
+
+/**
+ * Handles the encoders based on an XOR'd signal from the encoders and then
+ * using the known direction to set the count
+ */
+void DCMotor::encoderIRQ() {
+  if (direction)
+    currCount++;
+  else
+    currCount--;
 }

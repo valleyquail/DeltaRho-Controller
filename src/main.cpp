@@ -86,7 +86,7 @@ void __main__task(__unused void *pvParams) {
   xTaskCreate(prvMQTTTaskEntry, "MQTT Connection", 1024, NULL,
               mainMQTT_EVENT_TASK_PRIORITY, &vMQTTConnectionHandle);
   // Launches the task for controlling the robot and updating the motor control
-  xTaskCreate(vControlRobot, "Robot Control", 512, 0,
+  xTaskCreate(vControlRobot, "Robot Control", 512, &robot,
               mainROBOT_CONTROL_TASK_PRIORITY, &vControlRobotHandle);
   // Deletes this task
   vTaskDelete(NULL);
