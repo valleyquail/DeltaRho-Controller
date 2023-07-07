@@ -56,6 +56,8 @@ dkms.conf
 /cmake-build-release
 /cmake-build-debug-event-trace
 /build
+#Prevents changes to the included directories
+/include
 
 #prevent wifi info from getting uploaded
 /lib/wifi_config.h
