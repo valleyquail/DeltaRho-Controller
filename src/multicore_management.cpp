@@ -6,7 +6,14 @@ extern "C" {
 }
 #include "Robot.h"
 
-extern Robot robot;
+TaskHandle_t vMQTTConnectionHandle = NULL;
+TaskHandle_t vControlRobotHandle = NULL;
+TaskHandle_t xADCTaskHandle = NULL;
+
+QueueHandle_t xMQTTQueue = NULL;
+
+struct mqttPacket *currPacket = NULL;
+struct mqttPacket *prevPacket = NULL;
 
 static volatile uint32_t ulCountOfItemsSentOnQueue = 0;
 static volatile uint32_t ulCountOfItemsReceivedOnQueue = 0;
@@ -40,34 +47,37 @@ void prvMQTTTaskEntry(void *pvParameters) {
  */
 /**
  * Controls the robot based on the packet of data sent to it
- * @param pvParameters an mqttPacket containing the movement instructions
+ * @param pvParameters an instance of a robot
  */
-void vControlRobot(void *pvParameters) {
+extern "C" void vControlRobot(void *pvParameters) {
   const TickType_t xMaxExpectedBlockTime = pdMS_TO_TICKS(10);
-  float dist = robot.getCurrDistMovedThisInstruction();
-  
-  // Accept the task notify if it is there, but otherwise return immediately so
-  // that the robot can work on PID control
-  ulTaskNotifyTake(pdTRUE, 0);
-  // TODO: determine acceptable movement tolerance
-  if (dist >= currPacket->distance) {
-    // If the task has been called via notify and the robot has finished
-    // executing its current instruction, then it will take the next task from
-    // the queue and begin executing it
-    prevPacket = currPacket;
-    BaseType_t isEmpty =
-        xQueueReceive(xMQTTQueue, currPacket, xMaxExpectedBlockTime);
-    // If the robot has completed its movement but has no further instructions,
-    // stop the robot
-    if (!isEmpty)
-      robot.stopRobot();
-    else
-      robot.controlRobot(currPacket->speed, currPacket->theta,
-                         currPacket->rotation);
-  } else {
-    robot.update();
+  Robot *robot = const_cast<Robot *>(static_cast<Robot *>(pvParameters));
+  while (1) {
+    float dist = robot->getCurrDistMovedThisInstruction();
+
+    // Accept the task notify if it is there, but otherwise return immediately
+    // so that the robot can work on PID control
+    ulTaskNotifyTake(pdTRUE, 0);
+    // TODO: determine acceptable movement tolerance
+    if (dist >= currPacket->distance) {
+      // If the task has been called via notify and the robot has finished
+      // executing its current instruction, then it will take the next task from
+      // the queue and begin executing it
+      prevPacket = currPacket;
+      BaseType_t isEmpty =
+          xQueueReceive(xMQTTQueue, currPacket, xMaxExpectedBlockTime);
+      // If the robot has completed its movement but has no further
+      // instructions, stop the robot
+      if (!isEmpty)
+        robot->stopRobot();
+      else
+        robot->controlRobot(currPacket->speed, currPacket->theta,
+                            currPacket->rotation);
+    } else {
+      robot->update();
+    }
+    // Delay the task 10ms so that it updates at about 100Hz which is more than
+    // enough
+    vTaskDelay(pdMS_TO_TICKS(10));
   }
-  // Delay the task 10ms so that it updates at about 100Hz which is more than
-  // enough
-  vTaskDelay(pdMS_TO_TICKS(10));
 }

@@ -41,7 +41,8 @@ add_executable(DeltaRho_Controller
         lib/PCA9685.h
         lib/Robot.cpp lib/Robot.h
         lib/wifi_config.h
-        src/multicore_management.cpp src/multicore_management.h lib/MotorEncoder.cpp)
+        src/multicore_management.cpp src/multicore_management.h)
+
 
 target_compile_definitions(DeltaRho_Controller PUBLIC NO_SYS=0 PRIVATE ${CMAKE_BUILD_TYPE})
 pico_enable_stdio_usb(DeltaRho_Controller 1)
