@@ -79,10 +79,15 @@ void __main__task(__unused void *pvParams) {
   sleep_ms(1000);
 
   cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
+
+  xMQTTQueue = xQueueCreate(MQTT_QUEUE_SIZE, sizeof(mqttPacket *));
   // Launches the MQTT connection. Configures 1kb of stack words since Wi-Fi
   // communication is likely going to be parsing/encoding a lot of data
   xTaskCreate(prvMQTTTaskEntry, "MQTT Connection", 1024, NULL,
-              mainMQTT_EVENT_TASK_PRIORITY, &vMQTTConnection);
+              mainMQTT_EVENT_TASK_PRIORITY, &vMQTTConnectionHandle);
+  // Launches the task for controlling the robot and updating the motor control
+  xTaskCreate(vControlRobot, "Robot Control", 512, 0,
+              mainROBOT_CONTROL_TASK_PRIORITY, &vControlRobotHandle);
   // Deletes this task
   vTaskDelete(NULL);
 }

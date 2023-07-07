@@ -4,11 +4,13 @@
 
 #ifndef DELTARHO_CONTROLLER_ROBOT_H
 #define DELTARHO_CONTROLLER_ROBOT_H
+extern "C" {
+#include "FreeRTOS.h"
+};
 #include "DCMotor.h"
 #include <math.h>
 
 class Robot {
-  friend DCMotor;
 
 private:
   DCMotor backRight;
@@ -16,9 +18,18 @@ private:
   DCMotor front;
   DCMotor extra;
 
+  const uint8_t robotNum;
+
   // In cm
   const float wheelRadius = 5;
   const float chassisRadius = 10;
+  // Ticks per wheel rotation
+  uint16_t encoderTicksPerRotation = 100;
+  //  Positional Data
+  float currXDist = 0;
+  float currYDistance = 0;
+  double currHeading = 0;
+  volatile float currDistMovedThisInstruction = 0;
 
 public:
   Robot(uint8_t robotNum);
@@ -32,8 +43,17 @@ public:
    * @param rotation angular rotation speed in rad/sec, or at least will be one
    * day once speed is characterized
    */
-  void controlRobot(int speed, float direction, float rotation);
-  const uint8_t robotNum;
+  void controlRobot(float speed, float direction, float rotation);
+
+  /**
+   * Called periodically allow the PID control to work on the motors
+   */
+  void update();
+
+  float getCurrDistMovedThisInstruction();
+
+  uint8_t getRobotNum();
+  void stopRobot();
 };
 
 #endif // DELTARHO_CONTROLLER_ROBOT_H
