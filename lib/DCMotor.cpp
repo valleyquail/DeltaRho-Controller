@@ -11,10 +11,6 @@ constexpr float speedScalingFactor = PCA_PWM_RESOLUTION / 100;
 
 DCMotor::DCMotor() {}
 
-// Callback function for the interrupt. This acts as an intermediate since the
-// pico SDK is in C
-void gpio_callback(uint gpio, uint32_t events) {}
-
 /**
  * Initializes each of the DC motors on the robot
  * @param motorNum id of the motor
@@ -89,9 +85,10 @@ void DCMotor::updatePID() {
  * Handles the encoders based on an XOR'd signal from the encoders and then
  * using the known direction to set the count
  */
-void DCMotor::encoderIRQ() {
-  if (direction)
-    currCount++;
+void encoderIRQ(void *motorInstance) {
+  DCMotor *motor = static_cast<DCMotor *>(motorInstance);
+  if (motor->direction)
+    motor->currCount++;
   else
-    currCount--;
+    motor->currCount--;
 }
