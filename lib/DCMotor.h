@@ -10,9 +10,11 @@
 #include <string>
 
 #define BACK_RIGHT_INTERRUPT 0
-#define BACK_LEFT_INTERRUPT 0
-#define FRONT_INTERRUPT 0
-#define EXTRA_INTERRUPT 0
+#define BACK_LEFT_INTERRUPT 1
+#define FRONT_INTERRUPT 2
+#define EXTRA_INTERRUPT 3
+
+void encoderIRQ(void *motorInstance);
 
 class DCMotor {
   friend class Robot;
@@ -74,8 +76,9 @@ public:
   /**
    * Handles the encoders based on an XOR'd signal from the encoders and then
    * using the known direction to set the count
+   *
+   *
    */
-  void encoderIRQ();
+  friend void encoderIRQ(void *motorInstance);
 };
-
 #endif // DELTARHO_CONTROLLER_DCMOTOR_H

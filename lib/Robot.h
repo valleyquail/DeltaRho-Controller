@@ -13,11 +13,6 @@ extern "C" {
 class Robot {
 
 private:
-  DCMotor backRight;
-  DCMotor backLeft;
-  DCMotor front;
-  DCMotor extra;
-
   const uint8_t robotNum;
 
   // In cm

@@ -15,6 +15,18 @@ DCMotor extra;
 
 Robot::Robot(uint8_t robotNum) : robotNum(robotNum) {}
 
+// Callback function for the interrupt. This acts as an intermediate since the
+// pico SDK is in C
+extern "C" void back_right_gpio_callback(uint gpio, uint32_t events) {
+  encoderIRQ(&backRight);
+}
+extern "C" void back_left_gpio_callback(uint gpio, uint32_t events) {
+  encoderIRQ(&backLeft);
+}
+extern "C" void front_gpio_callback(uint gpio, uint32_t events) {
+  encoderIRQ(&front);
+}
+
 void Robot::init() {
 
   backRight.init(0, 0, 1, 2, 1);
@@ -22,18 +34,15 @@ void Robot::init() {
   front.init(2, 6, 7, 8, 1);
   extra.init(3, 9, 10, 11, 1);
 
-  //  gpio_set_irq_enabled_with_callback(BACK_LEFT_INTERRUPT,
-  //                                     GPIO_IRQ_EDGE_RISE |
-  //                                     GPIO_IRQ_EDGE_FALL, false,
-  //                                     &backLeftISR);
-  //  gpio_set_irq_enabled_with_callback(BACK_RIGHT_INTERRUPT,
-  //                                     GPIO_IRQ_EDGE_RISE |
-  //                                     GPIO_IRQ_EDGE_FALL, false,
-  //                                     &backRightISR);
-  //
-  //  gpio_set_irq_enabled_with_callback(FRONT_INTERRUPT,
-  //                                     GPIO_IRQ_EDGE_RISE |
-  //                                     GPIO_IRQ_EDGE_FALL, false, &frontISR);
+  gpio_set_irq_enabled_with_callback(BACK_RIGHT_INTERRUPT,
+                                     GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL,
+                                     false, &back_right_gpio_callback);
+  gpio_set_irq_enabled_with_callback(BACK_LEFT_INTERRUPT,
+                                     GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL,
+                                     false, &back_left_gpio_callback);
+  gpio_set_irq_enabled_with_callback(FRONT_INTERRUPT,
+                                     GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL,
+                                     false, &front_gpio_callback);
 }
 // Kinematics taken from here:
 // https://www.researchgate.net/publication/228786543_Three_omni-directional_wheels_control_on_a_mobile_robot
