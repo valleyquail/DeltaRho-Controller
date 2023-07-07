@@ -3,6 +3,9 @@
 //
 
 #include "mqtt_connection.h"
+#include "FreeRTOS.h"
+#include "queue.h"
+#include "task.h"
 
 static mqtt_client_t *mqtt_client;
 
@@ -66,9 +69,10 @@ static void mqtt_incoming_data_cb(void *arg, const u8_t *data, u16_t len,
 
   if (flags & MQTT_DATA_FLAG_LAST) {
     /* Last fragment of payload received (or whole part if payload fits
-       receive buffer See MQTT_VAR_HEADER_BUFFER_LEN)  */
+       receive buffer --> See MQTT_VAR_HEADER_BUFFER_LEN)  */
     // Matches the first character of the subscribed topics
     if (data[0] == topics[INSTRUCTIONS][0]) {
+      xTaskNotifyGive(vControlRobotHandle);
 #if Debug
       printf("mqtt_incoming_data_cb: %s\n", (const char *)data);
     } else {
@@ -76,9 +80,7 @@ static void mqtt_incoming_data_cb(void *arg, const u8_t *data, u16_t len,
 #endif
     }
   } else {
-    /* Handle fragmented payload, store in buffer, write to file or
-    whatever
-     */
+    // Handle fragmented payload or something else
   }
 }
 
@@ -182,9 +184,7 @@ void mqttDebug(__unused void *params) {
     if (check_mqtt_connected == 0) {
       connect(mqtt_client);
     }
-    /*
-    mqtt_client_is_connected 1 if connected to server, 0 otherwise
-    */
+    // mqtt_client_is_connected 1 if connected to server, 0 otherwise
     printf("saved_mqtt_client 0x%x check_mqtt_connected %d \n", mqtt_client,
            check_mqtt_connected);
 

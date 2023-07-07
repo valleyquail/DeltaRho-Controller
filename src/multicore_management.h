@@ -7,6 +7,7 @@
 
 /* Kernel includes. */
 #include "FreeRTOS.h" /* Must come first. */
+#include "mqtt_connection.h"
 #include "pico/stdlib.h"
 #include "queue.h"  /* RTOS queue related API prototypes. */
 #include "semphr.h" /* Semaphore related API prototypes. */
@@ -20,6 +21,7 @@ soon as the semaphore is given. */
 
 #define mainEVENT_SEMAPHORE_TASK_PRIORITY (configMAX_PRIORITIES - 1)
 #define mainMQTT_EVENT_TASK_PRIORITY (tskIDLE_PRIORITY + 1)
+#define mainROBOT_CONTROL_TASK_PRIORITY (tskIDLE_PRIORITY + 2)
 
 /* The period of the example software timer, specified in milliseconds, and
 converted to ticks using the pdMS_TO_TICKS() macro. */
@@ -27,21 +29,21 @@ converted to ticks using the pdMS_TO_TICKS() macro. */
 
 /*-----------------------------------------------------------*/
 
-static TaskHandle_t vMQTTConnection;
-static TaskHandle_t vControlRobotViaWifi;
-static TaskHandle_t xADCTask;
+static TaskHandle_t vMQTTConnectionHandle;
+static TaskHandle_t vControlRobotHandle;
+static TaskHandle_t xADCTaskHandle;
 
-typedef struct mqttPacket {
-  float xComponent;
-  float yComponent;
-  float rotation;
-  // add more parameters later depending on what needs to be parsed
-} mqttPacket;
+// Queue is initialized in __main__task. The number of packets is defined below
+#define MQTT_QUEUE_SIZE 10
+static QueueHandle_t xMQTTQueue;
 
-void prvControlRobot(void *pvParameters);
+mqttPacket *currPacket = NULL;
+mqttPacket *prevPacket = NULL;
+
+void vControlRobot(void *pvParameters);
 
 // to be implemented later
-void prvReadADC(void *pvParameters);
+void vReadADC(void *pvParameters);
 
 void prvMQTTTaskEntry(void *pvParameters);
 

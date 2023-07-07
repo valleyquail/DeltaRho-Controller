@@ -41,7 +41,7 @@ add_executable(DeltaRho_Controller
         lib/PCA9685.h
         lib/Robot.cpp lib/Robot.h
         lib/wifi_config.h
-        src/multicore_management.c src/multicore_management.h)
+        src/multicore_management.cpp src/multicore_management.h lib/MotorEncoder.cpp)
 
 target_compile_definitions(DeltaRho_Controller PUBLIC NO_SYS=0 PRIVATE ${CMAKE_BUILD_TYPE})
 pico_enable_stdio_usb(DeltaRho_Controller 1)
@@ -54,6 +54,8 @@ target_link_libraries(
         freertos_config
         FreeRTOS-Kernel
         FreeRTOS-Kernel-Heap4
+        hardware_adc
+        hardware_timer
         hardware_i2c
         pico_cyw43_arch_lwip_sys_freertos
         pico_lwip_freertos
