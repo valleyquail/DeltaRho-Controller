@@ -4,10 +4,15 @@
 
 #ifndef DELTARHO_CONTROLLER_PCA9685_H
 #define DELTARHO_CONTROLLER_PCA9685_H
+#if __cplusplus
+extern "C" {
+#endif
+
 #include "I2C_Control.h"
 #include "pico/stdio.h"
 #include "pico/stdlib.h"
 #include <math.h>
+#include <stdio.h>
 
 // Datasheet for the PCA9685 at:
 // https://www.nxp.com/docs/en/data-sheet/PCA9685.pdf
@@ -72,7 +77,7 @@ static inline void setLevel(int channel, bool level) {
  * sets the base output frequency for the PCA chip. The default value is set to
  * be 200hz, but it is easy to change
  */
-inline void __init__PCA__() {
+inline void init_PCA() {
   reg_write(i2c_default, PCA9685_ADDRESS, MODE1, 0x00, 1);
   sleep_us(500);
   uint8_t oldState;
@@ -95,5 +100,9 @@ inline void __init__PCA__() {
   reg_write(i2c_default, PCA9685_ADDRESS, MODE1, &oldState, 1);
   printf("Should have updated the PCA9685\n");
 }
+
+#if __cplusplus
+}
+#endif
 
 #endif // DELTARHO_CONTROLLER_PCA9685_H

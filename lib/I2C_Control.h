@@ -5,6 +5,10 @@
 #ifndef DELTARHO_CONTROLLER_I2C_CONTROL_H
 #define DELTARHO_CONTROLLER_I2C_CONTROL_H
 
+#if __cplusplus
+extern "C" {
+#endif
+
 #include "hardware/i2c.h"
 #include "pico/stdio.h"
 #include "pico/stdlib.h"
@@ -30,14 +34,18 @@
 
 //_________________________________________________________________________
 
-void __init__i2c__(void);
+void init_i2c(void);
 
-extern void __init__PCA(void);
+extern void init_PCA(void);
 // void __reset__();
-int reg_read(i2c_inst_t *i2c, const uint addr, const uint8_t reg, uint8_t *buf,
-             const uint8_t nbytes);
+int reg_read(i2c_inst_t *i2c, uint addr, uint8_t reg, uint8_t *buf,
+             uint8_t nbytes);
 
-int reg_write(i2c_inst_t *i2c, const uint addr, const uint8_t reg, uint8_t *buf,
-              const uint8_t nbytes);
+int reg_write(i2c_inst_t *i2c, uint addr, uint8_t reg, uint8_t *buf,
+              uint8_t nbytes);
+
+#if __cplusplus
+}
+#endif
 
 #endif // DELTARHO_CONTROLLER_I2C_CONTROL_H

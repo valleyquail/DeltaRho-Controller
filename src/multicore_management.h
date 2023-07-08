@@ -20,8 +20,10 @@ given the maximum priority of ( configMAX_PRIORITIES - 1 ) to ensure it runs as
 soon as the semaphore is given. */
 
 #define mainEVENT_SEMAPHORE_TASK_PRIORITY (configMAX_PRIORITIES - 1)
-#define mainMQTT_EVENT_TASK_PRIORITY (tskIDLE_PRIORITY + 1)
+#define mainMQTT_EVENT_TASK_PRIORITY (tskIDLE_PRIORITY + 2)
 #define mainROBOT_CONTROL_TASK_PRIORITY (tskIDLE_PRIORITY + 2)
+#define mainCYW43_ASYNC_PROCESS_PRIORITY (tskIDLE_PRIORITY + 1)
+#define mainBLINK_DEBUG_TASK (tskIDLE_PRIORITY + 5)
 
 /* The period of the example software timer, specified in milliseconds, and
 converted to ticks using the pdMS_TO_TICKS() macro. */
@@ -33,18 +35,32 @@ extern TaskHandle_t vMQTTConnectionHandle;
 extern TaskHandle_t vControlRobotHandle;
 extern TaskHandle_t xADCTaskHandle;
 
-// Queue is initialized in __main__task. The number of packets is defined below
-#define MQTT_QUEUE_SIZE 10
+// Queue is initialized in __main__task.
 extern QueueHandle_t xMQTTQueue;
 
 extern struct mqttPacket *currPacket;
-extern struct mqttPacket *prevPacket;
 
-void vControlRobot(void *pvParameters);
+/**
+ * This is responsible for launching the robot controller. It also specifies
+ * that the robot controller can only run on core 0 since the interrupt requests
+ * are tied to a core. Thus, by confining it to one core, the interrupt requests
+ * go to the right place
+ * @robot the instance of the robot that gets passed to the task launch
+ */
+void vLaunchControlRobot(void *robot);
 
 // to be implemented later
 void vReadADC(void *pvParameters);
 
+/**
+ * Initializes the MQTT connection by creating a client struct and the calling
+ * the connection Specifically, it handles creating the client, organizing the
+ * callbacks, and subscribing to topics
+ */
 void prvMQTTTaskEntry(void *pvParameters);
+
+// Runs some LEDs that are hooked up to some gpio pins in order to make sure
+// that some functions are running correctly
+void vBlinkDebug(void *pvParameters);
 
 #endif // DELTARHO_CONTROLLER_MULTICORE_MANAGEMENT_H

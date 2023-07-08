@@ -4,24 +4,26 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#include "Robot.h"
-extern "C" {
 #include "FreeRTOS.h"
 #include "I2C_Control.h"
 #include "PCA9685.h"
+#include "Robot.h"
+#include "Robot_Config.h"
 #include "multicore_management.h"
 #include "pico/cyw43_arch.h"
 #include "pico/stdio.h"
-#include "pico/stdlib.h"
 #include "task.h"
-
 #include "wifi_config.h"
-}
-// Global instance of the robot
-Robot robot = Robot(1);
+#include <pico/async_context_freertos.h>
 
-void __main__task(__unused void *pvParams);
+// Global instance of the robot
+Robot robot = Robot(ROBOT_NUMBER);
+
+void main_task(__unused void *pvParams);
 void vLaunch();
+//// Used to raise the priority of the cyw43 async context task so that it runs
+//// more often to parse instructions
+// void configure_cyw43();
 
 int main() {
   stdio_init_all();
@@ -51,9 +53,9 @@ int main() {
   return 0;
 }
 
-void __main__task(__unused void *pvParams) {
-  __init__i2c__();
-  __init__PCA__();
+void main_task(__unused void *pvParams) {
+  init_i2c();
+  init_PCA();
   robot.init();
   printf("Trying to connect to the wifi\n");
   //  printf("Shouldn't be initialized yet: %i\n",
@@ -63,7 +65,7 @@ void __main__task(__unused void *pvParams) {
   //  cyw43_is_initialized(&cyw43_state));
   if (error) {
     printf("Wi-Fi init failed --> %i\n", error);
-    robot.controlRobot(0, 0, 0);
+    robot.controlRobot(0, 0, 0, 0);
     return;
   }
   printf("Initialized the wifi\n");
@@ -76,30 +78,52 @@ void __main__task(__unused void *pvParams) {
     return;
   }
   printf("connected\n");
+  //  configure_cyw43();
   sleep_ms(1000);
 
   cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
 
   xMQTTQueue = xQueueCreate(MQTT_QUEUE_SIZE, sizeof(mqttPacket *));
+
   // Launches the MQTT connection. Configures 1kb of stack words since Wi-Fi
   // communication is likely going to be parsing/encoding a lot of data
-  xTaskCreate(prvMQTTTaskEntry, "MQTT Connection", 1024, NULL,
+  xTaskCreate(prvMQTTTaskEntry, "MQTT Connection", 1024, nullptr,
               mainMQTT_EVENT_TASK_PRIORITY, &vMQTTConnectionHandle);
-  // Launches the task for controlling the robot and updating the motor control
-  xTaskCreate(vControlRobot, "Robot Control", 512, &robot,
-              mainROBOT_CONTROL_TASK_PRIORITY, &vControlRobotHandle);
+  xTaskCreate(vBlinkDebug, "Blink Debug", configMINIMAL_STACK_SIZE, nullptr,
+              mainBLINK_DEBUG_TASK, nullptr);
+  // Launches the robot controller
+  vLaunchControlRobot(&robot);
   // Deletes this task
-  vTaskDelete(NULL);
+  vTaskDelete(nullptr);
 }
 
-void vLaunch(void) {
+void vLaunch() {
   // Ignore making a task handle for the main task since it is just used to
   // initialize the Wi-Fi connection and then will delete itself after
   // scheduling the remaining tasks
-  xTaskCreate(__main__task, "TestMainThread", configMINIMAL_STACK_SIZE, NULL,
-              tskIDLE_PRIORITY, NULL);
+  TaskHandle_t mainTask;
+  xTaskCreate(main_task, "TestMainThread", configMINIMAL_STACK_SIZE, nullptr,
+              tskIDLE_PRIORITY, &mainTask);
+  // Bind the main task to execute on core one since that is where the robot
+  // controller will be running and that needs to be linked to the interrupts
+  vTaskCoreAffinitySet(mainTask, 0);
   /* Start the tasks and timer running. */
   vTaskStartScheduler();
   // Ideally we should never reach this point
   panic_unsupported();
 }
+
+// void configure_cyw43() {
+//   // Makes a new FreeRTOS async context configuration
+//   async_context_freertos_config_t asyncContextFreertosConfig =
+//       async_context_freertos_default_config();
+//   // Sets the context task priority to the user defined level
+//   asyncContextFreertosConfig.task_priority =
+//   mainCYW43_ASYNC_PROCESS_PRIORITY;
+//   // Makes a new async context
+//   async_context_freertos_t asyncContextFreertos;
+//   async_context_freertos_init(&asyncContextFreertos,
+//                               &asyncContextFreertosConfig);
+//   // Sets the cyw43 config
+//   cyw43_arch_set_async_context(&asyncContextFreertos.core);
+// }

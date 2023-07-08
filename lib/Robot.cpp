@@ -4,9 +4,7 @@
 
 #include "Robot.h"
 #include "../src/multicore_management.h"
-extern "C" {
 #include "I2C_Control.h"
-}
 
 DCMotor backRight;
 DCMotor backLeft;
@@ -56,16 +54,18 @@ void Robot::init() {
  * @param speed desired speed of the robot in cm/s
  * @param direction the direction of the wheel in terms of angle relative to
  * absolute heading in radians
- * @param rotation angular rotation of the robot in rad/s
+ * @param omega angular rotation of the robot in rad/s
+ * @param distance how far the robot should move in cm
  */
-void Robot::controlRobot(float speed, float direction, float rotation) {
+void Robot::controlRobot(float speed, float direction, float omega,
+                         float distance) const {
   vTaskEnterCritical();
   uint32_t interrupts = save_and_disable_interrupts();
   // Convert speed into ticks/s
   speed = (speed / wheelRadius) * encoderTicksPerRotation;
-  float backRightSpeed = speed * cos(direction + 2 * M_PI / 3.) - rotation;
-  float backLeftSpeed = speed * cos(direction - 2 * M_PI / 3.) - rotation;
-  float frontSpeed = speed * cos(direction) - rotation;
+  float backRightSpeed = speed * cos(direction + 2 * M_PI / 3.) - omega;
+  float backLeftSpeed = speed * cos(direction - 2 * M_PI / 3.) - omega;
+  float frontSpeed = speed * cos(direction) - omega;
 
   backRight.setMotorMovement(floor(backRightSpeed));
   backLeft.setMotorMovement(floor(backLeftSpeed));

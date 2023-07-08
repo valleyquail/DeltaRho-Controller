@@ -32,12 +32,12 @@ The following relative paths also need to be set:
 
 The project makes use of FreeRTOS task scheduling instead of a state machine for controlling the robot since it allows
 for more flexibility during future feature development, including the implementation of a state machine in
-the ``` __main__task()``` if desired.
+the ` main__task()` if desired.
 
-Lower level functions, such as I2C and GPIO, and configuration files are stored in the ```/lib``` directory.
+Lower level functions, such as I2C and GPIO, and configuration files are stored in the `/lib` directory.
 
-In the ```/src``` directory, all functions used by FreeRTOS are defined in the ```multucore_management.h``` header file.
-These functions are then launched in ```__main__task()```.
+In the `/src` directory, all functions used by FreeRTOS are defined in the `multucore_management.h` header file.
+These functions are then launched in `main__task()`.
 
 In regard to the run time structure, most, if not all, of the control of the physical robot is handled on a single core,
 while the second core is dedicated to sending, receiving, and parsing data from an MQTT Broker. 

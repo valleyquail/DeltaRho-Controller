@@ -62,17 +62,17 @@ private:
     prevCount = currCount;
     // Calculates the speed as an unsigned value since the motor already knows
     // the direction
-    int16_t speed = deltaEncoder * 1000000 / deltaTime;
+    uint16_t speed = deltaEncoder * 1000000 / deltaTime;
     return speed;
   }
 
 public:
   DCMotor();
-  void init(int motorNum, uint8_t pwm, uint8_t lineOne, uint8_t lineTwo,
+  void init(int motorNumber, uint8_t pwm, uint8_t lineOne, uint8_t lineTwo,
             float kp);
   void setMotorMovement(int effort);
 
-  void setMotorStop(void);
+  void setMotorStop();
   /**
    * Handles the encoders based on an XOR'd signal from the encoders and then
    * using the known direction to set the count

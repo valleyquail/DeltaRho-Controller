@@ -7,13 +7,13 @@ extern "C" {
 #include "PCA9685.h"
 }
 
-constexpr float speedScalingFactor = PCA_PWM_RESOLUTION / 100;
+constexpr float speedScalingFactor = PCA_PWM_RESOLUTION / 100.0;
 
 DCMotor::DCMotor() {}
 
 /**
  * Initializes each of the DC motors on the robot
- * @param motorNum id of the motor
+ * @param motorNumber id of the motor
  * @param pwm the pin on the PCA that sets the register associated with setting
  * the PWM signal for the motor
  * @param lineOne one of the two pins on the PCA that determines the direction
@@ -22,10 +22,10 @@ DCMotor::DCMotor() {}
  * of the motor
  * @param kp used for PID to set the motor speed
  */
-void DCMotor::init(int motorNum, uint8_t pwm, uint8_t lineOne, uint8_t lineTwo,
-                   float kp) {
-  this->motorNum = motorNum;
-  motorName = "Motor " + std::to_string(motorNum);
+void DCMotor::init(int motorNumber, uint8_t pwm, uint8_t lineOne,
+                   uint8_t lineTwo, float kp) {
+  motorNum = motorNumber;
+  motorName = "Motor " + std::to_string(motorNumber);
   pwmPin = pwm;
   lineOneIn = lineOne;
   lineTwoIn = lineTwo;
@@ -86,7 +86,7 @@ void DCMotor::updatePID() {
  * using the known direction to set the count
  */
 void encoderIRQ(void *motorInstance) {
-  DCMotor *motor = static_cast<DCMotor *>(motorInstance);
+  auto *motor = static_cast<DCMotor *>(motorInstance);
   if (motor->direction)
     motor->currCount++;
   else
