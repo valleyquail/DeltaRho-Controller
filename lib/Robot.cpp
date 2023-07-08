@@ -59,7 +59,7 @@ void Robot::init() {
  */
 void Robot::controlRobot(float speed, float direction, float omega,
                          float distance) const {
-  vTaskEnterCritical();
+  //  vTaskEnterCritical();
   uint32_t interrupts = save_and_disable_interrupts();
   // Convert speed into ticks/s
   speed = (speed / wheelRadius) * encoderTicksPerRotation;
@@ -74,8 +74,8 @@ void Robot::controlRobot(float speed, float direction, float omega,
   backLeft.sumError = 0;
   front.sumError = 0;
   restore_interrupts(interrupts);
-  vTaskExitCritical();
-  //  printf("Should be setting the speed\n");
+  //  vTaskExitCritical();
+  printf("Should be setting the speed\n");
 }
 
 void Robot::stopRobot() {
@@ -85,6 +85,8 @@ void Robot::stopRobot() {
 }
 
 void Robot::update() {
+  printf("Doing some PID\n");
+  return;
   backRight.updatePID();
   backLeft.updatePID();
   front.updatePID();

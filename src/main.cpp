@@ -23,12 +23,12 @@ void main_task(__unused void *pvParams);
 void vLaunch();
 //// Used to raise the priority of the cyw43 async context task so that it runs
 //// more often to parse instructions
-// void configure_cyw43();
+void configure_cyw43();
 
 int main() {
   stdio_init_all();
   for (int i = 0; i < 100; ++i) {
-    printf("Launching in %i ms\n", 100 * 20 - i);
+    printf("Launching in %i ms\n", (100 - i) * 20);
     sleep_ms(20);
   }
   const char *rtos_name;
@@ -78,7 +78,11 @@ void main_task(__unused void *pvParams) {
     return;
   }
   printf("connected\n");
-  //  configure_cyw43();
+
+  configure_cyw43();
+  printf("Going to connect to the client\n");
+  connect();
+  printf("Connected successfully\n");
   sleep_ms(1000);
 
   cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
@@ -106,24 +110,23 @@ void vLaunch() {
               tskIDLE_PRIORITY, &mainTask);
   // Bind the main task to execute on core one since that is where the robot
   // controller will be running and that needs to be linked to the interrupts
-  vTaskCoreAffinitySet(mainTask, 0);
+  vTaskCoreAffinitySet(mainTask, 1);
   /* Start the tasks and timer running. */
   vTaskStartScheduler();
   // Ideally we should never reach this point
   panic_unsupported();
 }
 
-// void configure_cyw43() {
-//   // Makes a new FreeRTOS async context configuration
-//   async_context_freertos_config_t asyncContextFreertosConfig =
-//       async_context_freertos_default_config();
-//   // Sets the context task priority to the user defined level
-//   asyncContextFreertosConfig.task_priority =
-//   mainCYW43_ASYNC_PROCESS_PRIORITY;
-//   // Makes a new async context
-//   async_context_freertos_t asyncContextFreertos;
-//   async_context_freertos_init(&asyncContextFreertos,
-//                               &asyncContextFreertosConfig);
-//   // Sets the cyw43 config
-//   cyw43_arch_set_async_context(&asyncContextFreertos.core);
-// }
+void configure_cyw43() {
+  // Makes a new FreeRTOS async context configuration
+  async_context_freertos_config_t asyncContextFreertosConfig =
+      async_context_freertos_default_config();
+  // Sets the context task priority to the user defined level
+  asyncContextFreertosConfig.task_priority = mainCYW43_ASYNC_PROCESS_PRIORITY;
+  // Makes a new async context
+  async_context_freertos_t asyncContextFreertos;
+  async_context_freertos_init(&asyncContextFreertos,
+                              &asyncContextFreertosConfig);
+  // Sets the cyw43 config
+  cyw43_arch_set_async_context(&asyncContextFreertos.core);
+}

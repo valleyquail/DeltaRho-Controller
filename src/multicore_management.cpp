@@ -11,7 +11,7 @@ TaskHandle_t xADCTaskHandle = nullptr;
 
 QueueHandle_t xMQTTQueue = nullptr;
 
-struct mqttPacket *currPacket = nullptr;
+mqttPacket *currPacket;
 
 // static volatile uint32_t ulCountOfItemsSentOnQueue = 0;
 // static volatile uint32_t ulCountOfItemsReceivedOnQueue = 0;
@@ -32,14 +32,14 @@ struct mqttPacket *currPacket = nullptr;
  */
 
 void prvMQTTTaskEntry(__unused void *pvParameters) {
-  bool check_mqtt_connected;
-#if Debug
-  printf("Going to connect to the client\n");
-#endif
-  connect();
+  //  mqttPacket packet;
+  //  packet.distance = 0;
+  //  packet.speed = 1;
+  //  xQueueSendToBack(xMQTTQueue, &packet, 0);
   while (true) {
-    printf("in mqtt task");
+    printf("in mqtt task\n");
     ensureConnection();
+    vTaskDelay(20);
   }
 }
 
@@ -52,56 +52,76 @@ void prvMQTTTaskEntry(__unused void *pvParameters) {
  * @param pvParameters an instance of a robot
  */
 extern "C" [[noreturn]] void vControlRobot(void *pvParameters) {
-  const TickType_t xMaxExpectedBlockTime = pdMS_TO_TICKS(10);
   auto *robot = const_cast<Robot *>(static_cast<Robot *>(pvParameters));
+  float dist;
+  // Keep robot from freaking out when it starts
+  currPacket->distance = 100.0;
+#if Debug
+  robot->controlRobot(2, 0, 0, 0);
+#endif
   while (true) {
-    float dist = robot->getCurrDistMovedThisInstruction();
+    printf("in robot control task\n");
+    dist = robot->getCurrDistMovedThisInstruction();
 
     // Accept the task notify if it is there, but otherwise return immediately
     // so that the robot can work on PID control
     ulTaskNotifyTake(pdTRUE, 0);
     // TODO: determine acceptable movement tolerance
     if (dist >= currPacket->distance) {
+      printf("Trying to change the robot control by pulling from the queue; "
+             "dist = %f and currpack distance = %f\n",
+             dist, currPacket->distance);
       // If the task has been called via notify and the robot has finished
       // executing its current instruction, then it will take the next task from
       // the queue and begin executing it
-      BaseType_t isEmpty =
-          xQueueReceive(xMQTTQueue, currPacket, xMaxExpectedBlockTime);
+      //      BaseType_t isEmpty =
+      //          xQueueReceive(xMQTTQueue, currPacket, xMaxExpectedBlockTime);
       // If the robot has completed its movement but has no further
       // instructions, stop the robot
-      if (!isEmpty)
-        robot->stopRobot();
-      else
-        robot->controlRobot(currPacket->speed, currPacket->theta,
-                            currPacket->omega, 0);
+      //      if (!isEmpty)
+      //        robot->stopRobot();
+      //      else
+      //        robot->controlRobot(currPacket->speed, currPacket->theta,
+      //                            currPacket->omega, 0);
     }
+    robot->update();
     // Delay the task 10ms so that it updates at about 100Hz which is more than
     // enough
-    vTaskDelay(pdMS_TO_TICKS(10));
+    vTaskDelay(pdMS_TO_TICKS(20));
   }
 }
 
 void vLaunchControlRobot(void *robot) {
 
   // Launches the task for controlling the robot and updating the motor control
-  xTaskCreate(vControlRobot, "Robot Control", 512, robot,
+  xTaskCreate(vControlRobot, "Robot Control", 1024, robot,
               mainROBOT_CONTROL_TASK_PRIORITY, &vControlRobotHandle);
   // Can only run on core one
-  vTaskCoreAffinitySet(vControlRobotHandle, (UBaseType_t)1);
+  vTaskCoreAffinitySet(vControlRobotHandle, 1);
 }
 
-void vBlinkDebug(void *pvParameters) {
-  const uint8_t ledPinOne = 100;
-  const uint8_t ledPinTwo = 100;
-  const uint8_t ledPinThree = 100;
-  uint mask = 0 | (1 << ledPinOne) | (1 << ledPinTwo) | (1 << ledPinThree);
-  gpio_init_mask(mask);
+[[noreturn]] void vBlinkDebug(void *pvParameters) {
+  (void)pvParameters;
+  const uint8_t ledPinOne = 11;
+  const uint8_t ledPinTwo = 12;
+  const uint8_t ledPinThree = 13;
+
+  gpio_init(ledPinOne);
+  gpio_set_dir(ledPinOne, GPIO_OUT);
+  gpio_init(ledPinTwo);
+  gpio_set_dir(ledPinTwo, GPIO_OUT);
+  gpio_init(ledPinThree);
+  gpio_set_dir(ledPinThree, GPIO_OUT);
   uint8_t leds[] = {ledPinOne, ledPinTwo, ledPinThree};
   uint8_t ledIndex = 0;
+  bool on = false;
   while (true) {
+    cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, !on);
+    on = !on;
+    printf("in blink task\n");
     gpio_put(leds[ledIndex], 0);
     ledIndex = (ledIndex + 1) % 3;
     gpio_put(leds[ledIndex], 1);
-    vTaskDelay(pdMS_TO_TICKS(10));
+    vTaskDelay(pdMS_TO_TICKS(1000));
   }
 }

@@ -9,7 +9,7 @@
 #include "task.h"
 
 // Struct holding the mqtt broker connection
-mqtt_client_t *mqtt_client;
+mqtt_client_t mqtt_client;
 // Statically reserves the space needed for the mqtt packets so that we don't
 // need to use dynamic memory and saves on runtime and memory safety
 mqttPacket staticallyReserved_mqttPackets[MQTT_QUEUE_SIZE];
@@ -18,7 +18,7 @@ mqttPacket staticallyReserved_mqttPackets[MQTT_QUEUE_SIZE];
 // in order because we always send to the back of the queue and pull from the
 // front of the queue
 uint8_t mqttPacketIndex = 0;
-char robot_header[] = {'R', ('0' + ROBOT_NUMBER), '/'};
+char robot_header[3] = {'R', ('0' + ROBOT_NUMBER), '/'};
 
 static const struct mqtt_connect_client_info_t clientInfo = {
     "usertwo",
@@ -107,9 +107,10 @@ static void mqtt_incoming_data_cb(__unused void *arg, const u8_t *data,
       } else {
         payload[0] = 'f';
       }
-      err = mqtt_publish(mqtt_client, strcat(robot_header, topics[QUEUE_FULL]),
-                         payload, strlen(payload), qos, 0, mqtt_pub_request_cb,
-                         arg);
+//      err = mqtt_publish(mqtt_client, strcat(robot_header,
+//      topics[QUEUE_FULL]),
+//                         payload, strlen(payload), qos, 0,
+//                         mqtt_pub_request_cb, arg);
 #if Debug
       if (err != ERR_OK) {
         printf("mqtt_subscribe return: %d\n", err);
@@ -137,19 +138,15 @@ void mqtt_sub_request_cb(__unused void *arg, err_t result) {
 void subscribe_to_default_topics(mqtt_client_t *client, void *arg) {
   err_t err;
   printf("mqtt_connection_cb: Successfully connected\n");
-
-  /* Setup callback for incoming publish requests */
-  mqtt_set_inpub_callback(client, mqtt_incoming_publish_cb,
-                          mqtt_incoming_data_cb,
-                          LWIP_CONST_CAST(void *, &clientInfo));
-
   /* Subscribe to a topic named "subtopic" with QoS level 1, call
    * mqtt_sub_request_cb with result */
   int size = sizeof(topics_to_subscribe_to) / sizeof(enum TOPIC);
   for (int i = 0; i < size; i++) {
     enum TOPIC topic = topics_to_subscribe_to[i];
-    err = mqtt_subscribe(client, strcat(robot_header, topics[topic]), 1,
-                         mqtt_sub_request_cb, arg);
+    char buffer[8];
+    strcat(buffer, robot_header);
+    strcat(buffer, topics[topic]);
+    err = mqtt_subscribe(client, buffer, 1, mqtt_sub_request_cb, arg);
 
 #if Debug
     if (err != ERR_OK) {
@@ -162,7 +159,8 @@ void subscribe_to_default_topics(mqtt_client_t *client, void *arg) {
 void mqtt_connection_cb(mqtt_client_t *client, void *arg,
                         mqtt_connection_status_t status) {
   if (status == MQTT_CONNECT_ACCEPTED) {
-    subscribe_to_default_topics(client, arg);
+    //    subscribe_to_default_topics(client, arg);
+    printf("did a thing\n");
   } else {
 #if Debug
     printf("mqtt_connection_cb: Disconnected, reason: %d\n", status);
@@ -183,17 +181,15 @@ void mqtt_pub_request_cb(__unused void *arg, err_t result) {
 
 void connect() {
   err_t err;
+  printf("Connecting ...\n");
   /*
    * Initiate client and connect to server, if this fails immediately an
    * error code is returned otherwise mqtt_connection_cb will be called with
    * connection result after attempting to establish a connection with
    * the server. For now MQTT version 3.1.1 is always used
    */
-  mqtt_set_inpub_callback(mqtt_client, mqtt_incoming_publish_cb,
-                          mqtt_incoming_data_cb,
-                          LWIP_CONST_CAST(void *, &clientInfo));
   err =
-      mqtt_client_connect(mqtt_client, &ip_addr, MQTT_PORT, mqtt_connection_cb,
+      mqtt_client_connect(&mqtt_client, &ip_addr, MQTT_PORT, mqtt_connection_cb,
                           LWIP_CONST_CAST(void *, &clientInfo), &clientInfo);
   /* For now just print the result code if something goes wrong */
   if (err != ERR_OK) {
@@ -203,11 +199,15 @@ void connect() {
     printf("Made the client\n");
 #endif
   }
+  mqtt_set_inpub_callback(&mqtt_client, mqtt_incoming_publish_cb,
+                          mqtt_incoming_data_cb,
+                          LWIP_CONST_CAST(void *, &clientInfo));
+  subscribe_to_default_topics(&mqtt_client, 0);
 }
 
 void ensureConnection() {
   // mqtt_client_is_connected 1 if connected to server, 0 otherwise
-  bool check_mqtt_connected = mqtt_client_is_connected(mqtt_client);
+  bool check_mqtt_connected = mqtt_client_is_connected(&mqtt_client);
   if (check_mqtt_connected == 0) {
     connect();
   }
@@ -234,7 +234,7 @@ static inline mqttPacket *parseInstruction(const char *instruction,
 
 _Noreturn void mqttDebug(__unused void *params) {
   printf("mqtt_task starts\n");
-  mqtt_subscribe(mqtt_client, "testremote", 0, pub_mqtt_request_cb_t,
+  mqtt_subscribe(&mqtt_client, "testremote", 0, pub_mqtt_request_cb_t,
                  PUB_EXTRA_ARG);
 
   while (true) {
@@ -243,16 +243,17 @@ _Noreturn void mqttDebug(__unused void *params) {
     //    strcat(PUB_PAYLOAD_SCR, "testing");
     payload_size = sizeof(PUB_PAYLOAD_SCR);
     printf("%s  %d \n", PUB_PAYLOAD_SCR, sizeof(PUB_PAYLOAD_SCR));
-    bool check_mqtt_connected = mqtt_client_is_connected(mqtt_client);
+    bool check_mqtt_connected = mqtt_client_is_connected(&mqtt_client);
     if (check_mqtt_connected == 0) {
       connect();
     }
     // mqtt_client_is_connected 1 if connected to server, 0 otherwise
-    printf("saved_mqtt_client 0x%p check_mqtt_connected %d \n", mqtt_client,
+    printf("saved_mqtt_client 0x%i check_mqtt_connected %d \n", mqtt_client,
            check_mqtt_connected);
 
-    err_t err = mqtt_publish(mqtt_client, "test", PUB_PAYLOAD_SCR, payload_size,
-                             0, 0, pub_mqtt_request_cb_t, PUB_EXTRA_ARG);
+    err_t err =
+        mqtt_publish(&mqtt_client, "test", PUB_PAYLOAD_SCR, payload_size, 0, 0,
+                     pub_mqtt_request_cb_t, PUB_EXTRA_ARG);
     if (err != ERR_OK) {
       printf("mqtt_publish return %d\n", err);
     }

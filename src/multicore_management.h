@@ -23,7 +23,7 @@ soon as the semaphore is given. */
 #define mainMQTT_EVENT_TASK_PRIORITY (tskIDLE_PRIORITY + 2)
 #define mainROBOT_CONTROL_TASK_PRIORITY (tskIDLE_PRIORITY + 2)
 #define mainCYW43_ASYNC_PROCESS_PRIORITY (tskIDLE_PRIORITY + 1)
-#define mainBLINK_DEBUG_TASK (tskIDLE_PRIORITY + 5)
+#define mainBLINK_DEBUG_TASK (tskIDLE_PRIORITY + 1)
 
 /* The period of the example software timer, specified in milliseconds, and
 converted to ticks using the pdMS_TO_TICKS() macro. */
@@ -37,8 +37,6 @@ extern TaskHandle_t xADCTaskHandle;
 
 // Queue is initialized in __main__task.
 extern QueueHandle_t xMQTTQueue;
-
-extern struct mqttPacket *currPacket;
 
 /**
  * This is responsible for launching the robot controller. It also specifies
@@ -61,6 +59,6 @@ void prvMQTTTaskEntry(void *pvParameters);
 
 // Runs some LEDs that are hooked up to some gpio pins in order to make sure
 // that some functions are running correctly
-void vBlinkDebug(void *pvParameters);
+[[noreturn]] void vBlinkDebug(void *pvParameters);
 
 #endif // DELTARHO_CONTROLLER_MULTICORE_MANAGEMENT_H
