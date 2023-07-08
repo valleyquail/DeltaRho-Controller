@@ -1,13 +1,24 @@
+#include <sys/cdefs.h>
 //
 // Created by nikesh on 7/2/23.
 //
 
-#include "mqtt_connection.h"
 #include "FreeRTOS.h"
+#include "mqtt_connection.h"
 #include "queue.h"
 #include "task.h"
 
-static mqtt_client_t *mqtt_client;
+// Struct holding the mqtt broker connection
+mqtt_client_t *mqtt_client;
+// Statically reserves the space needed for the mqtt packets so that we don't
+// need to use dynamic memory and saves on runtime and memory safety
+mqttPacket staticallyReserved_mqttPackets[MQTT_QUEUE_SIZE];
+// Keeps track of which packet is the next in line to be sent to the queue. We
+// can do this since we know the packet information is always going to be sent
+// in order because we always send to the back of the queue and pull from the
+// front of the queue
+uint8_t mqttPacketIndex = 0;
+char robot_header[] = {'R', ('0' + ROBOT_NUMBER), '/'};
 
 static const struct mqtt_connect_client_info_t clientInfo = {
     "usertwo",
@@ -24,21 +35,22 @@ static const struct mqtt_connect_client_info_t clientInfo = {
 #endif
 };
 
+#if Debug
 mqtt_request_cb_t pub_mqtt_request_cb_t;
 char PUB_PAYLOAD[] = "this is a message from pico_w ctrl 0       ";
 char PUB_PAYLOAD_SCR[] = "this is a message from pico_w ctrl 0       ";
 char PUB_EXTRA_ARG[] = "test";
 u16_t payload_size;
+#endif
 
-static void connect(mqtt_client_t *client);
+/**
+ * Function prototype
+ */
+static inline mqttPacket *parseInstruction(const char *instruction,
+                                           mqttPacket *packet);
 
-void initMQTT() {
-  printf("Going to connect to the client\n");
-  connect(mqtt_client);
-  printf("Made the client\n");
-  return;
-}
-
+// The following are all callback functions and can be largely ignored
+//_____________________________________________________________________________
 /**
  * Callback for an incoming publish
  * @param arg
@@ -54,7 +66,6 @@ static void mqtt_incoming_publish_cb(void *arg, const char *topic,
                       client_info->client_id, topic, (int)tot_len));
 #endif
 }
-
 /**
  * Callback for any incoming data
  * @param arg
@@ -62,18 +73,47 @@ static void mqtt_incoming_publish_cb(void *arg, const char *topic,
  * @param len
  * @param flags
  */
-static void mqtt_incoming_data_cb(void *arg, const u8_t *data, u16_t len,
-                                  u8_t flags) {
+static void mqtt_incoming_data_cb(__unused void *arg, const u8_t *data,
+                                  u16_t len, u8_t flags) {
   printf("Incoming publish payload with length %d, flags %u\n", len,
          (unsigned int)flags);
 
   if (flags & MQTT_DATA_FLAG_LAST) {
     /* Last fragment of payload received (or whole part if payload fits
        receive buffer --> See MQTT_VAR_HEADER_BUFFER_LEN)  */
+    // Used for message send confirmation:
+    // use "p" to indicate the packet was successfully passed and "f" to
+    // indicate the packet failed to be put in the queue
+    char payload[] = "p";
+    // ensure this message is delivered
+    uint8_t qos = 1;
+
     // Matches the first character of the subscribed topics
     if (data[0] == topics[INSTRUCTIONS][0]) {
-      xTaskNotifyGive(vControlRobotHandle);
+      err_t err;
+      mqttPacket packet = staticallyReserved_mqttPackets[mqttPacketIndex];
+      parseInstruction((const char *)data, &packet);
+      // Add to the queue but don't wait for a chance to add, just immediately
+      // return
+      err = xQueueSendToBack(xMQTTQueue, (void *)&packet, 0);
+      // if the packet is successfully added to the queue, increment the index
+      // and notify the robot controller
+      if (err == pdPASS) {
+        // resets the packet index since we know the queue must progress in a
+        // linear fashion
+        mqttPacketIndex++;
+        mqttPacketIndex %= 10;
+        xTaskNotifyGive(vControlRobotHandle);
+      } else {
+        payload[0] = 'f';
+      }
+      err = mqtt_publish(mqtt_client, strcat(robot_header, topics[QUEUE_FULL]),
+                         payload, strlen(payload), qos, 0, mqtt_pub_request_cb,
+                         arg);
 #if Debug
+      if (err != ERR_OK) {
+        printf("mqtt_subscribe return: %d\n", err);
+      }
       printf("mqtt_incoming_data_cb: %s\n", (const char *)data);
     } else {
       printf("mqtt_incoming_data_cb: Ignoring payload...\n");
@@ -81,10 +121,11 @@ static void mqtt_incoming_data_cb(void *arg, const u8_t *data, u16_t len,
     }
   } else {
     // Handle fragmented payload or something else
+    return;
   }
 }
 
-static void mqtt_sub_request_cb(void *arg, err_t result) {
+void mqtt_sub_request_cb(__unused void *arg, err_t result) {
   /* Just print the result code here for simplicity,
      normal behaviour would be to take some action if subscribe fails like
      notifying user, retry subscribe or disconnect from server */
@@ -93,7 +134,7 @@ static void mqtt_sub_request_cb(void *arg, err_t result) {
 #endif
 }
 
-static void subscribe_to_default_topics(mqtt_client_t *client, void *arg) {
+void subscribe_to_default_topics(mqtt_client_t *client, void *arg) {
   err_t err;
   printf("mqtt_connection_cb: Successfully connected\n");
 
@@ -107,7 +148,8 @@ static void subscribe_to_default_topics(mqtt_client_t *client, void *arg) {
   int size = sizeof(topics_to_subscribe_to) / sizeof(enum TOPIC);
   for (int i = 0; i < size; i++) {
     enum TOPIC topic = topics_to_subscribe_to[i];
-    err = mqtt_subscribe(client, topics[topic], 1, mqtt_sub_request_cb, arg);
+    err = mqtt_subscribe(client, strcat(robot_header, topics[topic]), 1,
+                         mqtt_sub_request_cb, arg);
 
 #if Debug
     if (err != ERR_OK) {
@@ -117,8 +159,8 @@ static void subscribe_to_default_topics(mqtt_client_t *client, void *arg) {
   }
 }
 
-static void mqtt_connection_cb(mqtt_client_t *client, void *arg,
-                               mqtt_connection_status_t status) {
+void mqtt_connection_cb(mqtt_client_t *client, void *arg,
+                        mqtt_connection_status_t status) {
   if (status == MQTT_CONNECT_ACCEPTED) {
     subscribe_to_default_topics(client, arg);
   } else {
@@ -126,14 +168,48 @@ static void mqtt_connection_cb(mqtt_client_t *client, void *arg,
     printf("mqtt_connection_cb: Disconnected, reason: %d\n", status);
 #endif
     /* Its more nice to be connected, so try to reconnect */
-    connect(client);
+    connect();
   }
 }
 
 /* Called when publish is complete either with success or failure */
-static void mqtt_pub_request_cb(void *arg, err_t result) {
+void mqtt_pub_request_cb(__unused void *arg, err_t result) {
   if (result != ERR_OK) {
     printf("Publish result: %d\n", result);
+  }
+}
+
+//_____________________________________________________________________________
+
+void connect() {
+  err_t err;
+  /*
+   * Initiate client and connect to server, if this fails immediately an
+   * error code is returned otherwise mqtt_connection_cb will be called with
+   * connection result after attempting to establish a connection with
+   * the server. For now MQTT version 3.1.1 is always used
+   */
+  mqtt_set_inpub_callback(mqtt_client, mqtt_incoming_publish_cb,
+                          mqtt_incoming_data_cb,
+                          LWIP_CONST_CAST(void *, &clientInfo));
+  err =
+      mqtt_client_connect(mqtt_client, &ip_addr, MQTT_PORT, mqtt_connection_cb,
+                          LWIP_CONST_CAST(void *, &clientInfo), &clientInfo);
+  /* For now just print the result code if something goes wrong */
+  if (err != ERR_OK) {
+    printf("mqtt_connect return %d\n", err);
+  } else {
+#if Debug
+    printf("Made the client\n");
+#endif
+  }
+}
+
+void ensureConnection() {
+  // mqtt_client_is_connected 1 if connected to server, 0 otherwise
+  bool check_mqtt_connected = mqtt_client_is_connected(mqtt_client);
+  if (check_mqtt_connected == 0) {
+    connect();
   }
 }
 
@@ -149,27 +225,14 @@ void publish(mqtt_client_t *client, void *arg) {
   }
 }
 
-void connect(mqtt_client_t *client) {
-  err_t err;
-  /*
-   * Initiate client and connect to server, if this fails immediately an
-   * error code is returned otherwise mqtt_connection_cb will be called with
-   * connection result after attempting to establish a connection with
-   * the server. For now MQTT version 3.1.1 is always used
-   */
-  mqtt_set_inpub_callback(client, mqtt_incoming_publish_cb,
-                          mqtt_incoming_data_cb,
-                          LWIP_CONST_CAST(void *, &clientInfo));
-
-  err = mqtt_client_connect(client, &ip_addr, MQTT_PORT, mqtt_connection_cb,
-                            LWIP_CONST_CAST(void *, &clientInfo), &clientInfo);
-  /* For now just print the result code if something goes wrong */
-  if (err != ERR_OK) {
-    printf("mqtt_connect return %d\n", err);
-  }
+static inline mqttPacket *parseInstruction(const char *instruction,
+                                           mqttPacket *packet) {
+  //  uint8_t feed_index = ;
+  //  uint8_t distance_index = ;
+  //  uint8_t phi_index = ;
 }
 
-void mqttDebug(__unused void *params) {
+_Noreturn void mqttDebug(__unused void *params) {
   printf("mqtt_task starts\n");
   mqtt_subscribe(mqtt_client, "testremote", 0, pub_mqtt_request_cb_t,
                  PUB_EXTRA_ARG);
@@ -182,10 +245,10 @@ void mqttDebug(__unused void *params) {
     printf("%s  %d \n", PUB_PAYLOAD_SCR, sizeof(PUB_PAYLOAD_SCR));
     bool check_mqtt_connected = mqtt_client_is_connected(mqtt_client);
     if (check_mqtt_connected == 0) {
-      connect(mqtt_client);
+      connect();
     }
     // mqtt_client_is_connected 1 if connected to server, 0 otherwise
-    printf("saved_mqtt_client 0x%x check_mqtt_connected %d \n", mqtt_client,
+    printf("saved_mqtt_client 0x%p check_mqtt_connected %d \n", mqtt_client,
            check_mqtt_connected);
 
     err_t err = mqtt_publish(mqtt_client, "test", PUB_PAYLOAD_SCR, payload_size,

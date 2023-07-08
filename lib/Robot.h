@@ -27,18 +27,19 @@ private:
   volatile float currDistMovedThisInstruction = 0;
 
 public:
-  Robot(uint8_t robotNum);
-  void init();
+  explicit Robot(uint8_t robotNum);
+  static void init();
   /**
    *
    * @param speed integer between 0 and 100 representing the speed of the robot
    * in a percent
    * @param direction represents theta, the angle in which to travel relative to
    * the front wheel of the robot
-   * @param rotation angular rotation speed in rad/sec, or at least will be one
+   * @param omega angular rotation speed in rad/sec, or at least will be one
    * day once speed is characterized
    */
-  void controlRobot(float speed, float direction, float rotation);
+  void controlRobot(float speed, float direction, float omega,
+                    float distance) const;
 
   /**
    * Called periodically allow the PID control to work on the motors

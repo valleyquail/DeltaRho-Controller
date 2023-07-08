@@ -9,7 +9,7 @@
 /**
  * Initializes the pico i2c connections using the default i2c
  */
-void __init__i2c__() {
+void init_i2c() {
   // set up the I2C communication
   i2c_init(i2c_default, 100 * 1000);
   gpio_set_function(SDA, GPIO_FUNC_I2C);
