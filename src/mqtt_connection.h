@@ -37,6 +37,7 @@ typedef struct mqttPacket {
   float theta;
   float omega;
   float distance;
+  float phi;
   // add more parameters later depending on what needs to be parsed
 } mqttPacket;
 // The number of packets that the FreeRTOS Queue can hold is defined below
@@ -47,6 +48,7 @@ const char theta_flag = 'T';
 const char rotation_flag = 'W';
 const char distance_flag = 'D';
 const char angular_displace_flag = 'P';
+extern char flags[];
 
 enum TOPIC { INSTRUCTIONS, QUEUE_FULL, ADC, MISC };
 /**

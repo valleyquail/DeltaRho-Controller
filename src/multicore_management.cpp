@@ -11,7 +11,7 @@ TaskHandle_t xADCTaskHandle = nullptr;
 
 QueueHandle_t xMQTTQueue = nullptr;
 
-mqttPacket *currPacket;
+mqttPacket currPacket;
 
 // static volatile uint32_t ulCountOfItemsSentOnQueue = 0;
 // static volatile uint32_t ulCountOfItemsReceivedOnQueue = 0;
@@ -39,7 +39,7 @@ void prvMQTTTaskEntry(__unused void *pvParameters) {
   while (true) {
     printf("in mqtt task\n");
     ensureConnection();
-    vTaskDelay(20);
+    vTaskDelay(50);
   }
 }
 
@@ -55,37 +55,37 @@ extern "C" [[noreturn]] void vControlRobot(void *pvParameters) {
   auto *robot = const_cast<Robot *>(static_cast<Robot *>(pvParameters));
   float dist;
   // Keep robot from freaking out when it starts
-  currPacket->distance = 100.0;
+  currPacket.distance = 100.0;
 #if Debug
   robot->controlRobot(2, 0, 0, 0);
 #endif
   while (true) {
-    printf("in robot control task\n");
+    //    printf("in robot control task\n");
     dist = robot->getCurrDistMovedThisInstruction();
 
     // Accept the task notify if it is there, but otherwise return immediately
     // so that the robot can work on PID control
-    ulTaskNotifyTake(pdTRUE, 0);
+    uint8_t temp = ulTaskNotifyTake(pdTRUE, 0);
     // TODO: determine acceptable movement tolerance
-    if (dist >= currPacket->distance) {
+    if (dist >= currPacket.distance || temp) {
       printf("Trying to change the robot control by pulling from the queue; "
              "dist = %f and currpack distance = %f\n",
-             dist, currPacket->distance);
+             dist, currPacket.distance);
       // If the task has been called via notify and the robot has finished
       // executing its current instruction, then it will take the next task from
       // the queue and begin executing it
-      //      BaseType_t isEmpty =
-      //          xQueueReceive(xMQTTQueue, currPacket, xMaxExpectedBlockTime);
+      BaseType_t isEmpty =
+          xQueueReceive(xMQTTQueue, &currPacket, pdMS_TO_TICKS(20));
       // If the robot has completed its movement but has no further
       // instructions, stop the robot
-      //      if (!isEmpty)
-      //        robot->stopRobot();
-      //      else
-      //        robot->controlRobot(currPacket->speed, currPacket->theta,
-      //                            currPacket->omega, 0);
+      if (!isEmpty)
+        robot->stopRobot();
+      else
+        robot->controlRobot(currPacket.speed, currPacket.theta,
+                            currPacket.omega, 0);
     }
     robot->update();
-    // Delay the task 10ms so that it updates at about 100Hz which is more than
+    // Delay the task 20ms so that it updates at about 100Hz which is more than
     // enough
     vTaskDelay(pdMS_TO_TICKS(20));
   }

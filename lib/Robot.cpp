@@ -85,7 +85,7 @@ void Robot::stopRobot() {
 }
 
 void Robot::update() {
-  printf("Doing some PID\n");
+  //  printf("Doing some PID\n");
   return;
   backRight.updatePID();
   backLeft.updatePID();
