@@ -18,6 +18,8 @@ mqttPacket staticallyReserved_mqttPackets[MQTT_QUEUE_SIZE];
 // in order because we always send to the back of the queue and pull from the
 // front of the queue
 uint8_t mqttPacketIndex = 0;
+char flags[] = {speed_flag, theta_flag, rotation_flag, distance_flag,
+                angular_displace_flag};
 char robot_header[3] = {'R', ('0' + ROBOT_NUMBER), '/'};
 
 static const struct mqtt_connect_client_info_t clientInfo = {
@@ -46,8 +48,7 @@ u16_t payload_size;
 /**
  * Function prototype
  */
-static inline mqttPacket *parseInstruction(const char *instruction,
-                                           mqttPacket *packet);
+static inline void parseInstruction(char *instruction, mqttPacket *packet);
 
 // The following are all callback functions and can be largely ignored
 //_____________________________________________________________________________
@@ -77,7 +78,7 @@ static void mqtt_incoming_data_cb(__unused void *arg, const u8_t *data,
                                   u16_t len, u8_t flags) {
   printf("Incoming publish payload with length %d, flags %u\n", len,
          (unsigned int)flags);
-
+  printf("mqtt_incoming_data_cb: %s\n", (const char *)data);
   if (flags & MQTT_DATA_FLAG_LAST) {
     /* Last fragment of payload received (or whole part if payload fits
        receive buffer --> See MQTT_VAR_HEADER_BUFFER_LEN)  */
@@ -92,7 +93,9 @@ static void mqtt_incoming_data_cb(__unused void *arg, const u8_t *data,
     if (data[0] == topics[INSTRUCTIONS][0]) {
       err_t err;
       mqttPacket packet = staticallyReserved_mqttPackets[mqttPacketIndex];
-      parseInstruction((const char *)data, &packet);
+      // Remove the instruction flag from the string
+      data = strtok((char *)data, "i");
+      parseInstruction((char *)data, &packet);
       // Add to the queue but don't wait for a chance to add, just immediately
       // return
       err = xQueueSendToBack(xMQTTQueue, (void *)&packet, 0);
@@ -107,15 +110,13 @@ static void mqtt_incoming_data_cb(__unused void *arg, const u8_t *data,
       } else {
         payload[0] = 'f';
       }
-//      err = mqtt_publish(mqtt_client, strcat(robot_header,
-//      topics[QUEUE_FULL]),
-//                         payload, strlen(payload), qos, 0,
-//                         mqtt_pub_request_cb, arg);
+      err = mqtt_publish(&mqtt_client, topics[QUEUE_FULL], payload,
+                         strlen(payload), qos, 0, mqtt_pub_request_cb, arg);
 #if Debug
       if (err != ERR_OK) {
         printf("mqtt_subscribe return: %d\n", err);
       }
-      printf("mqtt_incoming_data_cb: %s\n", (const char *)data);
+      //      printf("mqtt_incoming_data_cb: %s\n", (const char *)data);
     } else {
       printf("mqtt_incoming_data_cb: Ignoring payload...\n");
 #endif
@@ -143,17 +144,18 @@ void subscribe_to_default_topics(mqtt_client_t *client, void *arg) {
   int size = sizeof(topics_to_subscribe_to) / sizeof(enum TOPIC);
   for (int i = 0; i < size; i++) {
     enum TOPIC topic = topics_to_subscribe_to[i];
-    char buffer[8];
-    strcat(buffer, robot_header);
-    strcat(buffer, topics[topic]);
-    err = mqtt_subscribe(client, buffer, 1, mqtt_sub_request_cb, arg);
-
+    //    char buffer[8];
+    //    memcpy(buffer, robot_header, sizeof(robot_header));
+    //    strcat(buffer, topics[topic]);
+    err = mqtt_subscribe(client, topics[topic], 1, mqtt_sub_request_cb, arg);
+    printf("Subscribed to: %s\n", topics[topic]);
 #if Debug
     if (err != ERR_OK) {
       printf("mqtt_subscribe return: %d\n", err);
     }
 #endif
   }
+  printf("Done subscribing\n");
 }
 
 void mqtt_connection_cb(mqtt_client_t *client, void *arg,
@@ -181,7 +183,6 @@ void mqtt_pub_request_cb(__unused void *arg, err_t result) {
 
 void connect() {
   err_t err;
-  printf("Connecting ...\n");
   /*
    * Initiate client and connect to server, if this fails immediately an
    * error code is returned otherwise mqtt_connection_cb will be called with
@@ -196,7 +197,7 @@ void connect() {
     printf("mqtt_connect return %d\n", err);
   } else {
 #if Debug
-    printf("Made the client\n");
+//    printf("Made the client\n");
 #endif
   }
   mqtt_set_inpub_callback(&mqtt_client, mqtt_incoming_publish_cb,
@@ -225,11 +226,29 @@ void publish(mqtt_client_t *client, void *arg) {
   }
 }
 
-static inline mqttPacket *parseInstruction(const char *instruction,
-                                           mqttPacket *packet) {
-  //  uint8_t feed_index = ;
-  //  uint8_t distance_index = ;
-  //  uint8_t phi_index = ;
+static inline void parseInstruction(char *instruction, mqttPacket *packet) {
+  packet->speed = 0;
+  packet->theta = 0;
+  packet->distance = 0;
+  packet->omega = 0;
+  packet->phi = 0;
+  char *distance_index = strchr(instruction, distance_flag);
+  char *controlVals;
+  strtok(instruction, flags);
+  if (distance_index != NULL) {
+    // Removes the "F" from the front of the string
+    controlVals = strtok(instruction, flags);
+    packet->speed = atof(controlVals);
+    controlVals = strtok(instruction, flags);
+    packet->theta = atof(controlVals);
+    controlVals = strtok(instruction, flags);
+    packet->distance = atof(controlVals);
+  } else {
+    controlVals = strtok(instruction, flags);
+    packet->omega = atof(controlVals);
+    controlVals = strtok(instruction, flags);
+    packet->phi = atof(controlVals);
+  }
 }
 
 _Noreturn void mqttDebug(__unused void *params) {

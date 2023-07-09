@@ -20,9 +20,9 @@ given the maximum priority of ( configMAX_PRIORITIES - 1 ) to ensure it runs as
 soon as the semaphore is given. */
 
 #define mainEVENT_SEMAPHORE_TASK_PRIORITY (configMAX_PRIORITIES - 1)
-#define mainMQTT_EVENT_TASK_PRIORITY (tskIDLE_PRIORITY + 2)
+#define mainMQTT_EVENT_TASK_PRIORITY (tskIDLE_PRIORITY + 3)
 #define mainROBOT_CONTROL_TASK_PRIORITY (tskIDLE_PRIORITY + 2)
-#define mainCYW43_ASYNC_PROCESS_PRIORITY (tskIDLE_PRIORITY + 1)
+#define mainCYW43_ASYNC_PROCESS_PRIORITY (tskIDLE_PRIORITY + 4)
 #define mainBLINK_DEBUG_TASK (tskIDLE_PRIORITY + 1)
 
 /* The period of the example software timer, specified in milliseconds, and
