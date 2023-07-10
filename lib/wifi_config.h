@@ -15,12 +15,12 @@
  * Sets the IP address of the MQTT Broker to connect to. Place the IP Address
  * segments in each of the spots inf the IPADDR4_INIT_BYTES macro below
  */
-#define mqtt_broker_ip_address = IPADDR4_INIT_BYTES(0, 0, 0, 0)
+#define mqtt_broker_ip_address = IPADDR4_INIT_BYTES(192, 168, 86, 32)
 static const ip4_addr_t ip_addr mqtt_broker_ip_address;
 /**
  * The SSID and Password of the wifi network to connect to
  */
-static const char *SSID = "your ssid";
-static const char *PASSWORD = "your password";
+static const char *SSID = "Pudgie Budgie";
+static const char *PASSWORD = "<00k1381rd";
 
 #endif // DELTARHO_CONTROLLER_WIFI_CONFIG_H

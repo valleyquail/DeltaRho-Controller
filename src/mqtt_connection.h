@@ -43,13 +43,6 @@ typedef struct mqttPacket {
 // The number of packets that the FreeRTOS Queue can hold is defined below
 #define MQTT_QUEUE_SIZE 10
 
-const char speed_flag = 'F';
-const char theta_flag = 'T';
-const char rotation_flag = 'W';
-const char distance_flag = 'D';
-const char angular_displace_flag = 'P';
-extern char flags[];
-
 enum TOPIC { INSTRUCTIONS, QUEUE_FULL, ADC, MISC };
 /**
  * Lists all of the topics that the robot should ever interact with and map them

@@ -11,7 +11,7 @@
  */
 void init_i2c() {
   // set up the I2C communication
-  i2c_init(i2c_default, 100 * 1000);
+  i2c_init(i2c_default, UPDATE_FREQ);
   gpio_set_function(SDA, GPIO_FUNC_I2C);
   gpio_set_function(SCL, GPIO_FUNC_I2C);
   gpio_pull_up(SDA);

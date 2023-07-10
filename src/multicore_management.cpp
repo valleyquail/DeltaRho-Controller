@@ -39,7 +39,7 @@ void prvMQTTTaskEntry(__unused void *pvParameters) {
   while (true) {
     printf("in mqtt task\n");
     ensureConnection();
-    vTaskDelay(50);
+    vTaskDelay(1000);
   }
 }
 
@@ -85,9 +85,9 @@ extern "C" [[noreturn]] void vControlRobot(void *pvParameters) {
                             currPacket.omega, 0);
     }
     robot->update();
-    // Delay the task 20ms so that it updates at about 100Hz which is more than
+    // Delay the task 50ms so that it updates at about 20Hz which is more than
     // enough
-    vTaskDelay(pdMS_TO_TICKS(20));
+    vTaskDelay(pdMS_TO_TICKS(50));
   }
 }
 

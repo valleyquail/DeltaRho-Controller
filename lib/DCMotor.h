@@ -13,6 +13,7 @@
 #define BACK_LEFT_INTERRUPT 1
 #define FRONT_INTERRUPT 2
 #define EXTRA_INTERRUPT 3
+#define clockRollover
 
 void encoderIRQ(void *motorInstance);
 
@@ -37,34 +38,14 @@ private:
   bool direction;
   // Target speed in ticks/s
   volatile int16_t targetSpeed;
-  uint32_t prevTime;
   const int8_t maxError = 200;
   volatile int currCount;
   volatile int prevCount;
-
+  volatile uint16_t speed;
   // Used for integral control
   int32_t sumError;
 
   void updatePID();
-  /**
-   * Calculates the rate of tick change between calls of the function. Used to
-   * set the speed of the robot since this value can be directly converted to
-   * rps
-   * @return the speed of the wheel in ticks/second
-   */
-  inline int16_t encoderTickRate() {
-    // Time since last call
-    uint32_t currTime = time_us_32();
-    uint32_t deltaTime = currTime - prevTime;
-    prevTime = currTime;
-    // Absolute value of the change in encoder count since last call
-    uint16_t deltaEncoder = currCount - prevCount;
-    prevCount = currCount;
-    // Calculates the speed as an unsigned value since the motor already knows
-    // the direction
-    uint16_t speed = deltaEncoder * 1000000 / deltaTime;
-    return speed;
-  }
 
 public:
   DCMotor();
@@ -73,6 +54,12 @@ public:
   void setMotorMovement(int effort);
 
   void setMotorStop();
+  /**
+   * Calculates the rate of tick change between timer interrupts. Used to
+   * set the speed of the robot since this value can be directly converted to
+   * rps
+   */
+  friend void encoderTickRate(void *motorInstance);
   /**
    * Handles the encoders based on an XOR'd signal from the encoders and then
    * using the known direction to set the count
