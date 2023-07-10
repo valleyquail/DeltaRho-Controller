@@ -72,7 +72,6 @@ void DCMotor::setMotorStop() {
 }
 
 void DCMotor::updatePID() {
-  uint16_t speed = encoderTickRate();
   int16_t error = targetSpeed - speed;
   if (sumError < maxError)
     sumError += error;
@@ -81,6 +80,15 @@ void DCMotor::updatePID() {
   setPWM(pwmPin, newPWM);
 }
 
+void encoderTickRate(void *motorInstance) {
+  auto *motor = static_cast<DCMotor *>(motorInstance);
+  // Absolute value of the change in encoder count since last call
+  uint16_t deltaEncoder = abs(motor->currCount - motor->prevCount);
+  motor->prevCount = motor->currCount;
+  // Calculates the speed as an unsigned value since the motor already knows
+  // the direction
+  motor->speed = deltaEncoder;
+}
 /**
  * Handles the encoders based on an XOR'd signal from the encoders and then
  * using the known direction to set the count

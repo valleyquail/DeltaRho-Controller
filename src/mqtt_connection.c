@@ -18,8 +18,6 @@ mqttPacket staticallyReserved_mqttPackets[MQTT_QUEUE_SIZE];
 // in order because we always send to the back of the queue and pull from the
 // front of the queue
 uint8_t mqttPacketIndex = 0;
-char flags[] = {speed_flag, theta_flag, rotation_flag, distance_flag,
-                angular_displace_flag};
 char robot_header[3] = {'R', ('0' + ROBOT_NUMBER), '/'};
 
 static const struct mqtt_connect_client_info_t clientInfo = {
@@ -93,11 +91,11 @@ static void mqtt_incoming_data_cb(__unused void *arg, const u8_t *data,
     if (data[0] == topics[INSTRUCTIONS][0]) {
       err_t err;
       mqttPacket packet = staticallyReserved_mqttPackets[mqttPacketIndex];
-      // Remove the instruction flag from the string
-      data = strtok((char *)data, "i");
-      parseInstruction((char *)data, &packet);
+
+      parseInstruction(data, &packet);
       // Add to the queue but don't wait for a chance to add, just immediately
       // return
+      memset(data, 0, strlen(data));
       err = xQueueSendToBack(xMQTTQueue, (void *)&packet, 0);
       // if the packet is successfully added to the queue, increment the index
       // and notify the robot controller
@@ -109,9 +107,10 @@ static void mqtt_incoming_data_cb(__unused void *arg, const u8_t *data,
         xTaskNotifyGive(vControlRobotHandle);
       } else {
         payload[0] = 'f';
+        err = mqtt_publish(&mqtt_client, topics[QUEUE_FULL], payload,
+                           strlen(payload), qos, 0, mqtt_pub_request_cb, arg);
       }
-      err = mqtt_publish(&mqtt_client, topics[QUEUE_FULL], payload,
-                         strlen(payload), qos, 0, mqtt_pub_request_cb, arg);
+
 #if Debug
       if (err != ERR_OK) {
         printf("mqtt_subscribe return: %d\n", err);
@@ -147,7 +146,7 @@ void subscribe_to_default_topics(mqtt_client_t *client, void *arg) {
     //    char buffer[8];
     //    memcpy(buffer, robot_header, sizeof(robot_header));
     //    strcat(buffer, topics[topic]);
-    err = mqtt_subscribe(client, topics[topic], 1, mqtt_sub_request_cb, arg);
+    err = mqtt_subscribe(client, topics[topic], 0, mqtt_sub_request_cb, arg);
     printf("Subscribed to: %s\n", topics[topic]);
 #if Debug
     if (err != ERR_OK) {
@@ -232,49 +231,55 @@ static inline void parseInstruction(char *instruction, mqttPacket *packet) {
   packet->distance = 0;
   packet->omega = 0;
   packet->phi = 0;
-  char *distance_index = strchr(instruction, distance_flag);
+  char *distance_index = strchr(instruction, 'D');
   char *controlVals;
-  strtok(instruction, flags);
   if (distance_index != NULL) {
     // Removes the "F" from the front of the string
-    controlVals = strtok(instruction, flags);
+    printf("string: %s\n", instruction);
+    controlVals = strtok(instruction, "iFT");
+    printf("string: %s\n", instruction);
     packet->speed = atof(controlVals);
-    controlVals = strtok(instruction, flags);
+    printf("speed: %f\n", packet->speed);
+    controlVals = strtok(NULL, "TD");
     packet->theta = atof(controlVals);
-    controlVals = strtok(instruction, flags);
+    printf("theta: %f\n", packet->theta);
+    controlVals = strtok(NULL, NULL);
     packet->distance = atof(controlVals);
+    printf("dist: %f\n", packet->distance);
+
   } else {
-    controlVals = strtok(instruction, flags);
+    controlVals = strtok(instruction, "iRP");
     packet->omega = atof(controlVals);
-    controlVals = strtok(instruction, flags);
+    controlVals = strtok(NULL, NULL);
     packet->phi = atof(controlVals);
   }
 }
-
-_Noreturn void mqttDebug(__unused void *params) {
-  printf("mqtt_task starts\n");
-  mqtt_subscribe(&mqtt_client, "testremote", 0, pub_mqtt_request_cb_t,
-                 PUB_EXTRA_ARG);
-
-  while (true) {
-    printf("in mqtt\n");
-    strcpy(PUB_PAYLOAD_SCR, PUB_PAYLOAD);
-    //    strcat(PUB_PAYLOAD_SCR, "testing");
-    payload_size = sizeof(PUB_PAYLOAD_SCR);
-    printf("%s  %d \n", PUB_PAYLOAD_SCR, sizeof(PUB_PAYLOAD_SCR));
-    bool check_mqtt_connected = mqtt_client_is_connected(&mqtt_client);
-    if (check_mqtt_connected == 0) {
-      connect();
-    }
-    // mqtt_client_is_connected 1 if connected to server, 0 otherwise
-    printf("saved_mqtt_client 0x%i check_mqtt_connected %d \n", mqtt_client,
-           check_mqtt_connected);
-
-    err_t err =
-        mqtt_publish(&mqtt_client, "test", PUB_PAYLOAD_SCR, payload_size, 0, 0,
-                     pub_mqtt_request_cb_t, PUB_EXTRA_ARG);
-    if (err != ERR_OK) {
-      printf("mqtt_publish return %d\n", err);
-    }
-  }
-}
+//
+//_Noreturn void mqttDebug(__unused void *params) {
+//  printf("mqtt_task starts\n");
+//  mqtt_subscribe(&mqtt_client, "testremote", 0, pub_mqtt_request_cb_t,
+//                 PUB_EXTRA_ARG);
+//
+//  while (true) {
+//    printf("in mqtt\n");
+//    strcpy(PUB_PAYLOAD_SCR, PUB_PAYLOAD);
+//    //    strcat(PUB_PAYLOAD_SCR, "testing");
+//    payload_size = sizeof(PUB_PAYLOAD_SCR);
+//    printf("%s  %d \n", PUB_PAYLOAD_SCR, sizeof(PUB_PAYLOAD_SCR));
+//    bool check_mqtt_connected = mqtt_client_is_connected(&mqtt_client);
+//    if (check_mqtt_connected == 0) {
+//      connect();
+//    }
+//    // mqtt_client_is_connected 1 if connected to server, 0 otherwise
+//    printf("saved_mqtt_client 0x%i check_mqtt_connected %d \n", mqtt_client,
+//           check_mqtt_connected);
+//
+//    err_t err =
+//        mqtt_publish(&mqtt_client, "test", PUB_PAYLOAD_SCR, payload_size, 0,
+//        0,
+//                     pub_mqtt_request_cb_t, PUB_EXTRA_ARG);
+//    if (err != ERR_OK) {
+//      printf("mqtt_publish return %d\n", err);
+//    }
+//  }
+//}

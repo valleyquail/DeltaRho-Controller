@@ -6,6 +6,9 @@
 #include "../src/multicore_management.h"
 #include "I2C_Control.h"
 
+#define ALARM_NUM 0
+#define ALARM_IRQ TIMER_IRQ_0
+
 DCMotor backRight;
 DCMotor backLeft;
 DCMotor front;
@@ -24,7 +27,7 @@ extern "C" void back_left_gpio_callback(uint gpio, uint32_t events) {
 extern "C" void front_gpio_callback(uint gpio, uint32_t events) {
   encoderIRQ(&front);
 }
-
+extern "C" void alarm_in_us(uint32_t delay_us);
 void Robot::init() {
 
   backRight.init(0, 0, 1, 2, 1);
@@ -41,6 +44,7 @@ void Robot::init() {
   gpio_set_irq_enabled_with_callback(FRONT_INTERRUPT,
                                      GPIO_IRQ_EDGE_RISE | GPIO_IRQ_EDGE_FALL,
                                      false, &front_gpio_callback);
+  //  alarm_in_us(10000);
 }
 // Kinematics taken from here:
 // https://www.researchgate.net/publication/228786543_Three_omni-directional_wheels_control_on_a_mobile_robot
@@ -93,3 +97,30 @@ void Robot::update() {
 }
 
 float Robot::getCurrDistMovedThisInstruction() { return 0; }
+
+static void alarmIRQ() {
+  hw_clear_bits(&timer_hw->intr, 1u << ALARM_NUM);
+  // calculate the encoder tick rates
+  encoderTickRate(&backRight);
+  encoderTickRate(&backRight);
+  encoderTickRate(&backRight);
+}
+
+extern "C" void alarm_in_us(uint32_t delay_us) {
+  // Enable the interrupt for our alarm (the timer outputs 4 alarm irqs)
+  hw_set_bits(&timer_hw->inte, 1u << ALARM_NUM);
+  // Set irq handler for alarm irq
+  irq_set_exclusive_handler(ALARM_IRQ, alarmIRQ);
+  // Enable the alarm irq
+  irq_set_enabled(ALARM_IRQ, true);
+  // Enable interrupt in block and at processor
+
+  // Alarm is only 32 bits so if trying to delay more
+  // than that need to be careful and keep track of the upper
+  // bits
+  uint64_t target = timer_hw->timerawl + delay_us;
+
+  // Write the lower 32 bits of the target time to the alarm which
+  // will arm it
+  timer_hw->alarm[ALARM_NUM] = (uint32_t)target;
+}
