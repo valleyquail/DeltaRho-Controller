@@ -7,7 +7,6 @@
 
 /* Kernel includes. */
 #include "FreeRTOS.h" /* Must come first. */
-#include "mqtt_connection.h"
 #include "pico/stdlib.h"
 #include "queue.h"  /* RTOS queue related API prototypes. */
 #include "semphr.h" /* Semaphore related API prototypes. */
@@ -20,7 +19,7 @@ given the maximum priority of ( configMAX_PRIORITIES - 1 ) to ensure it runs as
 soon as the semaphore is given. */
 
 #define mainEVENT_SEMAPHORE_TASK_PRIORITY (configMAX_PRIORITIES - 1)
-#define mainMQTT_EVENT_TASK_PRIORITY (tskIDLE_PRIORITY + 3)
+#define mainWifi_EVENT_TASK_PRIORITY (tskIDLE_PRIORITY + 3)
 #define mainROBOT_CONTROL_TASK_PRIORITY (tskIDLE_PRIORITY + 2)
 #define mainCYW43_ASYNC_PROCESS_PRIORITY (tskIDLE_PRIORITY + 4)
 #define mainBLINK_DEBUG_TASK (tskIDLE_PRIORITY + 1)
@@ -31,7 +30,7 @@ converted to ticks using the pdMS_TO_TICKS() macro. */
 
 /*-----------------------------------------------------------*/
 
-extern TaskHandle_t vMQTTConnectionHandle;
+extern TaskHandle_t vWifiConnectionHandle;
 extern TaskHandle_t vControlRobotHandle;
 extern TaskHandle_t xADCTaskHandle;
 
@@ -51,11 +50,12 @@ void vLaunchControlRobot(void *robot);
 void vReadADC(void *pvParameters);
 
 /**
- * Initializes the MQTT connection by creating a client struct and the calling
- * the connection Specifically, it handles creating the client, organizing the
+ * Initializes the Wi-Fi connection
+ * If MQTT_CONNECTION is defined, it handles creating the client, organizing the
  * callbacks, and subscribing to topics
+ * If SOCKET_CONNECTION is defined, it creates a socket and connects
  */
-void prvMQTTTaskEntry(void *pvParameters);
+void prvWifiTaskEntry(void *pvParameters);
 
 // Runs some LEDs that are hooked up to some gpio pins in order to make sure
 // that some functions are running correctly
