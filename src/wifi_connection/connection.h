@@ -31,6 +31,8 @@ extern const char *topics[];
  * initialization
  */
 extern const enum TOPIC topics_to_subscribe_to[];
+extern dataPacket staticallyReserved_mqttPackets[];
+extern uint8_t mqttPacketIndex;
 
 #ifdef MQTT_CONNECTION
 
@@ -54,9 +56,13 @@ void mqtt_pub_request_cb(__unused void *arg, err_t result);
  * @param params unused parameters needed by the function
  */
 _Noreturn void mqttDebug(__unused void *params);
-#elifdef SOCKET_CONNECTION
-#include "lwip/sockets.h"
 #endif
+
+#ifdef SOCKET_CONNECTION
+#include "lwip/sockets.h"
+void handle_connection(int socket);
+#endif
+
 //______________________________________________________________________________
 
 /// Required functions

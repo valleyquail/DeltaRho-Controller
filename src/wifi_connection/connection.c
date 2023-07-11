@@ -8,6 +8,11 @@ const char *topics[] = {"instruc", "full", "adc", "misc"};
 
 const enum TOPIC topics_to_subscribe_to[] = {INSTRUCTIONS, QUEUE_FULL};
 
+// Statically reserves the space needed for the mqtt packets so that we don't
+// need to use dynamic memory and saves on runtime and memory safety
+dataPacket staticallyReserved_mqttPackets[DATA_QUEUE_SIZE];
+uint8_t mqttPacketIndex = 0;
+
 void parseInstruction(char *instruction, dataPacket *packet) {
   packet->speed = 0;
   packet->theta = 0;
