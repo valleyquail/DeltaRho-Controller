@@ -5,13 +5,19 @@
 #include "multicore_management.h"
 #include "Robot.h"
 
-TaskHandle_t vMQTTConnectionHandle = nullptr;
+#include "wifi_connection/connection.h"
+extern "C" {
+#include "lwip/ip4_addr.h"
+#include "lwip/sockets.h"
+};
+
+TaskHandle_t vWifiConnectionHandle = nullptr;
 TaskHandle_t vControlRobotHandle = nullptr;
 TaskHandle_t xADCTaskHandle = nullptr;
 
 QueueHandle_t xMQTTQueue = nullptr;
 
-mqttPacket currPacket;
+dataPacket currPacket;
 
 // static volatile uint32_t ulCountOfItemsSentOnQueue = 0;
 // static volatile uint32_t ulCountOfItemsReceivedOnQueue = 0;
@@ -30,17 +36,36 @@ mqttPacket currPacket;
  * execute a sequence of movements rather than depending on unreliable timing
  * requirements from the broker
  */
-
-void prvMQTTTaskEntry(__unused void *pvParameters) {
-  //  mqttPacket packet;
-  //  packet.distance = 0;
-  //  packet.speed = 1;
-  //  xQueueSendToBack(xMQTTQueue, &packet, 0);
+void prvWifiTaskEntry(__unused void *pvParameters) {
+  auto socket = (int)pvParameters;
+  dataPacket packet;
+  packet.distance = 0;
+  packet.speed = 1;
+  xQueueSendToBack(xMQTTQueue, &packet, 0);
+  printf("Doing wifi\n");
+  // #ifdef MQTT_CONNECTION
+  //   while (true) {
+  //     printf("in mqtt task\n");
+  //     ensureConnection();
+  //     vTaskDelay(1000);
+  //   }
+  // #elifdef SOCKET_CONNECTION
+  int conn_sock = 0;
   while (true) {
-    printf("in mqtt task\n");
-    ensureConnection();
-    vTaskDelay(1000);
+    printf("Here\n");
+    struct sockaddr_storage remote_addr;
+    socklen_t len = sizeof(remote_addr);
+    printf("Doing wifi\n");
+    conn_sock = lwip_accept(socket, (struct sockaddr *)&remote_addr, &len);
+    printf("Failed wifi\n");
+    if (conn_sock < 0) {
+      printf("Unable to accept incoming connection: error %d\n", errno);
+      return;
+    }
+    //    handle_connection(conn_sock);
+    vTaskDelay(pdMS_TO_TICKS(20));
   }
+  // #endif
 }
 
 /*

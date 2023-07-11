@@ -12,51 +12,27 @@ extern "C" {
 
 #include "../lib/Robot_Config.h"
 #include "FreeRTOS.h"
-#include "lwip/apps/mqtt.h"
-#include "multicore_management.h"
+
+#include "../multicore_management.h"
 #include "pico/cyw43_arch.h"
 #include "pico/lwip_freertos.h"
 #include "wifi_config.h"
-#include <lwip/apps/mqtt_priv.h>
 #include <stdbool.h>
 #include <string.h>
-
-/**
- * Data structure that will be sent to the robot controller
- * speed - Speed at which the robot should travel
- * theta - The direction the robot should head relative to an absolute heading.
- *         Ideally this is set with a magnetometer to easily get an absolute
- *         heading
- * rotation - Angular rotation of the robot in rad/s
- * distance -  The distance the robot should move. This is used to prevent MQTT
- *             task notification from forcing the robot to process the next mqtt
- *             command if the current instruction has not finished executing
- */
-typedef struct mqttPacket {
-  float speed;
-  float theta;
-  float omega;
-  float distance;
-  float phi;
-  // add more parameters later depending on what needs to be parsed
-} mqttPacket;
-// The number of packets that the FreeRTOS Queue can hold is defined below
-#define MQTT_QUEUE_SIZE 10
 
 enum TOPIC { INSTRUCTIONS, QUEUE_FULL, ADC, MISC };
 /**
  * Lists all of the topics that the robot should ever interact with and map them
  * to the TOPIC enum to make it clear
  */
-static const char *topics[] = {"instruc", "full", "adc", "misc"};
+extern const char *topics[];
 /**
  * Use this to keep a list of topics the robot should subscribe to during
  * initialization
  */
-static const enum TOPIC topics_to_subscribe_to[] = {INSTRUCTIONS, QUEUE_FULL};
+extern const enum TOPIC topics_to_subscribe_to[];
 
-void connect();
-void ensureConnection();
+#ifdef MQTT_CONNECTION
 
 // Callbacks
 //______________________________________________________________________________
@@ -73,12 +49,19 @@ static void mqtt_connection_cb(mqtt_client_t *client, void *arg,
 
 void mqtt_pub_request_cb(__unused void *arg, err_t result);
 
-//______________________________________________________________________________
 /**
  * Used for debugging the connection to the MQTT Server
  * @param params unused parameters needed by the function
  */
 _Noreturn void mqttDebug(__unused void *params);
+#elifdef SOCKET_CONNECTION
+#include "lwip/sockets.h"
+#endif
+//______________________________________________________________________________
+
+/// Required functions
+int wifi_connect();
+void ensureConnection();
 
 /**
  * Used to publish readings from the ADC
@@ -88,8 +71,9 @@ _Noreturn void mqttDebug(__unused void *params);
 void publishADC(int adc_reading_one, int adc_reading_two);
 void publishLocation(float x_loc, float y_loc, float theta);
 
+void parseInstruction(char *instruction, dataPacket *packet);
+
 #if __cplusplus
 }
 #endif
-
 #endif // DELTARHO_CONTROLLER_MQTT_CONNECTION_H

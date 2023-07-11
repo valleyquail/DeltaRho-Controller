@@ -4,7 +4,7 @@
 #include "DCMotor.h"
 
 extern "C" {
-#include "PCA9685.h"
+#include "Hardware_Interface/PCA9685.h"
 }
 
 constexpr float speedScalingFactor = PCA_PWM_RESOLUTION / 100.0;

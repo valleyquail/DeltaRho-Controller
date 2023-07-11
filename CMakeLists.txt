@@ -35,14 +35,17 @@ include(FreeRTOS_Kernel_import.cmake)
 
 add_executable(DeltaRho_Controller
         src/main.cpp
-        src/mqtt_connection.c src/mqtt_connection.h
+        src/wifi_connection/connection.h
+        src/wifi_connection/mqtt_connection.c
+        src/wifi_connection/socket_connection.c
         lib/DCMotor.cpp lib/DCMotor.h
-        lib/I2C_Control.c lib/I2C_Control.h
-        lib/PCA9685.h
+        lib/Hardware_Interface/I2C_Control.c lib/Hardware_Interface/I2C_Control.h
+        lib/Hardware_Interface/PCA9685.h
         lib/Robot.cpp lib/Robot.h
-        lib/wifi_config.h
+        src/wifi_connection/wifi_config.h
         src/multicore_management.cpp src/multicore_management.h
-        lib/Robot_Config.h)
+        lib/Robot_Config.h
+        src/wifi_connection/connection.cpp)
 
 
 target_compile_definitions(DeltaRho_Controller PUBLIC NO_SYS=0 PRIVATE ${CMAKE_BUILD_TYPE})

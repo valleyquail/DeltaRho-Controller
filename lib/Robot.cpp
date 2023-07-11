@@ -4,8 +4,7 @@
 
 #include "Robot.h"
 #include "../src/multicore_management.h"
-#include "I2C_Control.h"
-
+#include "DCMotor.h"
 #define ALARM_NUM 0
 #define ALARM_IRQ TIMER_IRQ_0
 

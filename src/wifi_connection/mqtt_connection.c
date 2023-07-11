@@ -1,18 +1,20 @@
-#include <sys/cdefs.h>
+
 //
 // Created by nikesh on 7/2/23.
 //
-
+#ifdef MQTT_CONNECTION
 #include "FreeRTOS.h"
-#include "mqtt_connection.h"
+#include "connection.h"
+#include "lwip/apps/mqtt.h"
 #include "queue.h"
 #include "task.h"
+#include <lwip/apps/mqtt_priv.h>
 
 // Struct holding the mqtt broker connection
 mqtt_client_t mqtt_client;
 // Statically reserves the space needed for the mqtt packets so that we don't
 // need to use dynamic memory and saves on runtime and memory safety
-mqttPacket staticallyReserved_mqttPackets[MQTT_QUEUE_SIZE];
+dataPacket staticallyReserved_mqttPackets[DATA_QUEUE_SIZE];
 // Keeps track of which packet is the next in line to be sent to the queue. We
 // can do this since we know the packet information is always going to be sent
 // in order because we always send to the back of the queue and pull from the
@@ -42,11 +44,6 @@ char PUB_PAYLOAD_SCR[] = "this is a message from pico_w ctrl 0       ";
 char PUB_EXTRA_ARG[] = "test";
 u16_t payload_size;
 #endif
-
-/**
- * Function prototype
- */
-static inline void parseInstruction(char *instruction, mqttPacket *packet);
 
 // The following are all callback functions and can be largely ignored
 //_____________________________________________________________________________
@@ -78,8 +75,6 @@ static void mqtt_incoming_data_cb(__unused void *arg, const u8_t *data,
          (unsigned int)flags);
   printf("mqtt_incoming_data_cb: %s\n", (const char *)data);
   if (flags & MQTT_DATA_FLAG_LAST) {
-    /* Last fragment of payload received (or whole part if payload fits
-       receive buffer --> See MQTT_VAR_HEADER_BUFFER_LEN)  */
     // Used for message send confirmation:
     // use "p" to indicate the packet was successfully passed and "f" to
     // indicate the packet failed to be put in the queue
@@ -90,7 +85,7 @@ static void mqtt_incoming_data_cb(__unused void *arg, const u8_t *data,
     // Matches the first character of the subscribed topics
     if (data[0] == topics[INSTRUCTIONS][0]) {
       err_t err;
-      mqttPacket packet = staticallyReserved_mqttPackets[mqttPacketIndex];
+      dataPacket packet = staticallyReserved_mqttPackets[mqttPacketIndex];
 
       parseInstruction(data, &packet);
       // Add to the queue but don't wait for a chance to add, just immediately
@@ -188,9 +183,9 @@ void connect() {
    * connection result after attempting to establish a connection with
    * the server. For now MQTT version 3.1.1 is always used
    */
-  err =
-      mqtt_client_connect(&mqtt_client, &ip_addr, MQTT_PORT, mqtt_connection_cb,
-                          LWIP_CONST_CAST(void *, &clientInfo), &clientInfo);
+  err = mqtt_client_connect(&mqtt_client, &mqtt_ip_addr, MQTT_PORT,
+                            mqtt_connection_cb,
+                            LWIP_CONST_CAST(void *, &clientInfo), &clientInfo);
   /* For now just print the result code if something goes wrong */
   if (err != ERR_OK) {
     printf("mqtt_connect return %d\n", err);
@@ -209,7 +204,7 @@ void ensureConnection() {
   // mqtt_client_is_connected 1 if connected to server, 0 otherwise
   bool check_mqtt_connected = mqtt_client_is_connected(&mqtt_client);
   if (check_mqtt_connected == 0) {
-    connect();
+    wifi_connect();
   }
 }
 
@@ -225,35 +220,6 @@ void publish(mqtt_client_t *client, void *arg) {
   }
 }
 
-static inline void parseInstruction(char *instruction, mqttPacket *packet) {
-  packet->speed = 0;
-  packet->theta = 0;
-  packet->distance = 0;
-  packet->omega = 0;
-  packet->phi = 0;
-  char *distance_index = strchr(instruction, 'D');
-  char *controlVals;
-  if (distance_index != NULL) {
-    // Removes the "F" from the front of the string
-    printf("string: %s\n", instruction);
-    controlVals = strtok(instruction, "iFT");
-    printf("string: %s\n", instruction);
-    packet->speed = atof(controlVals);
-    printf("speed: %f\n", packet->speed);
-    controlVals = strtok(NULL, "TD");
-    packet->theta = atof(controlVals);
-    printf("theta: %f\n", packet->theta);
-    controlVals = strtok(NULL, NULL);
-    packet->distance = atof(controlVals);
-    printf("dist: %f\n", packet->distance);
-
-  } else {
-    controlVals = strtok(instruction, "iRP");
-    packet->omega = atof(controlVals);
-    controlVals = strtok(NULL, NULL);
-    packet->phi = atof(controlVals);
-  }
-}
 //
 //_Noreturn void mqttDebug(__unused void *params) {
 //  printf("mqtt_task starts\n");
@@ -283,3 +249,4 @@ static inline void parseInstruction(char *instruction, mqttPacket *packet) {
 //    }
 //  }
 //}
+#endif
