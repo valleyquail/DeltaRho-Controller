@@ -12,14 +12,11 @@
 
 // Struct holding the mqtt broker connection
 mqtt_client_t mqtt_client;
-// Statically reserves the space needed for the mqtt packets so that we don't
-// need to use dynamic memory and saves on runtime and memory safety
-dataPacket staticallyReserved_mqttPackets[DATA_QUEUE_SIZE];
+
 // Keeps track of which packet is the next in line to be sent to the queue. We
 // can do this since we know the packet information is always going to be sent
 // in order because we always send to the back of the queue and pull from the
 // front of the queue
-uint8_t mqttPacketIndex = 0;
 char robot_header[3] = {'R', ('0' + ROBOT_NUMBER), '/'};
 
 static const struct mqtt_connect_client_info_t clientInfo = {

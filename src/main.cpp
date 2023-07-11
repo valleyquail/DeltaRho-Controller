@@ -102,8 +102,8 @@ void main_task(__unused void *pvParams) {
   xTaskCreate(prvWifiTaskEntry, "Wifi Connection", 1024, (void *)socket,
               mainWifi_EVENT_TASK_PRIORITY, &vWifiConnectionHandle);
 
-  xTaskCreate(vBlinkDebug, "Blink Debug", configMINIMAL_STACK_SIZE, nullptr,
-              mainBLINK_DEBUG_TASK, nullptr);
+  //  xTaskCreate(vBlinkDebug, "Blink Debug", configMINIMAL_STACK_SIZE, nullptr,
+  //              mainBLINK_DEBUG_TASK, nullptr);
   // Launches the robot controller
   vLaunchControlRobot(&robot);
   // Deletes this task

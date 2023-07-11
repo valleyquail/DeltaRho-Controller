@@ -4,6 +4,7 @@
 
 #include "multicore_management.h"
 #include "Robot.h"
+#include "Robot_Config.h"
 
 #include "wifi_connection/connection.h"
 extern "C" {
@@ -42,27 +43,26 @@ void prvWifiTaskEntry(__unused void *pvParameters) {
   packet.distance = 0;
   packet.speed = 1;
   xQueueSendToBack(xMQTTQueue, &packet, 0);
-  printf("Doing wifi\n");
   // #ifdef MQTT_CONNECTION
-  //   while (true) {
-  //     printf("in mqtt task\n");
-  //     ensureConnection();
-  //     vTaskDelay(1000);
-  //   }
-  // #elifdef SOCKET_CONNECTION
+  //   //   while (true) {
+  //   //     printf("in mqtt task\n");
+  //   //     ensureConnection();
+  //   //     vTaskDelay(1000);
+  //   //   }
+  // #endif
+  // #ifdef SOCKET_CONNECTION
   int conn_sock = 0;
   while (true) {
-    printf("Here\n");
+    printf("in socket task on core %i\n", get_core_num());
     struct sockaddr_storage remote_addr;
     socklen_t len = sizeof(remote_addr);
-    printf("Doing wifi\n");
     conn_sock = lwip_accept(socket, (struct sockaddr *)&remote_addr, &len);
-    printf("Failed wifi\n");
     if (conn_sock < 0) {
       printf("Unable to accept incoming connection: error %d\n", errno);
-      return;
+      lwip_close(socket);
+      socket = wifi_connect();
     }
-    //    handle_connection(conn_sock);
+    handle_connection(conn_sock);
     vTaskDelay(pdMS_TO_TICKS(20));
   }
   // #endif
@@ -85,17 +85,17 @@ extern "C" [[noreturn]] void vControlRobot(void *pvParameters) {
   robot->controlRobot(2, 0, 0, 0);
 #endif
   while (true) {
-    //    printf("in robot control task\n");
+    printf("in robot control task\n");
     dist = robot->getCurrDistMovedThisInstruction();
 
     // Accept the task notify if it is there, but otherwise return immediately
     // so that the robot can work on PID control
-    uint8_t temp = ulTaskNotifyTake(pdTRUE, 0);
+    uint8_t temp = ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(10));
     // TODO: determine acceptable movement tolerance
     if (dist >= currPacket.distance || temp) {
-      printf("Trying to change the robot control by pulling from the queue; "
-             "dist = %f and currpack distance = %f\n",
-             dist, currPacket.distance);
+      printf("Trying to change the robot control by pulling from the queue: "
+             "temp = %i\n",
+             temp);
       // If the task has been called via notify and the robot has finished
       // executing its current instruction, then it will take the next task from
       // the queue and begin executing it
@@ -112,7 +112,7 @@ extern "C" [[noreturn]] void vControlRobot(void *pvParameters) {
     robot->update();
     // Delay the task 50ms so that it updates at about 20Hz which is more than
     // enough
-    vTaskDelay(pdMS_TO_TICKS(50));
+    vTaskDelay(pdMS_TO_TICKS(1000));
   }
 }
 
