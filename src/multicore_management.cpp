@@ -38,10 +38,11 @@ dataPacket currPacket;
  * requirements from the broker
  */
 void prvWifiTaskEntry(__unused void *pvParameters) {
-  auto socket = (int)pvParameters;
   dataPacket packet;
-  packet.distance = 0;
   packet.speed = 1;
+  packet.theta = 0;
+  packet.distance = 0;
+
   xQueueSendToBack(xMQTTQueue, &packet, 0);
   // #ifdef MQTT_CONNECTION
   //   //   while (true) {
@@ -54,16 +55,26 @@ void prvWifiTaskEntry(__unused void *pvParameters) {
   int conn_sock = 0;
   while (true) {
     printf("in socket task on core %i\n", get_core_num());
-    struct sockaddr_storage remote_addr;
-    socklen_t len = sizeof(remote_addr);
-    conn_sock = lwip_accept(socket, (struct sockaddr *)&remote_addr, &len);
-    if (conn_sock < 0) {
-      printf("Unable to accept incoming connection: error %d\n", errno);
+    if (conn_sock == 0) {
+      struct sockaddr_storage remote_addr;
+      socklen_t len = sizeof(remote_addr);
+      conn_sock = lwip_accept(socket, (struct sockaddr *)&remote_addr, &len);
+
+      if (conn_sock < 0) {
+        printf("Unable to accept incoming connection: error %d\n", errno);
+        lwip_shutdown(socket, SHUT_RDWR);
+        lwip_close(socket);
+      }
+    }
+    int alive = handle_connection(conn_sock);
+    if (alive < 0) {
+      printf("Shutting down the socket\n");
+      lwip_shutdown(socket, SHUT_RDWR);
       lwip_close(socket);
       socket = wifi_connect();
+      conn_sock = 0;
     }
-    handle_connection(conn_sock);
-    vTaskDelay(pdMS_TO_TICKS(20));
+    //    vTaskDelay(pdMS_TO_TICKS(20));
   }
   // #endif
 }
@@ -85,7 +96,7 @@ extern "C" [[noreturn]] void vControlRobot(void *pvParameters) {
   robot->controlRobot(2, 0, 0, 0);
 #endif
   while (true) {
-    printf("in robot control task\n");
+    printf("in robot control task on core %i\n", get_core_num());
     dist = robot->getCurrDistMovedThisInstruction();
 
     // Accept the task notify if it is there, but otherwise return immediately
@@ -122,7 +133,7 @@ void vLaunchControlRobot(void *robot) {
   xTaskCreate(vControlRobot, "Robot Control", 1024, robot,
               mainROBOT_CONTROL_TASK_PRIORITY, &vControlRobotHandle);
   // Can only run on core one
-  vTaskCoreAffinitySet(vControlRobotHandle, 1);
+  vTaskCoreAffinitySet(vControlRobotHandle, 1 << 0);
 }
 
 [[noreturn]] void vBlinkDebug(void *pvParameters) {

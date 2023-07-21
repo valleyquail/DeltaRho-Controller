@@ -91,17 +91,11 @@ void main_task(__unused void *pvParams) {
   // Launches the Wi-Fi connection. Configures 1kb of stack words since Wi-Fi
   // communication is likely going to be parsing/encoding a lot of data
   printf("Going to connect to the client\n");
-  int socket = wifi_connect();
-  if (socket >= 0)
-    printf("Connected successfully\n");
-  else {
-    printf("Failed to connect, aborting: socket = %i\n", socket);
-    panic_unsupported();
-  }
+  wifi_connect();
 
-  xTaskCreate(prvWifiTaskEntry, "Wifi Connection", 1024, (void *)socket,
+  xTaskCreate(prvWifiTaskEntry, "Wifi Connection", 1024, 0,
               mainWifi_EVENT_TASK_PRIORITY, &vWifiConnectionHandle);
-
+  vTaskCoreAffinitySet(vWifiConnectionHandle, 1 << 1);
   //  xTaskCreate(vBlinkDebug, "Blink Debug", configMINIMAL_STACK_SIZE, nullptr,
   //              mainBLINK_DEBUG_TASK, nullptr);
   // Launches the robot controller
@@ -119,7 +113,7 @@ void vLaunch() {
               tskIDLE_PRIORITY, &mainTask);
   // Bind the main task to execute on core one since that is where the robot
   // controller will be running and that needs to be linked to the interrupts
-  vTaskCoreAffinitySet(mainTask, 1);
+  vTaskCoreAffinitySet(mainTask, 1 << 0);
   /* Start the tasks and timer running. */
   vTaskStartScheduler();
   // Ideally we should never reach this point

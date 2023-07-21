@@ -20,8 +20,8 @@ static const ip4_addr_t mqtt_ip_addr mqtt_broker_ip_address;
 /**
  * The SSID and Password of the wifi network to connect to
  */
-static const char *SSID = "Pudgie Budgie";
-static const char *PASSWORD = "<00k1381rd";
+static const char *SSID = "NETGEAR44";
+static const char *PASSWORD = "icywater423";
 
 // The number of packets that the FreeRTOS Queue can hold
 #define DATA_QUEUE_SIZE 10

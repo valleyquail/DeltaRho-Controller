@@ -60,7 +60,9 @@ _Noreturn void mqttDebug(__unused void *params);
 
 #ifdef SOCKET_CONNECTION
 #include "lwip/sockets.h"
-void handle_connection(int socket);
+extern int socket;
+extern int conn_sock;
+int handle_connection(int conn_socket);
 #endif
 
 //______________________________________________________________________________

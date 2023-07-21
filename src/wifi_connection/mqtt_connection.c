@@ -159,7 +159,7 @@ void mqtt_connection_cb(mqtt_client_t *client, void *arg,
     printf("mqtt_connection_cb: Disconnected, reason: %d\n", status);
 #endif
     /* Its more nice to be connected, so try to reconnect */
-    connect();
+    wifi_connect();
   }
 }
 
@@ -172,7 +172,7 @@ void mqtt_pub_request_cb(__unused void *arg, err_t result) {
 
 //_____________________________________________________________________________
 
-void connect() {
+void wifi_connect() {
   err_t err;
   /*
    * Initiate client and connect to server, if this fails immediately an

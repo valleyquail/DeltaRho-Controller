@@ -9,17 +9,22 @@
 #include "task.h"
 
 // Port to connect to
-uint16_t xPort = 80;
+const uint16_t xPort = 80;
+int socket = 0;
 
 int wifi_connect() {
   struct sockaddr_in serv_addr;
-  int xSock = lwip_socket(AF_INET, SOCK_STREAM, 0);
-  if (xSock < 0) {
+  socket = lwip_socket(AF_INET, SOCK_STREAM, 0);
+  if (socket < 0) {
     printf("ERROR opening socket\n");
     return -1;
   }
-  int on = 1;
-  lwip_setsockopt(xSock, SOL_SOCKET, SO_RCVTIMEO, &on, sizeof(on));
+  // Sets the timeout option on the socket
+  int on = 10;
+  lwip_setsockopt(socket, SOL_SOCKET, SO_RCVTIMEO, &on, sizeof(on));
+  // Allows the port to be reused if the socket is closed
+  on = 1;
+  lwip_setsockopt(socket, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
 
   memset(&serv_addr, 0, sizeof(serv_addr));
   serv_addr.sin_len = sizeof(serv_addr);
@@ -27,31 +32,31 @@ int wifi_connect() {
   serv_addr.sin_port = PP_HTONS(xPort);
   printf("Connecting...\n");
 
-  if (lwip_bind(xSock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
-    lwip_close(xSock);
+  if (lwip_bind(socket, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
+    lwip_close(socket);
     printf("Failed to bind\n");
     return -1;
   }
-  printf("Bound to: %s\n", ipaddr_ntoa(netif_ip4_addr(&cyw43_state.netif[0])));
+  //  printf("Bound to: %s\n",
+  //  ipaddr_ntoa(netif_ip4_addr(&cyw43_state.netif[0])));
 
-  if (lwip_listen(xSock, TCP_LISTEN_BACKLOG) != 0) {
-    lwip_close(xSock);
+  if (lwip_listen(socket, TCP_LISTEN_BACKLOG) != 0) {
+    lwip_close(socket);
     printf("Failed to listen\n");
     return -1;
   }
   printf("Starting server at %s on port %u\n",
          ip4addr_ntoa(netif_ip4_addr(netif_list)), ntohs(serv_addr.sin_port));
-
-  return xSock;
+  return socket;
 }
 
-void handle_connection(int socket) {
-  char data[128];
+int handle_connection(int conn_socket) {
+  char data[32];
   int done = 0;
   while (done < sizeof(data)) {
-    int done_now = recv(socket, data + done, sizeof(data) - done, 0);
+    int done_now = recv(conn_socket, data + done, sizeof(data) - done, 0);
     if (done_now <= 0)
-      return;
+      return done_now;
     done += done_now;
 
     char *end = strnstr(data, "\n", done);
@@ -79,15 +84,10 @@ void handle_connection(int socket) {
     break;
   }
   printf("Sent a command\n");
-  return;
+  return done;
 }
 /***
  * Get status of the socket
  * @return int <0 is error
  */
-void ensureConnection() {
-  int error = 0;
-  socklen_t len = sizeof(error);
-  //  int retval = getsockopt(, SOL_SOCKET, SO_ERROR, &error, &len);
-  //  return error;
-}
+void ensureConnection() { return; }
