@@ -8,6 +8,7 @@
 
 #include "wifi_connection/connection.h"
 extern "C" {
+#include "../lib/Hardware_Interface//ADC_Force_Sensor.h"
 #include "lwip/ip4_addr.h"
 #include "lwip/sockets.h"
 };
@@ -92,8 +93,17 @@ extern "C" [[noreturn]] void vControlRobot(void *pvParameters) {
   float dist;
   // Keep robot from freaking out when it starts
   currPacket.distance = 100.0;
+
 #if Debug
-  robot->controlRobot(2, 0, 0, 0);
+  int testSpeed = 0;
+  //  uint32_t prevTime = 0;
+  while (true) {
+    testSpeed++;
+    robot->controlRobot(testSpeed, 0, 0, 100);
+    testSpeed %= 10;
+    //    printf("%i\n", time_us_32() - prevTime);
+    //    prevTime = time_us_32();
+  }
 #endif
   while (true) {
     printf("in robot control task on core %i\n", get_core_num());
@@ -123,7 +133,7 @@ extern "C" [[noreturn]] void vControlRobot(void *pvParameters) {
     robot->update();
     // Delay the task 50ms so that it updates at about 20Hz which is more than
     // enough
-    vTaskDelay(pdMS_TO_TICKS(1000));
+    //    vTaskDelay(pdMS_TO_TICKS(1000));
   }
 }
 
@@ -135,6 +145,8 @@ void vLaunchControlRobot(void *robot) {
   // Can only run on core one
   vTaskCoreAffinitySet(vControlRobotHandle, 1 << 0);
 }
+
+void vReadADC(void *pvParameters) { (void)pvParameters; }
 
 [[noreturn]] void vBlinkDebug(void *pvParameters) {
   (void)pvParameters;

@@ -4,6 +4,7 @@
 
 #ifndef DELTARHO_CONTROLLER_ROBOT_H
 #define DELTARHO_CONTROLLER_ROBOT_H
+#ifdef __cplusplus
 extern "C" {
 #include "FreeRTOS.h"
 };
@@ -51,4 +52,5 @@ public:
   void stopRobot();
 };
 
+#endif
 #endif // DELTARHO_CONTROLLER_ROBOT_H

@@ -4,7 +4,6 @@
 #include "FreeRTOS.h"
 #include "connection.h"
 #include "lwip/sockets.h"
-#include "pico/cyw43_arch.h"
 #include "queue.h"
 #include "task.h"
 

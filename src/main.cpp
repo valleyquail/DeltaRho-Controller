@@ -92,12 +92,12 @@ void main_task(__unused void *pvParams) {
   // communication is likely going to be parsing/encoding a lot of data
   printf("Going to connect to the client\n");
   wifi_connect();
-
+  //
   xTaskCreate(prvWifiTaskEntry, "Wifi Connection", 1024, 0,
               mainWifi_EVENT_TASK_PRIORITY, &vWifiConnectionHandle);
   vTaskCoreAffinitySet(vWifiConnectionHandle, 1 << 1);
-  //  xTaskCreate(vBlinkDebug, "Blink Debug", configMINIMAL_STACK_SIZE, nullptr,
-  //              mainBLINK_DEBUG_TASK, nullptr);
+  xTaskCreate(vBlinkDebug, "Blink Debug", configMINIMAL_STACK_SIZE, nullptr,
+              mainBLINK_DEBUG_TASK, nullptr);
   // Launches the robot controller
   vLaunchControlRobot(&robot);
   // Deletes this task

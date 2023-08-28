@@ -47,7 +47,7 @@ constexpr int PCA_HIGH =
  * @param channel
  * @param effort
  */
-static inline void setPWM(int channel, int effort) {
+static inline void set_PWM(int channel, int effort) {
   uint8_t offset = channel * 4;
   uint8_t offLow = effort & 0xFF; // First 8 bits of the 12 bit value
   uint8_t offHigh = effort >> 8;  // Last 4 bits of the 12 bits
@@ -66,11 +66,11 @@ static inline void setPWM(int channel, int effort) {
  * @param level a boolean that sets the line high or low. True = high and False
  * = low
  */
-static inline void setLevel(int channel, bool level) {
+static inline void set_Level(int channel, bool level) {
   if (level)
-    setPWM(channel, PCA_HIGH);
+    set_PWM(channel, PCA_HIGH);
   else
-    setPWM(channel, PCA_LOW);
+    set_PWM(channel, PCA_LOW);
 }
 
 /**
