@@ -4,7 +4,7 @@
 #include "DCMotor.h"
 
 extern "C" {
-#include "PCA9685.h"
+#include "Hardware_Interface/PCA9685.h"
 }
 
 constexpr float speedScalingFactor = PCA_PWM_RESOLUTION / 100.0;
@@ -40,23 +40,25 @@ void DCMotor::init(int motorNumber, uint8_t pwm, uint8_t lineOne,
  * output of the PCA. CW is a positive value and CCW is a negative value
  */
 void DCMotor::setMotorMovement(int speed) {
+#ifdef Debug
   printf("Setting the speeds for %s\n", motorName.c_str());
+#endif
   // Set the driver to short stop the motor
   targetSpeed = speed;
   if (speed == 0) {
-    setPWM(pwmPin, PCA_LOW);
+    set_PWM(pwmPin, PCA_LOW);
     return;
   }
   if (speed < 0) { // CW
     direction = true;
-    setLevel(lineOneIn, true);
-    setLevel(lineTwoIn, false);
-    setPWM(pwmPin, -speed * speedScalingFactor);
+    set_Level(lineOneIn, true);
+    set_Level(lineTwoIn, false);
+    set_PWM(pwmPin, -speed * speedScalingFactor);
   } else { // CCW
     direction = false;
-    setLevel(lineOneIn, false);
-    setLevel(lineTwoIn, true);
-    setPWM(pwmPin, speed * speedScalingFactor);
+    set_Level(lineOneIn, false);
+    set_Level(lineTwoIn, true);
+    set_PWM(pwmPin, speed * speedScalingFactor);
   }
 }
 
@@ -66,9 +68,9 @@ void DCMotor::setMotorMovement(int speed) {
  */
 
 void DCMotor::setMotorStop() {
-  setLevel(lineOneIn, false);
-  setLevel(lineTwoIn, false);
-  setPWM(pwmPin, PCA_HIGH);
+  set_Level(lineOneIn, false);
+  set_Level(lineTwoIn, false);
+  set_PWM(pwmPin, PCA_HIGH);
 }
 
 void DCMotor::updatePID() {
@@ -77,7 +79,7 @@ void DCMotor::updatePID() {
     sumError += error;
   int16_t newPWM =
       (targetSpeed + Kp * error - Ki * sumError) * speedScalingFactor;
-  setPWM(pwmPin, newPWM);
+  set_PWM(pwmPin, newPWM);
 }
 
 void encoderTickRate(void *motorInstance) {

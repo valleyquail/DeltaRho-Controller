@@ -4,14 +4,22 @@
 
 #include "multicore_management.h"
 #include "Robot.h"
+#include "Robot_Config.h"
 
-TaskHandle_t vMQTTConnectionHandle = nullptr;
+#include "wifi_connection/connection.h"
+extern "C" {
+#include "../lib/Hardware_Interface//ADC_Force_Sensor.h"
+#include "lwip/ip4_addr.h"
+#include "lwip/sockets.h"
+};
+
+TaskHandle_t vWifiConnectionHandle = nullptr;
 TaskHandle_t vControlRobotHandle = nullptr;
 TaskHandle_t xADCTaskHandle = nullptr;
 
 QueueHandle_t xMQTTQueue = nullptr;
 
-mqttPacket currPacket;
+dataPacket currPacket;
 
 // static volatile uint32_t ulCountOfItemsSentOnQueue = 0;
 // static volatile uint32_t ulCountOfItemsReceivedOnQueue = 0;
@@ -30,17 +38,46 @@ mqttPacket currPacket;
  * execute a sequence of movements rather than depending on unreliable timing
  * requirements from the broker
  */
+void prvWifiTaskEntry(__unused void *pvParameters) {
+  dataPacket packet;
+  packet.speed = 1;
+  packet.theta = 0;
+  packet.distance = 0;
 
-void prvMQTTTaskEntry(__unused void *pvParameters) {
-  //  mqttPacket packet;
-  //  packet.distance = 0;
-  //  packet.speed = 1;
-  //  xQueueSendToBack(xMQTTQueue, &packet, 0);
+  xQueueSendToBack(xMQTTQueue, &packet, 0);
+  // #ifdef MQTT_CONNECTION
+  //   //   while (true) {
+  //   //     printf("in mqtt task\n");
+  //   //     ensureConnection();
+  //   //     vTaskDelay(1000);
+  //   //   }
+  // #endif
+  // #ifdef SOCKET_CONNECTION
+  int conn_sock = 0;
   while (true) {
-    printf("in mqtt task\n");
-    ensureConnection();
-    vTaskDelay(1000);
+    printf("in socket task on core %i\n", get_core_num());
+    if (conn_sock == 0) {
+      struct sockaddr_storage remote_addr;
+      socklen_t len = sizeof(remote_addr);
+      conn_sock = lwip_accept(socket, (struct sockaddr *)&remote_addr, &len);
+
+      if (conn_sock < 0) {
+        printf("Unable to accept incoming connection: error %d\n", errno);
+        lwip_shutdown(socket, SHUT_RDWR);
+        lwip_close(socket);
+      }
+    }
+    int alive = handle_connection(conn_sock);
+    if (alive < 0) {
+      printf("Shutting down the socket\n");
+      lwip_shutdown(socket, SHUT_RDWR);
+      lwip_close(socket);
+      socket = wifi_connect();
+      conn_sock = 0;
+    }
+    //    vTaskDelay(pdMS_TO_TICKS(20));
   }
+  // #endif
 }
 
 /*
@@ -56,21 +93,30 @@ extern "C" [[noreturn]] void vControlRobot(void *pvParameters) {
   float dist;
   // Keep robot from freaking out when it starts
   currPacket.distance = 100.0;
+
 #if Debug
-  robot->controlRobot(2, 0, 0, 0);
+  int testSpeed = 0;
+  //  uint32_t prevTime = 0;
+  while (true) {
+    testSpeed++;
+    robot->controlRobot(testSpeed, 0, 0, 100);
+    testSpeed %= 10;
+    //    printf("%i\n", time_us_32() - prevTime);
+    //    prevTime = time_us_32();
+  }
 #endif
   while (true) {
-    //    printf("in robot control task\n");
+    printf("in robot control task on core %i\n", get_core_num());
     dist = robot->getCurrDistMovedThisInstruction();
 
     // Accept the task notify if it is there, but otherwise return immediately
     // so that the robot can work on PID control
-    uint8_t temp = ulTaskNotifyTake(pdTRUE, 0);
+    uint8_t temp = ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(10));
     // TODO: determine acceptable movement tolerance
     if (dist >= currPacket.distance || temp) {
-      printf("Trying to change the robot control by pulling from the queue; "
-             "dist = %f and currpack distance = %f\n",
-             dist, currPacket.distance);
+      printf("Trying to change the robot control by pulling from the queue: "
+             "temp = %i\n",
+             temp);
       // If the task has been called via notify and the robot has finished
       // executing its current instruction, then it will take the next task from
       // the queue and begin executing it
@@ -87,7 +133,7 @@ extern "C" [[noreturn]] void vControlRobot(void *pvParameters) {
     robot->update();
     // Delay the task 50ms so that it updates at about 20Hz which is more than
     // enough
-    vTaskDelay(pdMS_TO_TICKS(50));
+    //    vTaskDelay(pdMS_TO_TICKS(1000));
   }
 }
 
@@ -97,8 +143,10 @@ void vLaunchControlRobot(void *robot) {
   xTaskCreate(vControlRobot, "Robot Control", 1024, robot,
               mainROBOT_CONTROL_TASK_PRIORITY, &vControlRobotHandle);
   // Can only run on core one
-  vTaskCoreAffinitySet(vControlRobotHandle, 1);
+  vTaskCoreAffinitySet(vControlRobotHandle, 1 << 0);
 }
+
+void vReadADC(void *pvParameters) { (void)pvParameters; }
 
 [[noreturn]] void vBlinkDebug(void *pvParameters) {
   (void)pvParameters;

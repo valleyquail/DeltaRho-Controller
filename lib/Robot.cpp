@@ -4,8 +4,8 @@
 
 #include "Robot.h"
 #include "../src/multicore_management.h"
-#include "I2C_Control.h"
-
+#include "DCMotor.h"
+#include "pico/float.h"
 #define ALARM_NUM 0
 #define ALARM_IRQ TIMER_IRQ_0
 
@@ -13,7 +13,9 @@ DCMotor backRight;
 DCMotor backLeft;
 DCMotor front;
 DCMotor extra;
-
+#ifdef Debug
+uint32_t prevTime;
+#endif
 Robot::Robot(uint8_t robotNum) : robotNum(robotNum) {}
 
 // Callback function for the interrupt. This acts as an intermediate since the
@@ -63,23 +65,29 @@ void Robot::init() {
  */
 void Robot::controlRobot(float speed, float direction, float omega,
                          float distance) const {
-  //  vTaskEnterCritical();
+#ifdef Debug
+  prevTime = time_us_32();
+#endif
   uint32_t interrupts = save_and_disable_interrupts();
   // Convert speed into ticks/s
   speed = (speed / wheelRadius) * encoderTicksPerRotation;
   float backRightSpeed = speed * cos(direction + 2 * M_PI / 3.) - omega;
   float backLeftSpeed = speed * cos(direction - 2 * M_PI / 3.) - omega;
   float frontSpeed = speed * cos(direction) - omega;
-
-  backRight.setMotorMovement(floor(backRightSpeed));
-  backLeft.setMotorMovement(floor(backLeftSpeed));
-  front.setMotorMovement(floor(frontSpeed));
+#ifdef Debug
+  printf("presetmotor: %i\n", time_us_32() - prevTime);
+#endif
+  backRight.setMotorMovement(static_cast<int>(backRightSpeed));
+  backLeft.setMotorMovement(static_cast<int>(backLeftSpeed));
+  front.setMotorMovement(static_cast<int>(frontSpeed));
   backRight.sumError = 0;
   backLeft.sumError = 0;
   front.sumError = 0;
   restore_interrupts(interrupts);
-  //  vTaskExitCritical();
+#ifdef Debug
+  printf("delta: %i\n", time_us_32() - prevTime);
   printf("Should be setting the speed\n");
+#endif
 }
 
 void Robot::stopRobot() {

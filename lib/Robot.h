@@ -4,10 +4,10 @@
 
 #ifndef DELTARHO_CONTROLLER_ROBOT_H
 #define DELTARHO_CONTROLLER_ROBOT_H
+#ifdef __cplusplus
 extern "C" {
 #include "FreeRTOS.h"
 };
-#include "DCMotor.h"
 #include <math.h>
 
 class Robot {
@@ -52,4 +52,5 @@ public:
   void stopRobot();
 };
 
+#endif
 #endif // DELTARHO_CONTROLLER_ROBOT_H

@@ -5,15 +5,16 @@
  */
 
 #include "FreeRTOS.h"
-#include "I2C_Control.h"
-#include "PCA9685.h"
+#include "Hardware_Interface/I2C_Control.h"
+#include "Hardware_Interface/PCA9685.h"
 #include "Robot.h"
 #include "Robot_Config.h"
 #include "multicore_management.h"
 #include "pico/cyw43_arch.h"
 #include "pico/stdio.h"
 #include "task.h"
-#include "wifi_config.h"
+#include "wifi_connection/connection.h"
+#include "wifi_connection/wifi_config.h"
 #include <pico/async_context_freertos.h>
 
 // Global instance of the robot
@@ -27,6 +28,7 @@ void configure_cyw43();
 
 int main() {
   stdio_init_all();
+  sleep_ms(1000);
   for (int i = 0; i < 100; ++i) {
     printf("Launching in %i ms\n", (100 - i) * 20);
     sleep_ms(20);
@@ -77,22 +79,23 @@ void main_task(__unused void *pvParams) {
     printf("failed to connect\n");
     return;
   }
-  printf("connected\n");
-
+  printf("socket\n");
+  printf("This is the IP address of the board: %s\n",
+         ipaddr_ntoa(netif_ip4_addr(&cyw43_state.netif[0])));
   configure_cyw43();
-  printf("Going to connect to the client\n");
-  connect();
-  printf("Connected successfully\n");
-  sleep_ms(1000);
 
   cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
 
-  xMQTTQueue = xQueueCreate(MQTT_QUEUE_SIZE, sizeof(mqttPacket *));
+  xMQTTQueue = xQueueCreate(DATA_QUEUE_SIZE, sizeof(dataPacket *));
 
-  // Launches the MQTT connection. Configures 1kb of stack words since Wi-Fi
+  // Launches the Wi-Fi connection. Configures 1kb of stack words since Wi-Fi
   // communication is likely going to be parsing/encoding a lot of data
-  xTaskCreate(prvMQTTTaskEntry, "MQTT Connection", 1024, nullptr,
-              mainMQTT_EVENT_TASK_PRIORITY, &vMQTTConnectionHandle);
+  printf("Going to connect to the client\n");
+  wifi_connect();
+  //
+  xTaskCreate(prvWifiTaskEntry, "Wifi Connection", 1024, 0,
+              mainWifi_EVENT_TASK_PRIORITY, &vWifiConnectionHandle);
+  vTaskCoreAffinitySet(vWifiConnectionHandle, 1 << 1);
   xTaskCreate(vBlinkDebug, "Blink Debug", configMINIMAL_STACK_SIZE, nullptr,
               mainBLINK_DEBUG_TASK, nullptr);
   // Launches the robot controller
@@ -110,10 +113,11 @@ void vLaunch() {
               tskIDLE_PRIORITY, &mainTask);
   // Bind the main task to execute on core one since that is where the robot
   // controller will be running and that needs to be linked to the interrupts
-  vTaskCoreAffinitySet(mainTask, 1);
+  vTaskCoreAffinitySet(mainTask, 1 << 0);
   /* Start the tasks and timer running. */
   vTaskStartScheduler();
   // Ideally we should never reach this point
+  printf("Something failed hard\n");
   panic_unsupported();
 }
 
@@ -129,4 +133,6 @@ void configure_cyw43() {
                               &asyncContextFreertosConfig);
   // Sets the cyw43 config
   cyw43_arch_set_async_context(&asyncContextFreertos.core);
+  // Sets the Wi-Fi connection to performance mode
+  cyw43_wifi_pm(&cyw43_state, CYW43_PERFORMANCE_PM);
 }
