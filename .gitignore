@@ -60,4 +60,4 @@ dkms.conf
 /include
 
 #prevent wifi info from getting uploaded
-/lib/wifi_config.h
+/src/wifi_connection/wifi_config.h
