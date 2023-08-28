@@ -5,7 +5,7 @@
 #include "Robot.h"
 #include "../src/multicore_management.h"
 #include "DCMotor.h"
-#include "pico/float.h"
+#include "hardware/sync.h"
 #define ALARM_NUM 0
 #define ALARM_IRQ TIMER_IRQ_0
 

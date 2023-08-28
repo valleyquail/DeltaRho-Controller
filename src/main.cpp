@@ -5,6 +5,7 @@
  */
 
 #include "FreeRTOS.h"
+#include "Hardware_Interface/ADC_Force_Sensor.h"
 #include "Hardware_Interface/I2C_Control.h"
 #include "Hardware_Interface/PCA9685.h"
 #include "Robot.h"
